@@ -1,0 +1,4 @@
+#include <MC9S12XS128.h>
+
+#pragma LINK_INFO DERIVATIVE "MC9S12XS128"
+
