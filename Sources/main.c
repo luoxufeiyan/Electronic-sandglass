@@ -27,7 +27,8 @@ void main(void)
   
    for(;;) 
    {
-     Oled_ControlShow();
+     Oled_ControlShow();  //ShowCurrentPosition
+     LCD_Triangle(0,0,127,63,0);
    }
 }
 

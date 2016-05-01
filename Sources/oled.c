@@ -802,7 +802,7 @@ void LCD_PutPixel(byte x,byte y)
 //                   byte x2,byte y2,byte color,byte gif)
 //功能描述：绘制一个实心矩形
 //参数：左上角坐标（x1,y1）,右下角坐标（x2，y2）
-//      其中x1、x2的范围0～127，y1，y2的范围0～63，即真实坐标值
+//      其中x1、x2的范围0～127，y1，y2的范围0～63，gif控制画线快慢。即真实坐标值
 //返回：无
 //==============================================================
 void LCD_Rectangle(byte x1,byte y1,byte x2,byte y2,byte gif)
@@ -823,6 +823,34 @@ void LCD_Rectangle(byte x1,byte y1,byte x2,byte y2,byte gif)
 	}
 	
 }  
+
+//==============================================================
+//函数名： void LCD_Triangle(byte x1,byte y1,
+//                   byte x2,byte y2,byte color,byte gif)
+//功能描述：绘制一个对角三角形
+//参数：左上角坐标（x1,y1）,右下角坐标（x2，y2）
+//      其中x1、x2的范围0～127，y1，y2的范围0～63，即真实坐标值
+//返回：无
+//==============================================================
+void LCD_Triangle(byte x1,byte y1,byte x2,byte y2,byte gif)
+{
+	byte n; 
+		
+	OLED_Set_XY(x1,y1>>3);
+	for(n=x1;n<=x2;n++)
+	{
+		OLED_WrDat(0x01<<(y2%8)); 			
+		if(gif == 1) 	OLED_Delay_ms(50);
+	}  
+	OLED_Set_XY(x1,y2>>3);
+  for(n=x1;n<=x2;n++)
+	{
+		OLED_WrDat(0x01<<(y1%8)); 			
+		if(gif == 1) 	OLED_Delay_ms(5);
+	}
+	
+}  
+
 //==============================================================
 //函数名：LCD_P6x8Str(byte x,byte y,byte *p)
 //功能描述：写入一组标准ASCII字符串
