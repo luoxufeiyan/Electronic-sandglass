@@ -2,12 +2,24 @@
 
 void Oled_ControlShow(void)  
 {   
+    int i;
    	OLED_Write_String(8,0,"ac_x");
     OLED_Write_Num4(68, 0, acx);
   	OLED_Write_String(8,1,"ac_y");
     OLED_Write_Num4(68, 1, acy);
     OLED_Write_String(8,2,"ac_z");
     OLED_Write_Num4(68, 2, acz);
+    for(i=0;i<=63;i++) {
+      if(i!=31||i!=32){
+        
+        LCD_PutPixel(i,i);
+        LCD_PutPixel((63-i),i); 
+      }
+    }
+    LCD_PutPixel(30,31);
+    LCD_PutPixel(30,32);
+    LCD_PutPixel(33,31);
+    LCD_PutPixel(33,32);
 }
 
 void ALL_init(void)
@@ -27,8 +39,7 @@ void main(void)
   
    for(;;) 
    {
-     Oled_ControlShow();  //ShowCurrentPosition
-     LCD_Triangle(0,0,127,63,0);
+     Oled_ControlShow();
    }
 }
 
