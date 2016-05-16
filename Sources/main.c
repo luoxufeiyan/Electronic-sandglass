@@ -2,24 +2,55 @@
 
 void Oled_ControlShow(void)  
 {   
-    int i;
-   	OLED_Write_String(8,0,"ac_x");
-    OLED_Write_Num4(68, 0, acx);
-  	OLED_Write_String(8,1,"ac_y");
-    OLED_Write_Num4(68, 1, acy);
-    OLED_Write_String(8,2,"ac_z");
-    OLED_Write_Num4(68, 2, acz);
-    for(i=0;i<=63;i++) {
+
+    if(flag == 0){
+      
+    int i,j;
+   	OLED_Write_String(64,0,"ac_x");
+    OLED_Write_Num4(96, 0, acx);
+  	OLED_Write_String(64,1,"ac_y");
+    OLED_Write_Num4(96, 1, acy);
+    OLED_Write_String(64,2,"ac_z");
+    OLED_Write_Num4(96, 2, acz);
+    
+    for(i=1;i<=62;i++) {
       if(i!=31||i!=32){
         
         LCD_PutPixel(i,i);
         LCD_PutPixel((63-i),i); 
       }
     }
+    for(i=0;i<=63;i++){
+    LCD_PutPixel(i,0);
+    LCD_PutPixel(i,63);
+    }
     LCD_PutPixel(30,31);
     LCD_PutPixel(30,32);
     LCD_PutPixel(33,31);
-    LCD_PutPixel(33,32);
+    LCD_PutPixel(33,32);  
+    
+    for(i=0;i<=29;i++){
+      for(j=i+1;j<=62-i;j++)
+        LCD_PutPixel(j,i); 
+    }
+    }
+    if(flag == 1){
+    
+    
+    }
+    if(flag == 2){
+    
+    
+    }
+    if(flag == 3){
+    
+    
+    }
+    if(flag == 4){
+    
+    
+    }
+   
 }
 
 void ALL_init(void)
@@ -29,6 +60,7 @@ void ALL_init(void)
     PIT_Init012();           
     InitMPU6050();
     I2C_Init();
+    Pwm0_Init();
 }
 
 void main(void) 
@@ -57,6 +89,11 @@ void interrupt 68 Pit0_interrupt(void)
     	coy=GetData(GYRO_YOUT_H);	
     	coz=GetData(GYRO_ZOUT_H);	
       PITTF_PTF0=1;
+      if(count<=990){
+      count ++;
+      }else{
+      count == 0;  
+      }
       EnableInterrupts; 
        
 }   

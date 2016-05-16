@@ -24,6 +24,7 @@ PLL.c.o                                 Model: BANKED,        Lang: ANSI-C
 var.c.o                                 Model: BANKED,        Lang: ANSI-C
 MPU-6050.c.o                            Model: BANKED,        Lang: ANSI-C
 oled.c.o                                Model: BANKED,        Lang: ANSI-C
+PWM.c.o                                 Model: BANKED,        Lang: ANSI-C
 
 *********************************************************************************************
 STARTUP SECTION
@@ -32,8 +33,8 @@ Entry point: 0xC000 (_Startup)
 _startupData is allocated at 0xC00F and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x2100     444
-  _Copy    *toCopyDownBeg 0xC141
+  _Range   pZeroOut       0x2100     446
+  _Copy    *toCopyDownBeg 0xC14D
 } _startupData;
 
 *********************************************************************************************
@@ -43,9 +44,9 @@ Section Name                    Size  Type     From       To       Segment
 .init                             15     R     0xC000     0xC00E   ROM_C000
 .startData                        10     R     0xC00F     0xC018   ROM_C000
 .rodata1                          15     R     0xC019     0xC027   ROM_C000
-NON_BANKED                       281     R     0xC028     0xC140   ROM_C000
-.copy                            425     R     0xC141     0xC2E9   ROM_C000
-.text                           1424     R   0xFE8000   0xFE858F   PAGE_FE
+NON_BANKED                       293     R     0xC028     0xC14C   ROM_C000
+.copy                            425     R     0xC14D     0xC2F5   ROM_C000
+.text                           1595     R   0xFE8000   0xFE863A   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
 .data                            420   R/W     0x2100     0x22A3   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
@@ -340,12 +341,12 @@ NON_BANKED                       281     R     0xC028     0xC140   ROM_C000
 .abs_section_354                   2   N/I      0x354      0x355   .absSeg289
 .abs_section_356                   2   N/I      0x356      0x357   .absSeg290
 .abs_section_ff76                  2     R     0xFF76     0xFF77   .absSeg291
-.bss                              24   R/W     0x22A4     0x22BB   RAM
+.bss                              26   R/W     0x22A4     0x22BD   RAM
 .vectSeg292_vect                   2     R     0xFFFE     0xFFFF   .vectSeg292
 
 Summary of section sizes per section type:
-READ_ONLY (R):         87E (dec:     2174)
-READ_WRITE (R/W):      2BC (dec:      700)
+READ_ONLY (R):         935 (dec:     2357)
+READ_WRITE (R/W):      2BE (dec:      702)
 NO_INIT (N/I):         168 (dec:      360)
 
 *********************************************************************************************
@@ -566,11 +567,11 @@ MODULE:                 -- MC9S12XS128.c.o --
      _VREGAPICL                                 2F2       1       1       0   .abs_section_2f2
      _VREGAPITR                                 2F3       1       1       0   .abs_section_2f3
      _VREGHTTR                                  2F7       1       1       0   .abs_section_2f7
-     _PWME                                      300       1       1       0   .abs_section_300
-     _PWMPOL                                    301       1       1       0   .abs_section_301
-     _PWMCLK                                    302       1       1       0   .abs_section_302
-     _PWMPRCLK                                  303       1       1       0   .abs_section_303
-     _PWMCAE                                    304       1       1       0   .abs_section_304
+     _PWME                                      300       1       1       1   .abs_section_300
+     _PWMPOL                                    301       1       1       1   .abs_section_301
+     _PWMCLK                                    302       1       1       1   .abs_section_302
+     _PWMPRCLK                                  303       1       1       2   .abs_section_303
+     _PWMCAE                                    304       1       1       1   .abs_section_304
      _PWMCTL                                    305       1       1       0   .abs_section_305
      _PWMSCLA                                   308       1       1       0   .abs_section_308
      _PWMSCLB                                   309       1       1       0   .abs_section_309
@@ -636,11 +637,11 @@ MODULE:                 -- MC9S12XS128.c.o --
      _PWMCNT23                                  30E       2       2       0   .abs_section_30e
      _PWMCNT45                                  310       2       2       0   .abs_section_310
      _PWMCNT67                                  312       2       2       0   .abs_section_312
-     _PWMPER01                                  314       2       2       0   .abs_section_314
+     _PWMPER01                                  314       2       2       1   .abs_section_314
      _PWMPER23                                  316       2       2       0   .abs_section_316
      _PWMPER45                                  318       2       2       0   .abs_section_318
      _PWMPER67                                  31A       2       2       0   .abs_section_31a
-     _PWMDTY01                                  31C       2       2       0   .abs_section_31c
+     _PWMDTY01                                  31C       2       2       1   .abs_section_31c
      _PWMDTY23                                  31E       2       2       0   .abs_section_31e
      _PWMDTY45                                  320       2       2       0   .abs_section_320
      _PWMDTY67                                  322       2       2       0   .abs_section_322
@@ -654,10 +655,10 @@ MODULE:                 -- MC9S12XS128.c.o --
      _PITCNT3                                   356       2       2       0   .abs_section_356
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     Oled_ControlShow                        FE8000      82     130       2   .text       
-     ALL_init                                FE8082      15      21       2   .text       
-     main                                    FE8097       E      14       2   .text       
-     Pit0_interrupt                            C028      4E      78       1   NON_BANKED  
+     Oled_ControlShow                        FE8000     106     262       2   .text       
+     ALL_init                                FE8106      19      25       2   .text       
+     main                                    FE811F       E      14       2   .text       
+     Pit0_interrupt                            C028      5A      90       1   NON_BANKED  
 - VARIABLES:
      STRING.ac_x.1                             C019       5       5       1   .rodata1    
      STRING.ac_y.2                             C01E       5       5       1   .rodata1    
@@ -665,7 +666,7 @@ MODULE:                 -- main.c.o --
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
-     Init                                    FE80A5      29      41       2   .text       
+     Init                                    FE812D      29      41       2   .text       
      _Startup                                  C000       F      15       0   .init       
 - VARIABLES:
      _startupData                              C00F       6       6       3   .startData  
@@ -673,81 +674,87 @@ MODULE:                 -- Start12.c.o --
      __SEG_END_SSTACK                          2100       0       0       1               
 MODULE:                 -- FCONV.C.o (ansixbf.lib) --
 - PROCEDURES:
-     F_TOLONGK                                 C076      32      50       1   NON_BANKED  
-     F_FRLONGK                                 C0A8      1E      30       1   NON_BANKED  
-     _FSFLOAT                                  C0C6      12      18       1   NON_BANKED  
-     _FSTRUNC                                  C0D8      11      17       1   NON_BANKED  
-     _FUTRUNC                                  C0E9       3       3       3   NON_BANKED  
+     F_TOLONGK                                 C082      32      50       1   NON_BANKED  
+     F_FRLONGK                                 C0B4      1E      30       1   NON_BANKED  
+     _FSFLOAT                                  C0D2      12      18       1   NON_BANKED  
+     _FSTRUNC                                  C0E4      11      17       1   NON_BANKED  
+     _FUTRUNC                                  C0F5       3       3       3   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- FREGS.C.o (ansixbf.lib) --
 - PROCEDURES:
-     F_PULK                                    C0EC      15      21       1   NON_BANKED  
-     F_PSHK                                    C101      13      19       1   NON_BANKED  
+     F_PULK                                    C0F8      15      21       1   NON_BANKED  
+     F_PSHK                                    C10D      13      19       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- rtshc12.c.o (ansixbf.lib) --
 - PROCEDURES:
-     _BSHL                                     C114       8       8       1   NON_BANKED  
-     _NEG_P                                    C11C       C      12       1   NON_BANKED  
+     _BSHL                                     C120       8       8       1   NON_BANKED  
+     _NEG_P                                    C128       C      12       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- VREGS.C.o (ansixbf.lib) --
 - PROCEDURES:
-     L_NEGK                                    C128       7       7       2   NON_BANKED  
-     L_PSHK                                    C12F       8       8       1   NON_BANKED  
-     SL_PULK                                   C137       A      10       1   NON_BANKED  
+     L_NEGK                                    C134       7       7       2   NON_BANKED  
+     L_PSHK                                    C13B       8       8       1   NON_BANKED  
+     SL_PULK                                   C143       A      10       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- PIT.c.o --
 - PROCEDURES:
-     PIT_Init012                             FE80CE      33      51       2   .text       
+     PIT_Init012                             FE8156      33      51       2   .text       
 - VARIABLES:
 MODULE:                 -- PLL.c.o --
 - PROCEDURES:
-     PLL_init                                FE8101      1A      26       2   .text       
+     PLL_init                                FE8189      1A      26       2   .text       
 - VARIABLES:
 MODULE:                 -- var.c.o --
 - PROCEDURES:
 - VARIABLES:
-     acx                                       22A4       4       4       4   .bss        
-     acy                                       22A8       4       4       4   .bss        
-     acz                                       22AC       4       4       4   .bss        
-     cox                                       22B0       4       4       2   .bss        
-     coy                                       22B4       4       4       2   .bss        
-     coz                                       22B8       4       4       2   .bss        
+     flag                                      22A4       1       1       1   .bss        
+     count                                     22A5       1       1       2   .bss        
+     acx                                       22A6       4       4       4   .bss        
+     acy                                       22AA       4       4       4   .bss        
+     acz                                       22AE       4       4       4   .bss        
+     cox                                       22B2       4       4       2   .bss        
+     coy                                       22B6       4       4       2   .bss        
+     coz                                       22BA       4       4       2   .bss        
 MODULE:                 -- MPU-6050.c.o --
 - PROCEDURES:
-     delayus                                 FE811B      15      21      28   .text       
-     I2C_Init                                FE8130      13      19       2   .text       
-     I2C_Start                               FE8143      1F      31       6   .text       
-     I2C_Stop                                FE8162      1C      28       4   .text       
-     I2C_SendACK                             FE817E      1C      28       2   .text       
-     I2C_RecvACK                             FE819A      19      25       2   .text       
-     I2C_SendByte                            FE81B3      38      56      12   .text       
-     I2C_RecvByte                            FE81EB      39      57       2   .text       
-     Single_WriteI2C                         FE8224      1D      29      10   .text       
-     Single_ReadI2C                          FE8241      2B      43       4   .text       
-     InitMPU6050                             FE826C      46      70       2   .text       
-     GetData                                 FE82B2      22      34       2   .text       
+     delayus                                 FE81A3      15      21      28   .text       
+     I2C_Init                                FE81B8      13      19       2   .text       
+     I2C_Start                               FE81CB      1F      31       6   .text       
+     I2C_Stop                                FE81EA      1C      28       4   .text       
+     I2C_SendACK                             FE8206      1C      28       2   .text       
+     I2C_RecvACK                             FE8222      19      25       2   .text       
+     I2C_SendByte                            FE823B      38      56      12   .text       
+     I2C_RecvByte                            FE8273      39      57       2   .text       
+     Single_WriteI2C                         FE82AC      1D      29      10   .text       
+     Single_ReadI2C                          FE82C9      2B      43       4   .text       
+     InitMPU6050                             FE82F4      46      70       2   .text       
+     GetData                                 FE833A      22      34       2   .text       
 - VARIABLES:
 MODULE:                 -- oled.c.o --
 - PROCEDURES:
-     OLED_WrDat                              FE82D4      37      55       6   .text       
-     OLED_WrCmd                              FE830B      35      53      20   .text       
-     OLED_Set_XY                             FE8340      1F      31       6   .text       
-     OLED_Clear                              FE835F      2F      47       2   .text       
-     OLED_Delay_ms                           FE838E      17      23       2   .text       
-     OLED_Init                               FE83A5      98     152       2   .text       
-     OLED_Write_Char                         FE843D      8A     138      10   .text       
-     OLED_Write_String                       FE84C7      2D      45       6   .text       
-     OLED_Write_Num4                         FE84F4      60      96       6   .text       
-     LCD_PutPixel                            FE8554      3C      60       4   .text       
+     OLED_WrDat                              FE835C      37      55       6   .text       
+     OLED_WrCmd                              FE8393      35      53      20   .text       
+     OLED_Set_XY                             FE83C8      1F      31       6   .text       
+     OLED_Clear                              FE83E7      2F      47       2   .text       
+     OLED_Delay_ms                           FE8416      17      23       2   .text       
+     OLED_Init                               FE842D      98     152       2   .text       
+     OLED_Write_Char                         FE84C5      8A     138      10   .text       
+     OLED_Write_String                       FE854F      2D      45       6   .text       
+     OLED_Write_Num4                         FE857C      60      96       6   .text       
+     LCD_PutPixel                            FE85DC      3C      60      16   .text       
 - VARIABLES:
      SmallChars                                2100     1A4     420       1   .data       
+MODULE:                 -- PWM.c.o --
+- PROCEDURES:
+     Pwm0_Init                               FE8618      23      35       2   .text       
+- VARIABLES:
 
 *********************************************************************************************
 MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   MC9S12XS128.c.o                            360      0      0
-  main.c.o                                     0    243     17
+  main.c.o                                     0    391     17
   Start12.c.o                                  0     56      0
   FCONV.C.o (ansixbf.lib)                      0    118      0
   FREGS.C.o (ansixbf.lib)                      0     40      0
@@ -755,9 +762,10 @@ MODULE STATISTIC
   VREGS.C.o (ansixbf.lib)                      0     25      0
   PIT.c.o                                      0     51      0
   PLL.c.o                                      0     26      0
-  var.c.o                                     24      0      0
+  var.c.o                                     26      0      0
   MPU-6050.c.o                                 0    441      0
   oled.c.o                                   420    700      0
+  PWM.c.o                                      0     35      0
   other                                      256     12    425
 
 *********************************************************************************************
@@ -768,11 +776,11 @@ SECTION: ".text"
   I2C_Start I2C_Stop I2C_SendACK I2C_RecvACK I2C_SendByte I2C_RecvByte 
   Single_WriteI2C Single_ReadI2C InitMPU6050 GetData OLED_WrDat OLED_WrCmd 
   OLED_Set_XY OLED_Clear OLED_Delay_ms OLED_Init OLED_Write_Char 
-  OLED_Write_String OLED_Write_Num4 LCD_PutPixel 
+  OLED_Write_String OLED_Write_Num4 LCD_PutPixel Pwm0_Init 
 SECTION: ".data"
   SmallChars 
 SECTION: ".bss"
-  acx acy acz cox coy coz 
+  flag count acx acy acz cox coy coz 
 SECTION: ".init"
   _Startup 
 SECTION: ".rodata1"
@@ -1623,11 +1631,11 @@ OBJECT LIST SORTED BY ADDRESS
      _VREGAPITR                                 2F3       1       1       0   .abs_section_2f3
      _VREGAPIR                                  2F4       2       2       0   .abs_section_2f4
      _VREGHTTR                                  2F7       1       1       0   .abs_section_2f7
-     _PWME                                      300       1       1       0   .abs_section_300
-     _PWMPOL                                    301       1       1       0   .abs_section_301
-     _PWMCLK                                    302       1       1       0   .abs_section_302
-     _PWMPRCLK                                  303       1       1       0   .abs_section_303
-     _PWMCAE                                    304       1       1       0   .abs_section_304
+     _PWME                                      300       1       1       1   .abs_section_300
+     _PWMPOL                                    301       1       1       1   .abs_section_301
+     _PWMCLK                                    302       1       1       1   .abs_section_302
+     _PWMPRCLK                                  303       1       1       2   .abs_section_303
+     _PWMCAE                                    304       1       1       1   .abs_section_304
      _PWMCTL                                    305       1       1       0   .abs_section_305
      _PWMSCLA                                   308       1       1       0   .abs_section_308
      _PWMSCLB                                   309       1       1       0   .abs_section_309
@@ -1635,11 +1643,11 @@ OBJECT LIST SORTED BY ADDRESS
      _PWMCNT23                                  30E       2       2       0   .abs_section_30e
      _PWMCNT45                                  310       2       2       0   .abs_section_310
      _PWMCNT67                                  312       2       2       0   .abs_section_312
-     _PWMPER01                                  314       2       2       0   .abs_section_314
+     _PWMPER01                                  314       2       2       1   .abs_section_314
      _PWMPER23                                  316       2       2       0   .abs_section_316
      _PWMPER45                                  318       2       2       0   .abs_section_318
      _PWMPER67                                  31A       2       2       0   .abs_section_31a
-     _PWMDTY01                                  31C       2       2       0   .abs_section_31c
+     _PWMDTY01                                  31C       2       2       1   .abs_section_31c
      _PWMDTY23                                  31E       2       2       0   .abs_section_31e
      _PWMDTY45                                  320       2       2       0   .abs_section_320
      _PWMDTY67                                  322       2       2       0   .abs_section_322
@@ -1661,58 +1669,61 @@ OBJECT LIST SORTED BY ADDRESS
      _PITLD3                                    354       2       2       0   .abs_section_354
      _PITCNT3                                   356       2       2       0   .abs_section_356
      SmallChars                                2100     1A4     420       1   .data       
-     acx                                       22A4       4       4       4   .bss        
-     acy                                       22A8       4       4       4   .bss        
-     acz                                       22AC       4       4       4   .bss        
-     cox                                       22B0       4       4       2   .bss        
-     coy                                       22B4       4       4       2   .bss        
-     coz                                       22B8       4       4       2   .bss        
+     flag                                      22A4       1       1       1   .bss        
+     count                                     22A5       1       1       2   .bss        
+     acx                                       22A6       4       4       4   .bss        
+     acy                                       22AA       4       4       4   .bss        
+     acz                                       22AE       4       4       4   .bss        
+     cox                                       22B2       4       4       2   .bss        
+     coy                                       22B6       4       4       2   .bss        
+     coz                                       22BA       4       4       2   .bss        
      _Startup                                  C000       F      15       0   .init       
      STRING.ac_x.1                             C019       5       5       1   .rodata1    
      STRING.ac_y.2                             C01E       5       5       1   .rodata1    
      STRING.ac_z.3                             C023       5       5       1   .rodata1    
-     Pit0_interrupt                            C028      4E      78       1   NON_BANKED  
-     F_TOLONGK                                 C076      32      50       1   NON_BANKED  
-     F_FRLONGK                                 C0A8      1E      30       1   NON_BANKED  
-     _FSFLOAT                                  C0C6      12      18       1   NON_BANKED  
-     _FSTRUNC                                  C0D8      11      17       1   NON_BANKED  
-     _FUTRUNC                                  C0E9       3       3       3   NON_BANKED  
-     F_PULK                                    C0EC      15      21       1   NON_BANKED  
-     F_PSHK                                    C101      13      19       1   NON_BANKED  
-     _BSHL                                     C114       8       8       1   NON_BANKED  
-     _NEG_P                                    C11C       C      12       1   NON_BANKED  
-     L_NEGK                                    C128       7       7       2   NON_BANKED  
-     L_PSHK                                    C12F       8       8       1   NON_BANKED  
-     SL_PULK                                   C137       A      10       1   NON_BANKED  
+     Pit0_interrupt                            C028      5A      90       1   NON_BANKED  
+     F_TOLONGK                                 C082      32      50       1   NON_BANKED  
+     F_FRLONGK                                 C0B4      1E      30       1   NON_BANKED  
+     _FSFLOAT                                  C0D2      12      18       1   NON_BANKED  
+     _FSTRUNC                                  C0E4      11      17       1   NON_BANKED  
+     _FUTRUNC                                  C0F5       3       3       3   NON_BANKED  
+     F_PULK                                    C0F8      15      21       1   NON_BANKED  
+     F_PSHK                                    C10D      13      19       1   NON_BANKED  
+     _BSHL                                     C120       8       8       1   NON_BANKED  
+     _NEG_P                                    C128       C      12       1   NON_BANKED  
+     L_NEGK                                    C134       7       7       2   NON_BANKED  
+     L_PSHK                                    C13B       8       8       1   NON_BANKED  
+     SL_PULK                                   C143       A      10       1   NON_BANKED  
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
-     Oled_ControlShow                        FE8000      82     130       2   .text       
-     ALL_init                                FE8082      15      21       2   .text       
-     main                                    FE8097       E      14       2   .text       
-     Init                                    FE80A5      29      41       2   .text       
-     PIT_Init012                             FE80CE      33      51       2   .text       
-     PLL_init                                FE8101      1A      26       2   .text       
-     delayus                                 FE811B      15      21      28   .text       
-     I2C_Init                                FE8130      13      19       2   .text       
-     I2C_Start                               FE8143      1F      31       6   .text       
-     I2C_Stop                                FE8162      1C      28       4   .text       
-     I2C_SendACK                             FE817E      1C      28       2   .text       
-     I2C_RecvACK                             FE819A      19      25       2   .text       
-     I2C_SendByte                            FE81B3      38      56      12   .text       
-     I2C_RecvByte                            FE81EB      39      57       2   .text       
-     Single_WriteI2C                         FE8224      1D      29      10   .text       
-     Single_ReadI2C                          FE8241      2B      43       4   .text       
-     InitMPU6050                             FE826C      46      70       2   .text       
-     GetData                                 FE82B2      22      34       2   .text       
-     OLED_WrDat                              FE82D4      37      55       6   .text       
-     OLED_WrCmd                              FE830B      35      53      20   .text       
-     OLED_Set_XY                             FE8340      1F      31       6   .text       
-     OLED_Clear                              FE835F      2F      47       2   .text       
-     OLED_Delay_ms                           FE838E      17      23       2   .text       
-     OLED_Init                               FE83A5      98     152       2   .text       
-     OLED_Write_Char                         FE843D      8A     138      10   .text       
-     OLED_Write_String                       FE84C7      2D      45       6   .text       
-     OLED_Write_Num4                         FE84F4      60      96       6   .text       
-     LCD_PutPixel                            FE8554      3C      60       4   .text       
+     Oled_ControlShow                        FE8000     106     262       2   .text       
+     ALL_init                                FE8106      19      25       2   .text       
+     main                                    FE811F       E      14       2   .text       
+     Init                                    FE812D      29      41       2   .text       
+     PIT_Init012                             FE8156      33      51       2   .text       
+     PLL_init                                FE8189      1A      26       2   .text       
+     delayus                                 FE81A3      15      21      28   .text       
+     I2C_Init                                FE81B8      13      19       2   .text       
+     I2C_Start                               FE81CB      1F      31       6   .text       
+     I2C_Stop                                FE81EA      1C      28       4   .text       
+     I2C_SendACK                             FE8206      1C      28       2   .text       
+     I2C_RecvACK                             FE8222      19      25       2   .text       
+     I2C_SendByte                            FE823B      38      56      12   .text       
+     I2C_RecvByte                            FE8273      39      57       2   .text       
+     Single_WriteI2C                         FE82AC      1D      29      10   .text       
+     Single_ReadI2C                          FE82C9      2B      43       4   .text       
+     InitMPU6050                             FE82F4      46      70       2   .text       
+     GetData                                 FE833A      22      34       2   .text       
+     OLED_WrDat                              FE835C      37      55       6   .text       
+     OLED_WrCmd                              FE8393      35      53      20   .text       
+     OLED_Set_XY                             FE83C8      1F      31       6   .text       
+     OLED_Clear                              FE83E7      2F      47       2   .text       
+     OLED_Delay_ms                           FE8416      17      23       2   .text       
+     OLED_Init                               FE842D      98     152       2   .text       
+     OLED_Write_Char                         FE84C5      8A     138      10   .text       
+     OLED_Write_String                       FE854F      2D      45       6   .text       
+     OLED_Write_Num4                         FE857C      60      96       6   .text       
+     LCD_PutPixel                            FE85DC      3C      60      16   .text       
+     Pwm0_Init                               FE8618      23      35       2   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -1736,6 +1747,9 @@ PIT.c.o:
 oled.c.o:
   OLED_Write_Num OLED_Write_Num3 LCD_Rectangle LCD_P6x8Str LCD_P8x16Str 
   Draw_BMP 
+PWM.c.o:
+  Pwm1_Init Pwm2_Init Pwm3_Init Pwm4_Init Pwm5_Init Pwm6_Init Pwm7_Init 
+  Pwm01_Init Pwm23_Init Pwm45_Init Pwm67_Init Delay 
 NOT USED VARIABLES
 rtshc12.c.o (ansixbf.lib):
   _PowOfTwo_8 _PowOfTwo_16 _PowOfTwo_32 errno 
@@ -1749,10 +1763,10 @@ oled.c.o:
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xC141 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xC14D ---- SIZE       4 ---
 Filling bytes inserted
  01A32101
-------- ROM-ADDRESS: 0xC145 ---- RAM-ADDRESS: 0x2101 ---- SIZE     215 ---
+------- ROM-ADDRESS: 0xC151 ---- RAM-ADDRESS: 0x2101 ---- SIZE     215 ---
 Name of initialized Object : SmallChars:1
  3E5149453E 0000427F40 0000426151
  4946002141 454B310018 14127F1000
@@ -1769,17 +1783,17 @@ Name of initialized Object : SmallChars:1
  3F4040403F 001F204020 1F003F4038
  403F006314 0814630007 0870080700
  6151494543
-------- ROM-ADDRESS: 0xC21C ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xC228 ---- SIZE       8 ---
 Filling bytes inserted
  0000000000 000000
-------- ROM-ADDRESS: 0xC224 ---- RAM-ADDRESS: 0x21E0 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xC230 ---- RAM-ADDRESS: 0x21E0 ---- SIZE      20 ---
 Name of initialized Object : SmallChars:224
  3636000000 0808080808 0020100804
  0200006060
-------- ROM-ADDRESS: 0xC238 ---- SIZE       5 ---
+------- ROM-ADDRESS: 0xC244 ---- SIZE       5 ---
 Filling bytes inserted
  0000000000
-------- ROM-ADDRESS: 0xC23D ---- RAM-ADDRESS: 0x21F9 ---- SIZE     171 ---
+------- ROM-ADDRESS: 0xC249 ---- RAM-ADDRESS: 0x21F9 ---- SIZE     171 ---
 Name of initialized Object : SmallChars:249
  A060000004 0201020408 08082A1C08
  0020545454 78007F4844 4438003844
@@ -1793,7 +1807,7 @@ Name of initialized Object : SmallChars:249
  003C404020 7C001C2040 201C003C40
  30403C0044 2810284400 1CA0A0A07C
  004464544C 44
-------- ROM-ADDRESS: 0xC2E8 ---- SIZE       2 ---
+------- ROM-ADDRESS: 0xC2F4 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -1801,7 +1815,8 @@ Filling bytes inserted
 OBJECT-DEPENDENCIES SECTION
 ---------------------------------------------------------------------------------------------
 _Startup                  USES __SEG_END_SSTACK Init main 
-Pit0_interrupt            USES acx acy acz cox coy coz _PITTF GetData _FSFLOAT 
+Pit0_interrupt            USES acx acy acz cox coy coz _PITTF count GetData 
+                                _FSFLOAT 
 _FSFLOAT                  USES SL_PULK F_FRLONGK F_PSHK 
 _FSTRUNC                  USES F_PULK F_TOLONGK L_PSHK 
 _FUTRUNC                  USES _FSTRUNC 
@@ -1809,11 +1824,11 @@ L_NEGK                    USES _NEG_P
 L_PSHK                    USES L_NEGK 
 SL_PULK                   USES L_NEGK 
 _Vector_68                USES Pit0_interrupt 
-Oled_ControlShow          USES STRING.ac_x.1 OLED_Write_String acx _FUTRUNC 
-                                OLED_Write_Num4 STRING.ac_y.2 acy STRING.ac_z.3 acz 
-                                LCD_PutPixel 
+Oled_ControlShow          USES flag STRING.ac_x.1 OLED_Write_String acx 
+                                _FUTRUNC OLED_Write_Num4 STRING.ac_y.2 acy 
+                                STRING.ac_z.3 acz LCD_PutPixel 
 ALL_init                  USES PLL_init OLED_Init PIT_Init012 InitMPU6050 
-                                I2C_Init 
+                                I2C_Init Pwm0_Init 
 main                      USES ALL_init Oled_ControlShow 
 Init                      USES _startupData 
 PIT_Init012               USES _PITCFLMT _PITFLT _PITCE _PITMUX _PITMTLD0 
@@ -1841,6 +1856,8 @@ OLED_Write_Char           USES OLED_Set_XY SmallChars OLED_WrDat
 OLED_Write_String         USES OLED_Write_Char 
 OLED_Write_Num4           USES OLED_Write_Char 
 LCD_PutPixel              USES OLED_Set_XY _BSHL OLED_WrCmd OLED_WrDat 
+Pwm0_Init                 USES _PWMCLK _PWMPRCLK _PWMPOL _PWMCAE _PWMPER01 
+                                _PWMDTY01 _PWME 
 
 *********************************************************************************************
 DEPENDENCY TREE
@@ -1892,9 +1909,11 @@ DEPENDENCY TREE
  |  |  |        +- delayus              (see above)
  |  |  |           
  |  |  +- I2C_Init            
- |  |     | 
- |  |     +- delayus              (see above)
- |  |        
+ |  |  |  | 
+ |  |  |  +- delayus              (see above)
+ |  |  |     
+ |  |  +- Pwm0_Init           
+ |  |       
  |  +- Oled_ControlShow    
  |     | 
  |     +- OLED_Write_String   
@@ -1978,5 +1997,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 8
-Total size of all blocks to be downloaded: 2174
+Total size of all blocks to be downloaded: 2357
 

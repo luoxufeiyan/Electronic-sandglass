@@ -8,6 +8,8 @@ uint16  P = 0;
 uint16  Angle = 10; 
 uint8  work1 = 250;
 uint8  work0 = 0;
+uint8  flag = 0;
+uint8  count = 0;
 //-------------------------------------------------
 
  float acx=0;

@@ -11,6 +11,7 @@
 #include "MPU-6050.h"
 #include "control.h"
 #include "oled.h"
+#include "PWM.h"
 
 
 #endif
