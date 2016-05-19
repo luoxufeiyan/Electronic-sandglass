@@ -27,16 +27,17 @@
 
 /* OLED端口宏定义 */
 
-#define OLED_SCL   PTM_PTM0   //24   //D0
-#define OLED_SDA   PTM_PTM1   //26   //D1
+#define OLED_SCL   PTM_PTM0   //24   //D0   SCLK
+#define OLED_SDA   PTM_PTM1   //26   //D1   MOSI
 #define OLED_RST   PTM_PTM2   //25   //RST
 #define OLED_DC    PTM_PTM3   //28   //DC
-
+#define OLED_CS    PTM_PTM4          //CS
+                                   
 #define SCL_DDR  DDRM_DDRM0 
-#define SDA_DDR  DDRM_DDRM1
+#define SDA_DDR  DDRM_DDRM1      
 #define RST_DDR  DDRM_DDRM2
 #define DC_DDR   DDRM_DDRM3 
-
+#define CS_DDR   DDRM_DDRM4
 /*
  *                        ** 大小字体显示的切换 **
  *    只需在 "oled.c" 中修改 "OLED_Write_Char()" 函数 两种显示二选一即可
@@ -146,9 +147,8 @@ void OLED_Write_Num3(unsigned char x,unsigned char y,unsigned int num);
  示    例 ：OLED_Write_Num4(0, 0, 1999);
 *******************************************************************************/ 
 void OLED_Write_Num4(unsigned char x,unsigned char y,unsigned int num);
-
+void OLED_Write_Num6(unsigned char x,unsigned char y,unsigned int num);
 void LCD_PutPixel(byte x,byte y);
-
 
 //void LCD_P8x16Str(byte x,byte y,byte ch[]);
 

@@ -6,35 +6,61 @@ void Oled_ControlShow(void)
     if(flag == 0){
       
     int i,j;
-   	OLED_Write_String(64,0,"ac_x");
-    OLED_Write_Num4(96, 0, acx);
-  	OLED_Write_String(64,1,"ac_y");
-    OLED_Write_Num4(96, 1, acy);
-    OLED_Write_String(64,2,"ac_z");
-    OLED_Write_Num4(96, 2, acz);
+   	OLED_Write_String(33,2,"x:");
+    OLED_Write_Num6(35, 2, acx);
+  	OLED_Write_String(33,3,"y:");
+    OLED_Write_Num6(35, 3, acy/50);
+    OLED_Write_String(33,4,"z:");
+    OLED_Write_Num6(35, 4, acz/50);
     
-    for(i=1;i<=62;i++) {
-      if(i!=31||i!=32){
+   /*for(j=1;j<=62;j++) {
+
         
         LCD_PutPixel(i,i);
         LCD_PutPixel((63-i),i); 
-      }
-    }
-    for(i=0;i<=63;i++){
-    LCD_PutPixel(i,0);
-    LCD_PutPixel(i,63);
-    }
+
+    } */ 
+    for(i=0;i<63;i=i+4){
+
+    }   
+    
+    LCD_PutPixel(4,4);
+    LCD_PutPixel((63-4),4);
+    LCD_PutPixel(8,8);
+    LCD_PutPixel((63-8),8);
+    LCD_PutPixel(12,12);
+    LCD_PutPixel((63-12),12);
+    LCD_PutPixel(16,16);
+    LCD_PutPixel((63-16),16);
+    LCD_PutPixel(20,20);
+    LCD_PutPixel((63-20),20);
+    LCD_PutPixel(24,24);
+    LCD_PutPixel((63-24),24);
+    LCD_PutPixel(28,28);
+    LCD_PutPixel((63-28),28);
+    LCD_PutPixel(36,36);
+    LCD_PutPixel((63-36),36);
+    LCD_PutPixel(40,40);
+    LCD_PutPixel((63-40),40);
+    LCD_PutPixel(44,44);
+    LCD_PutPixel((63-44),44);
+    LCD_PutPixel(48,48);
+    LCD_PutPixel((63-48),48);
+    LCD_PutPixel(52,52);
+    LCD_PutPixel((63-52),52);
+    LCD_PutPixel(56,56);
+    LCD_PutPixel((63-56),56);
+    LCD_PutPixel(60,60);
+    LCD_PutPixel((63-60),60);
+    
     LCD_PutPixel(30,31);
     LCD_PutPixel(30,32);
     LCD_PutPixel(33,31);
     LCD_PutPixel(33,32);  
-    
-    for(i=0;i<=29;i++){
-      for(j=i+1;j<=62-i;j++)
-        LCD_PutPixel(j,i); 
-    }
+
     }
     if(flag == 1){
+
     
     
     }
@@ -67,11 +93,13 @@ void main(void)
 {
    DisableInterrupts;
    ALL_init(); 
+   //Oled_ControlShow();
    EnableInterrupts;
   
    for(;;) 
    {
      Oled_ControlShow();
+     delayms(500);
    }
 }
 
@@ -84,16 +112,15 @@ void interrupt 68 Pit0_interrupt(void)
       DisableInterrupts;
       acx=GetData(ACCEL_XOUT_H);	
     	acy=GetData(ACCEL_YOUT_H);	
-    	acz=GetData(ACCEL_ZOUT_H);
-    	cox=GetData(GYRO_XOUT_H);	
-    	coy=GetData(GYRO_YOUT_H);	
-    	coz=GetData(GYRO_ZOUT_H);	
+    	acz=GetData(ACCEL_ZOUT_H);	
       PITTF_PTF0=1;
-      if(count<=990){
+     /* if(count<=990){
       count ++;
+      flag == 1;
       }else{
-      count == 0;  
-      }
+      count == 0; 
+      flag == 0; 
+      }*/
       EnableInterrupts; 
        
 }   

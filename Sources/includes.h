@@ -8,10 +8,11 @@
 #include "PIT.h"
 #include "Datatype.h"
 #include "var.h"
-#include "MPU-6050.h"
+#include "MCU6050.h"
 #include "control.h"
 #include "oled.h"
 #include "PWM.h"
+#include "delay.h"
 
 
 #endif

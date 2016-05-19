@@ -6,10 +6,18 @@
 
 #define SCL PORTB_PB0  		
 #define SDA PORTB_PB1		 
+#define XDA PORTB_PB2
+#define XCL PORTB_PB3
+#define AD0 PORTB_PB4
+#define INT PORTB_PB5
+
 
 #define SCLIO DDRB_DDRB0
 #define SDAIO DDRB_DDRB1
-
+#define XDAIO DDRB_DDRB2
+#define XCLIO DDRB_DDRB3
+#define AD0IO DDRB_DDRB4
+#define INTIO DDRB_DDRB5
 
 
 

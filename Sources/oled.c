@@ -1,9 +1,4 @@
-/*******************(C) Copyright 2014 HDU XinGong CCD SmartCar************************
-  File Name   : oled.h
-
-  Author      : ZhaoXiang
-
-  Found Date  : 2014.2.12
+/***************************************************************************************
    
   Description : OLED液晶显示模块底层驱动.c文件 
 
@@ -508,13 +503,16 @@ void OLED_Init(void)
     SDA_DDR = 1;
     RST_DDR = 1;
     DC_DDR = 1;
-
+    CS_DDR = 1;
+    
     OLED_SCL = 0; 	
 
     OLED_RST = 0;
     OLED_Delay_ms(50);
     OLED_RST = 1;
-
+    OLED_CS = 1;
+    asm ("nop");
+    OLED_CS = 0;
     /* 从上电到下面开始初始化要有足够的时间，即等待RC复位完毕 */
     OLED_WrCmd(0xAE | 0x00);	 // Display Off (0x00)
 
@@ -779,6 +777,16 @@ void OLED_Write_Num4(unsigned char x,unsigned char y,unsigned int num)
     OLED_Write_Char(x + 1, y, num % 1000 / 100);
     OLED_Write_Char(x + 2, y, num % 100 / 10);
     OLED_Write_Char(x + 3, y, num % 10);
+}
+
+void OLED_Write_Num6(unsigned char x,unsigned char y,unsigned int num)
+{
+    OLED_Write_Char(x,     y, num / 100000);
+    OLED_Write_Char(x + 1, y, num % 100000 / 10000);
+    OLED_Write_Char(x + 2, y, num % 10000 / 1000);
+    OLED_Write_Char(x + 3, y, num % 1000 / 100);
+    OLED_Write_Char(x + 4, y, num % 100 / 10);
+    OLED_Write_Char(x + 5, y, num % 10);
 }
 //==============================================================
 //函数名： void LCD_PutPixel(byte x,byte y)

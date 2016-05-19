@@ -14,6 +14,7 @@ void I2C_Init()
     delayus(5);
     SDA=1;
     delayus(5);
+    INT=1;
 }
 
 void I2C_Start()
