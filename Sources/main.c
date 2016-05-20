@@ -155,8 +155,8 @@ void interrupt 68 Pit0_interrupt(void)
          delayms(50);
          flag == 1;
       }else if(count==30){
-        count == 0; 
-        flag == 0; 
+        count = 0; 
+        flag = 0; 
       }
       count ++;
       EnableInterrupts; 
