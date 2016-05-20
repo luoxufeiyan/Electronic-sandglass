@@ -1,9 +1,8 @@
 #include"includes.h"
 
 void Oled_ControlShow(void)  
-{     
+{    
     if(flag == 0){
-      
     int i,j;
    	OLED_Write_String(33,2,"x:");
     OLED_Write_Num6(35, 2, acx);
@@ -19,15 +18,12 @@ void Oled_ControlShow(void)
         LCD_PutPixel((63-i),i); 
 
     } */ 
-    /*for(i=0;i<30;i++)  //»­É³×Ó
+    /**/for(i=0;i<30;i++)  //»­É³×Ó
     {
       LCD_PutPixel(shazi_x[i],shazi_y[i]);
-    } */
+    } 
     
-    /*LCD_PutPixel(12,6);
-//*****************»­É³Â©±ß½ç**********************    
-    LCD_PutPixel(0,0);
-    LCD_PutPixel(6,0);
+    /*LCD_PutPixel(6,0);
     LCD_PutPixel(12,0);
     LCD_PutPixel(18,0);
     LCD_PutPixel(24,0);
@@ -37,6 +33,34 @@ void Oled_ControlShow(void)
     LCD_PutPixel(45,0);
     LCD_PutPixel(51,0);
     LCD_PutPixel(57,0);
+    
+    LCD_PutPixel(12,6);
+    LCD_PutPixel(18,6);
+    LCD_PutPixel(24,6);
+    LCD_PutPixel(30,6);
+    LCD_PutPixel(33,6);
+    LCD_PutPixel(39,6);
+    LCD_PutPixel(45,6);
+    LCD_PutPixel(51,6);
+    
+    LCD_PutPixel(18,12);
+    LCD_PutPixel(24,12);
+    LCD_PutPixel(30,12);
+    LCD_PutPixel(33,12);
+    LCD_PutPixel(39,12);
+    LCD_PutPixel(45,12);
+    
+    LCD_PutPixel(24,18);
+    LCD_PutPixel(30,18);
+    LCD_PutPixel(33,18);
+    LCD_PutPixel(39,18);
+    
+    LCD_PutPixel(30,24);
+    LCD_PutPixel(33,24);
+    
+    LCD_PutPixel(12,5);
+//*****************»­É³Â©±ß½ç**********************    
+    LCD_PutPixel(0,0);
     LCD_PutPixel((63-0),0);
     LCD_PutPixel(6,6);
     LCD_PutPixel((63-6),6);
@@ -64,8 +88,8 @@ void Oled_ControlShow(void)
     LCD_PutPixel(30,31);
     LCD_PutPixel(30,32);
     LCD_PutPixel(33,31); 
-    LCD_PutPixel(33,32);  
-            */
+    LCD_PutPixel(33,32);  */
+            
     
     }
     if(flag == 1){
@@ -108,7 +132,7 @@ void main(void)
    for(;;) 
    {
      Oled_ControlShow();
-     delayms(500);
+     delayms(1000);
    }
 }
 
@@ -123,16 +147,18 @@ void interrupt 68 Pit0_interrupt(void)
     	acy=GetData(ACCEL_YOUT_H);	
     	acz=GetData(ACCEL_ZOUT_H);	
       PITTF_PTF0=1;
-      delayms(500);
-     /* if(count <= 29){
+      delayms(1000);
+      if(count <= 29){
          LCD_CutPixel(liusha_x[count],liusha_y[count]);
-         
+         delayms(50);
          LCD_PutPixel((63-liusha_x[count]),(63-liusha_y[count]));
-      }else {
+         delayms(50);
+         flag == 1;
+      }else if(count==30){
         count == 0; 
         flag == 0; 
       }
-      count ++;*/
+      count ++;
       EnableInterrupts; 
        
 }   
