@@ -5,14 +5,14 @@
 #include "derivative.h"      
 #include <mc9s12xs128.h>
 #include "PLL.h"
-#include "PIT.h"
 #include "Datatype.h"
 #include "var.h"
 #include "MCU6050.h"
 #include "control.h"
-#include "oled.h"
+//#include "oled.h"
 #include "PWM.h"
 #include "delay.h"
+#include "LQ12864.h"
 
 
 #endif

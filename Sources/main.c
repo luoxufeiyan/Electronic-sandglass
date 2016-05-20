@@ -6,13 +6,13 @@ void Oled_ControlShow(void)
     
     if(flag == 0){
     int i,j;
-   	OLED_Write_String(33,2,"x:");
+   /*	OLED_Write_String(33,2,"x:");
     OLED_Write_Num6(35, 2, acx);
   	OLED_Write_String(33,3,"y:");
     OLED_Write_Num6(35, 3, acy/50);
     OLED_Write_String(33,4,"z:");
     OLED_Write_Num6(35, 4, acz/50);
-    /*for(i=0;i<30;i++)  //»­É³×Ó
+    for(i=0;i<30;i++)  //»­É³×Ó
     {
       LCD_PutPixel(shazi_x[i],shazi_y[i]);
     } 
@@ -102,16 +102,15 @@ void Oled_ControlShow(void)
     }else if(count==30){
       count = 0; 
       flag = 0;
-      OLED_Init(); 
+      LCD_Init(); 
     }
     
 }
 
 void ALL_init(void)
 {
-    PLL_init(); 
-    OLED_Init();    
-    PIT_Init012();           
+    Pll_Init();
+    LCD_Init();               
     InitMPU6050();
     I2C_Init();
     Pwm0_Init();
