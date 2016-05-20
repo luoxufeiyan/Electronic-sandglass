@@ -388,10 +388,11 @@ const byte F8X16[]=
 
 };
 
+
+
 /************************************** Internal Command *****************************************/
 
-
-                                        
+                              
 /*
  *  数据写入
  */
@@ -415,7 +416,7 @@ void OLED_WrDat(unsigned char data)
         }
         OLED_SCL = 1; 
         asm ("nop");
-        //asm ("nop");
+        asm ("nop");
         OLED_SCL = 0;    
         data <<= 1;    
     }
@@ -797,7 +798,7 @@ void OLED_Write_Num6(unsigned char x,unsigned char y,unsigned int num)
 void LCD_PutPixel(byte x,byte y)
 {
 	byte data1;  //data1当前点的数据 
-	 
+	if(x>63||y>63)return;   //超出范围
   OLED_Set_XY(x,y); 
 	data1 = 0x01<<(y%8); 	
 	OLED_WrCmd(0xb0+(y>>3));
@@ -805,6 +806,19 @@ void LCD_PutPixel(byte x,byte y)
 	OLED_WrCmd((x&0x0f)|0x00);
 	OLED_WrDat(data1); 	 	
 }
+
+void LCD_CutPixel(byte x,byte y)
+{
+	byte data1;  //data1当前点的数据 
+	if(x>63||y>63)return;   //超出范围
+  OLED_Set_XY(x,y); 
+	data1 = 0x00<<(y%8); 	
+	OLED_WrCmd(0xb0+(y>>3));
+	OLED_WrCmd(((x&0xf0)>>4)|0x10);
+	OLED_WrCmd((x&0x0f)|0x00);
+	OLED_WrDat(data1); 	 	
+}
+
 //==============================================================
 //函数名： void LCD_Rectangle(byte x1,byte y1,
 //                   byte x2,byte y2,byte color,byte gif)

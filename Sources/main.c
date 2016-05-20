@@ -1,8 +1,7 @@
 #include"includes.h"
 
 void Oled_ControlShow(void)  
-{   
-
+{     
     if(flag == 0){
       
     int i,j;
@@ -20,44 +19,54 @@ void Oled_ControlShow(void)
         LCD_PutPixel((63-i),i); 
 
     } */ 
-    for(i=0;i<63;i=i+4){
-
-    }   
+    /*for(i=0;i<30;i++)  //»­É³×Ó
+    {
+      LCD_PutPixel(shazi_x[i],shazi_y[i]);
+    } */
     
-    LCD_PutPixel(4,4);
-    LCD_PutPixel((63-4),4);
-    LCD_PutPixel(8,8);
-    LCD_PutPixel((63-8),8);
+    /*LCD_PutPixel(12,6);
+//*****************»­É³Â©±ß½ç**********************    
+    LCD_PutPixel(0,0);
+    LCD_PutPixel(6,0);
+    LCD_PutPixel(12,0);
+    LCD_PutPixel(18,0);
+    LCD_PutPixel(24,0);
+    LCD_PutPixel(30,0);
+    LCD_PutPixel(33,0);
+    LCD_PutPixel(39,0);
+    LCD_PutPixel(45,0);
+    LCD_PutPixel(51,0);
+    LCD_PutPixel(57,0);
+    LCD_PutPixel((63-0),0);
+    LCD_PutPixel(6,6);
+    LCD_PutPixel((63-6),6);
     LCD_PutPixel(12,12);
     LCD_PutPixel((63-12),12);
-    LCD_PutPixel(16,16);
-    LCD_PutPixel((63-16),16);
-    LCD_PutPixel(20,20);
-    LCD_PutPixel((63-20),20);
+    LCD_PutPixel(18,18);
+    LCD_PutPixel((63-18),18);
     LCD_PutPixel(24,24);
     LCD_PutPixel((63-24),24);
-    LCD_PutPixel(28,28);
-    LCD_PutPixel((63-28),28);
-    LCD_PutPixel(36,36);
-    LCD_PutPixel((63-36),36);
-    LCD_PutPixel(40,40);
-    LCD_PutPixel((63-40),40);
-    LCD_PutPixel(44,44);
-    LCD_PutPixel((63-44),44);
-    LCD_PutPixel(48,48);
-    LCD_PutPixel((63-48),48);
-    LCD_PutPixel(52,52);
-    LCD_PutPixel((63-52),52);
-    LCD_PutPixel(56,56);
-    LCD_PutPixel((63-56),56);
-    LCD_PutPixel(60,60);
-    LCD_PutPixel((63-60),60);
+    LCD_PutPixel(30,30);
+    LCD_PutPixel((63-30),30);
+    LCD_PutPixel(33,33);
+    LCD_PutPixel((63-33),33);
+    LCD_PutPixel(39,39);
+    LCD_PutPixel((63-39),39);
+    LCD_PutPixel(45,45);
+    LCD_PutPixel((63-45),45);
+    LCD_PutPixel(51,51);
+    LCD_PutPixel((63-51),51);
+    LCD_PutPixel(57,57);
+    LCD_PutPixel((63-57),57);
+    LCD_PutPixel(63,63);
+    LCD_PutPixel((63-63),63);
     
     LCD_PutPixel(30,31);
     LCD_PutPixel(30,32);
-    LCD_PutPixel(33,31);
+    LCD_PutPixel(33,31); 
     LCD_PutPixel(33,32);  
-
+            */
+    
     }
     if(flag == 1){
 
@@ -75,7 +84,7 @@ void Oled_ControlShow(void)
     if(flag == 4){
     
     
-    }
+    }   
    
 }
 
@@ -114,13 +123,16 @@ void interrupt 68 Pit0_interrupt(void)
     	acy=GetData(ACCEL_YOUT_H);	
     	acz=GetData(ACCEL_ZOUT_H);	
       PITTF_PTF0=1;
-     /* if(count<=990){
-      count ++;
-      flag == 1;
-      }else{
-      count == 0; 
-      flag == 0; 
-      }*/
+      delayms(500);
+     /* if(count <= 29){
+         LCD_CutPixel(liusha_x[count],liusha_y[count]);
+         
+         LCD_PutPixel((63-liusha_x[count]),(63-liusha_y[count]));
+      }else {
+        count == 0; 
+        flag == 0; 
+      }
+      count ++;*/
       EnableInterrupts; 
        
 }   

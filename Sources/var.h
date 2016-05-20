@@ -13,7 +13,10 @@ extern uint8  work0;
 extern uint8  flag;
 extern uint8  count;
 //------------------------------------------------------------
-
+extern byte shazi_x[30];
+extern byte shazi_y[30];
+extern byte liusha_x[30];
+extern byte liusha_y[30];
 extern float acx;
 extern float acy;
 extern float acz;

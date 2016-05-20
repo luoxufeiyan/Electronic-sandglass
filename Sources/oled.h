@@ -149,7 +149,7 @@ void OLED_Write_Num3(unsigned char x,unsigned char y,unsigned int num);
 void OLED_Write_Num4(unsigned char x,unsigned char y,unsigned int num);
 void OLED_Write_Num6(unsigned char x,unsigned char y,unsigned int num);
 void LCD_PutPixel(byte x,byte y);
-
+void LCD_CutPixel(byte x,byte y);
 //void LCD_P8x16Str(byte x,byte y,byte ch[]);
 
 #endif
