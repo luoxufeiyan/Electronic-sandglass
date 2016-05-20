@@ -35,8 +35,8 @@ Entry point: 0xC000 (_Startup)
 _startupData is allocated at 0xC00F and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x2100     554
-  _Copy    *toCopyDownBeg 0xC358
+  _Range   pZeroOut       0x2100     494
+  _Copy    *toCopyDownBeg 0xC310
 } _startupData;
 
 *********************************************************************************************
@@ -46,11 +46,11 @@ Section Name                    Size  Type     From       To       Segment
 .init                             15     R     0xC000     0xC00E   ROM_C000
 .startData                        10     R     0xC00F     0xC018   ROM_C000
 .rodata1                           9     R     0xC019     0xC021   ROM_C000
-NON_BANKED                       822     R     0xC022     0xC357   ROM_C000
-.copy                            540     R     0xC358     0xC573   ROM_C000
-.text                           1664     R   0xFE8000   0xFE867F   PAGE_FE
+NON_BANKED                       750     R     0xC022     0xC30F   ROM_C000
+.copy                            473     R     0xC310     0xC4E8   ROM_C000
+.text                           1873     R   0xFE8000   0xFE8750   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
-.data                            540   R/W     0x2100     0x231B   RAM
+.data                            480   R/W     0x2100     0x22DF   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
 .abs_section_b                     1   N/I        0xB        0xB   .absSeg2
@@ -343,12 +343,12 @@ NON_BANKED                       822     R     0xC022     0xC357   ROM_C000
 .abs_section_354                   2   N/I      0x354      0x355   .absSeg289
 .abs_section_356                   2   N/I      0x356      0x357   .absSeg290
 .abs_section_ff76                  2     R     0xFF76     0xFF77   .absSeg291
-.bss                              14   R/W     0x231C     0x2329   RAM
+.bss                              14   R/W     0x22E0     0x22ED   RAM
 .vectSeg292_vect                   2     R     0xFFFE     0xFFFF   .vectSeg292
 
 Summary of section sizes per section type:
-READ_ONLY (R):         BF8 (dec:     3064)
-READ_WRITE (R/W):      32A (dec:      810)
+READ_ONLY (R):         C3E (dec:     3134)
+READ_WRITE (R/W):      2EE (dec:      750)
 NO_INIT (N/I):         168 (dec:      360)
 
 *********************************************************************************************
@@ -657,10 +657,10 @@ MODULE:                 -- MC9S12XS128.c.o --
      _PITCNT3                                   356       2       2       0   .abs_section_356
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     Oled_ControlShow                        FE8000      9B     155       2   .text       
-     ALL_init                                FE809B      19      25       2   .text       
-     main                                    FE80B4      15      21       2   .text       
-     Pit0_interrupt                            C022      78     120       1   NON_BANKED  
+     Oled_ControlShow                        FE8000     166     358      14   .text       
+     ALL_init                                FE8166      19      25       2   .text       
+     main                                    FE817F      15      21       2   .text       
+     Pit0_interrupt                            C022      30      48       1   NON_BANKED  
 - VARIABLES:
      STRING.x..1                               C019       3       3       1   .rodata1    
      STRING.y..2                               C01C       3       3       1   .rodata1    
@@ -668,7 +668,7 @@ MODULE:                 -- main.c.o --
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
-     Init                                    FE80C9      29      41       2   .text       
+     Init                                    FE8194      29      41       2   .text       
      _Startup                                  C000       F      15       0   .init       
 - VARIABLES:
      _startupData                              C00F       6       6       3   .startData  
@@ -676,97 +676,95 @@ MODULE:                 -- Start12.c.o --
      __SEG_END_SSTACK                          2100       0       0       1               
 MODULE:                 -- FCONV.C.o (ansixbf.lib) --
 - PROCEDURES:
-     F_TOLONGK                                 C09A      32      50       1   NON_BANKED  
-     F_FRLONGK                                 C0CC      1E      30       1   NON_BANKED  
-     _FSFLOAT                                  C0EA      12      18       1   NON_BANKED  
-     _FSTRUNC                                  C0FC      11      17       1   NON_BANKED  
-     _FUTRUNC                                  C10D       3       3       3   NON_BANKED  
+     F_TOLONGK                                 C052      32      50       1   NON_BANKED  
+     F_FRLONGK                                 C084      1E      30       1   NON_BANKED  
+     _FSFLOAT                                  C0A2      12      18       1   NON_BANKED  
+     _FSTRUNC                                  C0B4      11      17       1   NON_BANKED  
+     _FUTRUNC                                  C0C5       3       3       3   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- FMUL.C.o (ansixbf.lib) --
 - PROCEDURES:
-     F_DIVKL                                   C110      84     132       1   NON_BANKED  
-     _FDIV                                     C194      1E      30       2   NON_BANKED  
+     F_DIVKL                                   C0C8      84     132       1   NON_BANKED  
+     _FDIV                                     C14C      1E      30       2   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- FREGS.C.o (ansixbf.lib) --
 - PROCEDURES:
-     F_PULK                                    C1B2      15      21       2   NON_BANKED  
-     F_PULL                                    C1C7      15      21       1   NON_BANKED  
-     F_PSHK                                    C1DC      13      19       2   NON_BANKED  
-     F_CLRK                                    C1EF       B      11       1   NON_BANKED  
-     F_MAXK                                    C1FA       9       9       2   NON_BANKED  
-     F_NORMK                                   C203      37      55       1   NON_BANKED  
+     F_PULK                                    C16A      15      21       2   NON_BANKED  
+     F_PULL                                    C17F      15      21       1   NON_BANKED  
+     F_PSHK                                    C194      13      19       2   NON_BANKED  
+     F_CLRK                                    C1A7       B      11       1   NON_BANKED  
+     F_MAXK                                    C1B2       9       9       2   NON_BANKED  
+     F_NORMK                                   C1BB      37      55       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- rtshc12.c.o (ansixbf.lib) --
 - PROCEDURES:
-     _BSHL                                     C23A       8       8       1   NON_BANKED  
-     _lDivMod                                  C242      B9     185       3   NON_BANKED  
-     _LDIVU                                    C2FB       E      14       2   NON_BANKED  
-     _NEG_P                                    C309       C      12       4   NON_BANKED  
-     _LMODS                                    C315      2A      42       1   NON_BANKED  
+     _BSHL                                     C1F2       8       8       1   NON_BANKED  
+     _lDivMod                                  C1FA      B9     185       3   NON_BANKED  
+     _LDIVU                                    C2B3       E      14       2   NON_BANKED  
+     _NEG_P                                    C2C1       C      12       4   NON_BANKED  
+     _LMODS                                    C2CD      2A      42       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- VREGS.C.o (ansixbf.lib) --
 - PROCEDURES:
-     L_NEGK                                    C33F       7       7       2   NON_BANKED  
-     L_PSHK                                    C346       8       8       1   NON_BANKED  
-     SL_PULK                                   C34E       A      10       1   NON_BANKED  
+     L_NEGK                                    C2F7       7       7       2   NON_BANKED  
+     L_PSHK                                    C2FE       8       8       1   NON_BANKED  
+     SL_PULK                                   C306       A      10       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- PIT.c.o --
 - PROCEDURES:
-     PIT_Init012                             FE80F2      33      51       2   .text       
+     PIT_Init012                             FE81BD      33      51       2   .text       
 - VARIABLES:
 MODULE:                 -- PLL.c.o --
 - PROCEDURES:
-     PLL_init                                FE8125      1A      26       2   .text       
+     PLL_init                                FE81F0      1A      26       2   .text       
 - VARIABLES:
 MODULE:                 -- var.c.o --
 - PROCEDURES:
 - VARIABLES:
-     shazi_x                                   2100      1E      30       1   .data       
-     shazi_y                                   211E      1E      30       1   .data       
-     liusha_x                                  213C      1E      30       2   .data       
-     liusha_y                                  215A      1E      30       2   .data       
-     flag                                      231C       1       1       1   .bss        
-     count                                     231D       1       1       3   .bss        
-     acx                                       231E       4       4       4   .bss        
-     acy                                       2322       4       4       4   .bss        
-     acz                                       2326       4       4       4   .bss        
+     liusha_x                                  2100      1E      30       2   .data       
+     liusha_y                                  211E      1E      30       2   .data       
+     flag                                      22E0       1       1       4   .bss        
+     count                                     22E1       1       1       6   .bss        
+     acx                                       22E2       4       4       4   .bss        
+     acy                                       22E6       4       4       4   .bss        
+     acz                                       22EA       4       4       4   .bss        
 MODULE:                 -- oled.c.o --
 - PROCEDURES:
-     OLED_WrDat                              FE813F      38      56       8   .text       
-     OLED_WrCmd                              FE8177      35      53      26   .text       
-     OLED_Set_XY                             FE81AC      1F      31       8   .text       
-     OLED_Clear                              FE81CB      2F      47       2   .text       
-     OLED_Delay_ms                           FE81FA      17      23       2   .text       
-     OLED_Init                               FE8211      A5     165       2   .text       
-     OLED_Write_Char                         FE82B6      8A     138      14   .text       
-     OLED_Write_String                       FE8340      2D      45       6   .text       
-     OLED_Write_Num6                         FE836D      AA     170       6   .text       
-     LCD_PutPixel                            FE8417      48      72       4   .text       
-     LCD_CutPixel                            FE845F      3C      60       2   .text       
+     OLED_WrDat                              FE820A      38      56       8   .text       
+     OLED_WrCmd                              FE8242      35      53      26   .text       
+     OLED_Set_XY                             FE8277      1F      31       8   .text       
+     OLED_Clear                              FE8296      2F      47       2   .text       
+     OLED_Delay_ms                           FE82C5      17      23       2   .text       
+     OLED_Init                               FE82DC      AB     171       4   .text       
+     OLED_Write_Char                         FE8387      8A     138      14   .text       
+     OLED_Write_String                       FE8411      2D      45       6   .text       
+     OLED_Write_Num6                         FE843E      AA     170       6   .text       
+     LCD_PutPixel                            FE84E8      48      72      14   .text       
+     LCD_CutPixel                            FE8530      3C      60       2   .text       
 - VARIABLES:
-     SmallChars                                2178     1A4     420       1   .data       
+     SmallChars                                213C     1A4     420       1   .data       
 MODULE:                 -- PWM.c.o --
 - PROCEDURES:
-     Pwm0_Init                               FE849B      23      35       2   .text       
+     Pwm0_Init                               FE856C      23      35       2   .text       
 - VARIABLES:
 MODULE:                 -- MCU6050.c.o --
 - PROCEDURES:
-     I2C_Init                                FE84BE      15      21       2   .text       
-     I2C_Start                               FE84D3      21      33       6   .text       
-     I2C_Stop                                FE84F4      1E      30       4   .text       
-     I2C_SendACK                             FE8512      1E      30       2   .text       
-     I2C_RecvACK                             FE8530      1B      27       2   .text       
-     I2C_SendByte                            FE854B      3A      58      12   .text       
-     I2C_RecvByte                            FE8585      39      57       2   .text       
-     Single_WriteI2C                         FE85BE      1D      29      10   .text       
-     Single_ReadI2C                          FE85DB      2B      43       4   .text       
-     InitMPU6050                             FE8606      32      50       2   .text       
-     GetData                                 FE8638      22      34       2   .text       
+     I2C_Init                                FE858F      15      21       2   .text       
+     I2C_Start                               FE85A4      21      33       6   .text       
+     I2C_Stop                                FE85C5      1E      30       4   .text       
+     I2C_SendACK                             FE85E3      1E      30       2   .text       
+     I2C_RecvACK                             FE8601      1B      27       2   .text       
+     I2C_SendByte                            FE861C      3A      58      12   .text       
+     I2C_RecvByte                            FE8656      39      57       2   .text       
+     Single_WriteI2C                         FE868F      1D      29      10   .text       
+     Single_ReadI2C                          FE86AC      2B      43       4   .text       
+     InitMPU6050                             FE86D7      32      50       2   .text       
+     GetData                                 FE8709      22      34       2   .text       
 - VARIABLES:
 MODULE:                 -- delay.c.o --
 - PROCEDURES:
-     delayms                                 FE865A      1B      27       8   .text       
-     delayus                                 FE8675       B      11      28   .text       
+     delayms                                 FE872B      1B      27       6   .text       
+     delayus                                 FE8746       B      11      28   .text       
 - VARIABLES:
 
 *********************************************************************************************
@@ -774,7 +772,7 @@ MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   MC9S12XS128.c.o                            360      0      0
-  main.c.o                                     0    321     11
+  main.c.o                                     0    452     11
   Start12.c.o                                  0     56      0
   FCONV.C.o (ansixbf.lib)                      0    118      0
   FMUL.C.o (ansixbf.lib)                       0    162      0
@@ -783,12 +781,12 @@ MODULE STATISTIC
   VREGS.C.o (ansixbf.lib)                      0     25      0
   PIT.c.o                                      0     51      0
   PLL.c.o                                      0     26      0
-  var.c.o                                    134      0      0
-  oled.c.o                                   420    860      0
+  var.c.o                                     74      0      0
+  oled.c.o                                   420    866      0
   PWM.c.o                                      0     35      0
   MCU6050.c.o                                  0    412      0
   delay.c.o                                    0     38      0
-  other                                      256     12    540
+  other                                      256     12    473
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
@@ -800,7 +798,7 @@ SECTION: ".text"
   I2C_Init I2C_Start I2C_Stop I2C_SendACK I2C_RecvACK I2C_SendByte I2C_RecvByte 
   Single_WriteI2C Single_ReadI2C InitMPU6050 GetData delayms delayus 
 SECTION: ".data"
-  shazi_x shazi_y liusha_x liusha_y SmallChars 
+  liusha_x liusha_y SmallChars 
 SECTION: ".bss"
   flag count acx acy acz 
 SECTION: ".init"
@@ -1691,74 +1689,72 @@ OBJECT LIST SORTED BY ADDRESS
      _PITCNT2                                   352       2       2       0   .abs_section_352
      _PITLD3                                    354       2       2       0   .abs_section_354
      _PITCNT3                                   356       2       2       0   .abs_section_356
-     shazi_x                                   2100      1E      30       1   .data       
-     shazi_y                                   211E      1E      30       1   .data       
-     liusha_x                                  213C      1E      30       2   .data       
-     liusha_y                                  215A      1E      30       2   .data       
-     SmallChars                                2178     1A4     420       1   .data       
-     flag                                      231C       1       1       1   .bss        
-     count                                     231D       1       1       3   .bss        
-     acx                                       231E       4       4       4   .bss        
-     acy                                       2322       4       4       4   .bss        
-     acz                                       2326       4       4       4   .bss        
+     liusha_x                                  2100      1E      30       2   .data       
+     liusha_y                                  211E      1E      30       2   .data       
+     SmallChars                                213C     1A4     420       1   .data       
+     flag                                      22E0       1       1       4   .bss        
+     count                                     22E1       1       1       6   .bss        
+     acx                                       22E2       4       4       4   .bss        
+     acy                                       22E6       4       4       4   .bss        
+     acz                                       22EA       4       4       4   .bss        
      _Startup                                  C000       F      15       0   .init       
      STRING.x..1                               C019       3       3       1   .rodata1    
      STRING.y..2                               C01C       3       3       1   .rodata1    
      STRING.z..3                               C01F       3       3       1   .rodata1    
-     Pit0_interrupt                            C022      78     120       1   NON_BANKED  
-     F_TOLONGK                                 C09A      32      50       1   NON_BANKED  
-     F_FRLONGK                                 C0CC      1E      30       1   NON_BANKED  
-     _FSFLOAT                                  C0EA      12      18       1   NON_BANKED  
-     _FSTRUNC                                  C0FC      11      17       1   NON_BANKED  
-     _FUTRUNC                                  C10D       3       3       3   NON_BANKED  
-     F_DIVKL                                   C110      84     132       1   NON_BANKED  
-     _FDIV                                     C194      1E      30       2   NON_BANKED  
-     F_PULK                                    C1B2      15      21       2   NON_BANKED  
-     F_PULL                                    C1C7      15      21       1   NON_BANKED  
-     F_PSHK                                    C1DC      13      19       2   NON_BANKED  
-     F_CLRK                                    C1EF       B      11       1   NON_BANKED  
-     F_MAXK                                    C1FA       9       9       2   NON_BANKED  
-     F_NORMK                                   C203      37      55       1   NON_BANKED  
-     _BSHL                                     C23A       8       8       1   NON_BANKED  
-     _lDivMod                                  C242      B9     185       3   NON_BANKED  
-     _LDIVU                                    C2FB       E      14       2   NON_BANKED  
-     _NEG_P                                    C309       C      12       4   NON_BANKED  
-     _LMODS                                    C315      2A      42       1   NON_BANKED  
-     L_NEGK                                    C33F       7       7       2   NON_BANKED  
-     L_PSHK                                    C346       8       8       1   NON_BANKED  
-     SL_PULK                                   C34E       A      10       1   NON_BANKED  
+     Pit0_interrupt                            C022      30      48       1   NON_BANKED  
+     F_TOLONGK                                 C052      32      50       1   NON_BANKED  
+     F_FRLONGK                                 C084      1E      30       1   NON_BANKED  
+     _FSFLOAT                                  C0A2      12      18       1   NON_BANKED  
+     _FSTRUNC                                  C0B4      11      17       1   NON_BANKED  
+     _FUTRUNC                                  C0C5       3       3       3   NON_BANKED  
+     F_DIVKL                                   C0C8      84     132       1   NON_BANKED  
+     _FDIV                                     C14C      1E      30       2   NON_BANKED  
+     F_PULK                                    C16A      15      21       2   NON_BANKED  
+     F_PULL                                    C17F      15      21       1   NON_BANKED  
+     F_PSHK                                    C194      13      19       2   NON_BANKED  
+     F_CLRK                                    C1A7       B      11       1   NON_BANKED  
+     F_MAXK                                    C1B2       9       9       2   NON_BANKED  
+     F_NORMK                                   C1BB      37      55       1   NON_BANKED  
+     _BSHL                                     C1F2       8       8       1   NON_BANKED  
+     _lDivMod                                  C1FA      B9     185       3   NON_BANKED  
+     _LDIVU                                    C2B3       E      14       2   NON_BANKED  
+     _NEG_P                                    C2C1       C      12       4   NON_BANKED  
+     _LMODS                                    C2CD      2A      42       1   NON_BANKED  
+     L_NEGK                                    C2F7       7       7       2   NON_BANKED  
+     L_PSHK                                    C2FE       8       8       1   NON_BANKED  
+     SL_PULK                                   C306       A      10       1   NON_BANKED  
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
-     Oled_ControlShow                        FE8000      9B     155       2   .text       
-     ALL_init                                FE809B      19      25       2   .text       
-     main                                    FE80B4      15      21       2   .text       
-     Init                                    FE80C9      29      41       2   .text       
-     PIT_Init012                             FE80F2      33      51       2   .text       
-     PLL_init                                FE8125      1A      26       2   .text       
-     OLED_WrDat                              FE813F      38      56       8   .text       
-     OLED_WrCmd                              FE8177      35      53      26   .text       
-     OLED_Set_XY                             FE81AC      1F      31       8   .text       
-     OLED_Clear                              FE81CB      2F      47       2   .text       
-     OLED_Delay_ms                           FE81FA      17      23       2   .text       
-     OLED_Init                               FE8211      A5     165       2   .text       
-     OLED_Write_Char                         FE82B6      8A     138      14   .text       
-     OLED_Write_String                       FE8340      2D      45       6   .text       
-     OLED_Write_Num6                         FE836D      AA     170       6   .text       
-     LCD_PutPixel                            FE8417      48      72       4   .text       
-     LCD_CutPixel                            FE845F      3C      60       2   .text       
-     Pwm0_Init                               FE849B      23      35       2   .text       
-     I2C_Init                                FE84BE      15      21       2   .text       
-     I2C_Start                               FE84D3      21      33       6   .text       
-     I2C_Stop                                FE84F4      1E      30       4   .text       
-     I2C_SendACK                             FE8512      1E      30       2   .text       
-     I2C_RecvACK                             FE8530      1B      27       2   .text       
-     I2C_SendByte                            FE854B      3A      58      12   .text       
-     I2C_RecvByte                            FE8585      39      57       2   .text       
-     Single_WriteI2C                         FE85BE      1D      29      10   .text       
-     Single_ReadI2C                          FE85DB      2B      43       4   .text       
-     InitMPU6050                             FE8606      32      50       2   .text       
-     GetData                                 FE8638      22      34       2   .text       
-     delayms                                 FE865A      1B      27       8   .text       
-     delayus                                 FE8675       B      11      28   .text       
+     Oled_ControlShow                        FE8000     166     358      14   .text       
+     ALL_init                                FE8166      19      25       2   .text       
+     main                                    FE817F      15      21       2   .text       
+     Init                                    FE8194      29      41       2   .text       
+     PIT_Init012                             FE81BD      33      51       2   .text       
+     PLL_init                                FE81F0      1A      26       2   .text       
+     OLED_WrDat                              FE820A      38      56       8   .text       
+     OLED_WrCmd                              FE8242      35      53      26   .text       
+     OLED_Set_XY                             FE8277      1F      31       8   .text       
+     OLED_Clear                              FE8296      2F      47       2   .text       
+     OLED_Delay_ms                           FE82C5      17      23       2   .text       
+     OLED_Init                               FE82DC      AB     171       4   .text       
+     OLED_Write_Char                         FE8387      8A     138      14   .text       
+     OLED_Write_String                       FE8411      2D      45       6   .text       
+     OLED_Write_Num6                         FE843E      AA     170       6   .text       
+     LCD_PutPixel                            FE84E8      48      72      14   .text       
+     LCD_CutPixel                            FE8530      3C      60       2   .text       
+     Pwm0_Init                               FE856C      23      35       2   .text       
+     I2C_Init                                FE858F      15      21       2   .text       
+     I2C_Start                               FE85A4      21      33       6   .text       
+     I2C_Stop                                FE85C5      1E      30       4   .text       
+     I2C_SendACK                             FE85E3      1E      30       2   .text       
+     I2C_RecvACK                             FE8601      1B      27       2   .text       
+     I2C_SendByte                            FE861C      3A      58      12   .text       
+     I2C_RecvByte                            FE8656      39      57       2   .text       
+     Single_WriteI2C                         FE868F      1D      29      10   .text       
+     Single_ReadI2C                          FE86AC      2B      43       4   .text       
+     InitMPU6050                             FE86D7      32      50       2   .text       
+     GetData                                 FE8709      22      34       2   .text       
+     delayms                                 FE872B      1B      27       6   .text       
+     delayus                                 FE8746       B      11      28   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -1791,44 +1787,33 @@ NOT USED VARIABLES
 rtshc12.c.o (ansixbf.lib):
   _PowOfTwo_8 _PowOfTwo_16 _PowOfTwo_32 errno 
 var.c.o:
-  Angle work1 t D P work0 cox coy coz co_all co_all_now co_all_bef ac_x_eve 
-  ac_y_eve ac_z_eve last_ac_x last_ac_y ac_x_max ac_y_max ac_x ac_y ac_z 
-  co_x_eve co_y_eve co_z_eve co_x co_y co_z hubu hubu0 CY 
+  Angle work1 shazi_x shazi_y t D P work0 cox coy coz co_all co_all_now 
+  co_all_bef ac_x_eve ac_y_eve ac_z_eve last_ac_x last_ac_y ac_x_max ac_y_max 
+  ac_x ac_y ac_z co_x_eve co_y_eve co_z_eve co_x co_y co_z hubu hubu0 CY 
 oled.c.o:
   F6x8 F8X16 
 
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xC358 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xC310 ---- SIZE       4 ---
 Filling bytes inserted
- 001E2100
-------- ROM-ADDRESS: 0xC35C ---- RAM-ADDRESS: 0x2100 ---- SIZE      30 ---
-Name of initialized Object : shazi_x
- 060C12181E 21272D3339 0C12181E21
- 272D331218 1E21272D18 1E21271E21
-------- ROM-ADDRESS: 0xC37A ---- SIZE       4 ---
-Filling bytes inserted
- 01F42128
-------- ROM-ADDRESS: 0xC37E ---- RAM-ADDRESS: 0x2128 ---- SIZE      20 ---
-Name of initialized Object : shazi_y:10
- 0606060606 0606060C0C 0C0C0C0C12
- 1212121818
-------- ROM-ADDRESS: 0xC392 ---- RAM-ADDRESS: 0x213C ---- SIZE      30 ---
+ 00142100
+------- ROM-ADDRESS: 0xC314 ---- RAM-ADDRESS: 0x2100 ---- SIZE      20 ---
 Name of initialized Object : liusha_x
  1E2118271E 21122D1827 1E210C3312
- 2D18271E21 06390C3312 2D18271E21
-------- ROM-ADDRESS: 0xC3B0 ---- SIZE       4 ---
+ 2D18271E21
+------- ROM-ADDRESS: 0xC328 ---- SIZE       4 ---
 Filling bytes inserted
- 00000000
-------- ROM-ADDRESS: 0xC3B4 ---- RAM-ADDRESS: 0x215E ---- SIZE      26 ---
-Name of initialized Object : liusha_y:4
- 0606000006 060C0C0000 06060C0C12
- 1200000606 0C0C121218 18
-------- ROM-ADDRESS: 0xC3CE ---- SIZE       1 ---
+ 0014211E
+------- ROM-ADDRESS: 0xC32C ---- RAM-ADDRESS: 0x211E ---- SIZE      20 ---
+Name of initialized Object : liusha_y
+ 060606060C 0C06060C0C 121206060C
+ 0C12121818
+------- ROM-ADDRESS: 0xC340 ---- SIZE       4 ---
 Filling bytes inserted
- 00
-------- ROM-ADDRESS: 0xC3CF ---- RAM-ADDRESS: 0x2179 ---- SIZE     215 ---
+ 01A3213D
+------- ROM-ADDRESS: 0xC344 ---- RAM-ADDRESS: 0x213D ---- SIZE     215 ---
 Name of initialized Object : SmallChars:1
  3E5149453E 0000427F40 0000426151
  4946002141 454B310018 14127F1000
@@ -1845,17 +1830,17 @@ Name of initialized Object : SmallChars:1
  3F4040403F 001F204020 1F003F4038
  403F006314 0814630007 0870080700
  6151494543
-------- ROM-ADDRESS: 0xC4A6 ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xC41B ---- SIZE       8 ---
 Filling bytes inserted
  0000000000 000000
-------- ROM-ADDRESS: 0xC4AE ---- RAM-ADDRESS: 0x2258 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xC423 ---- RAM-ADDRESS: 0x221C ---- SIZE      20 ---
 Name of initialized Object : SmallChars:224
  3636000000 0808080808 0020100804
  0200006060
-------- ROM-ADDRESS: 0xC4C2 ---- SIZE       5 ---
+------- ROM-ADDRESS: 0xC437 ---- SIZE       5 ---
 Filling bytes inserted
  0000000000
-------- ROM-ADDRESS: 0xC4C7 ---- RAM-ADDRESS: 0x2271 ---- SIZE     171 ---
+------- ROM-ADDRESS: 0xC43C ---- RAM-ADDRESS: 0x2235 ---- SIZE     171 ---
 Name of initialized Object : SmallChars:249
  A060000004 0201020408 08082A1C08
  0020545454 78007F4844 4438003844
@@ -1869,7 +1854,7 @@ Name of initialized Object : SmallChars:249
  003C404020 7C001C2040 201C003C40
  30403C0044 2810284400 1CA0A0A07C
  004464544C 44
-------- ROM-ADDRESS: 0xC572 ---- SIZE       2 ---
+------- ROM-ADDRESS: 0xC4E7 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -1877,8 +1862,7 @@ Filling bytes inserted
 OBJECT-DEPENDENCIES SECTION
 ---------------------------------------------------------------------------------------------
 _Startup                  USES __SEG_END_SSTACK Init main 
-Pit0_interrupt            USES acx acy acz _PITTF delayms count liusha_x 
-                                liusha_y LCD_CutPixel LCD_PutPixel GetData _FSFLOAT 
+Pit0_interrupt            USES acx acy acz _PITTF GetData _FSFLOAT 
 _FSFLOAT                  USES SL_PULK F_FRLONGK F_PSHK 
 _FSTRUNC                  USES F_PULK F_TOLONGK L_PSHK 
 _FUTRUNC                  USES _FSTRUNC 
@@ -1893,8 +1877,9 @@ L_PSHK                    USES L_NEGK
 SL_PULK                   USES L_NEGK 
 _Vector_68                USES Pit0_interrupt 
 Oled_ControlShow          USES flag STRING.x..1 OLED_Write_String acx _FUTRUNC 
-                                OLED_Write_Num6 STRING.y..2 acy _FDIV STRING.z..3 acz shazi_x 
-                                shazi_y LCD_PutPixel 
+                                OLED_Write_Num6 STRING.y..2 acy _FDIV STRING.z..3 acz 
+                                LCD_PutPixel Oled_ControlShow count liusha_x liusha_y 
+                                LCD_CutPixel delayms OLED_Init 
 ALL_init                  USES PLL_init OLED_Init PIT_Init012 InitMPU6050 
                                 I2C_Init Pwm0_Init 
 main                      USES ALL_init Oled_ControlShow delayms 
@@ -1906,8 +1891,8 @@ OLED_WrDat                USES _PTM
 OLED_WrCmd                USES _PTM 
 OLED_Set_XY               USES OLED_WrCmd 
 OLED_Clear                USES OLED_WrCmd OLED_WrDat 
-OLED_Init                 USES _DDRM _PTM OLED_Delay_ms OLED_Clear OLED_Set_XY 
-                                OLED_WrCmd 
+OLED_Init                 USES flag count _DDRM _PTM OLED_Delay_ms OLED_Clear 
+                                OLED_Set_XY OLED_WrCmd 
 OLED_Write_Char           USES OLED_Set_XY SmallChars OLED_WrDat 
 OLED_Write_String         USES OLED_Write_Char 
 OLED_Write_Num6           USES _LDIVU OLED_Write_Char _LMODS 
@@ -2040,17 +2025,29 @@ DEPENDENCY TREE
  |  |  |  +- F_PSHK              
  |  |  |       
  |  |  +- LCD_PutPixel        
- |  |     | 
- |  |     +- OLED_Set_XY          (see above)
- |  |     |  
- |  |     +- _BSHL               
- |  |     |    
- |  |     +- OLED_WrCmd           (see above)
- |  |     |  
- |  |     +- OLED_WrDat           (see above)
- |  |        
- |  +- delayms             
- |       
+ |  |  |  | 
+ |  |  |  +- OLED_Set_XY          (see above)
+ |  |  |  |  
+ |  |  |  +- _BSHL               
+ |  |  |  |    
+ |  |  |  +- OLED_WrCmd           (see above)
+ |  |  |  |  
+ |  |  |  +- OLED_WrDat           (see above)
+ |  |  |     
+ |  |  +- LCD_CutPixel        
+ |  |  |  | 
+ |  |  |  +- OLED_Set_XY          (see above)
+ |  |  |  |  
+ |  |  |  +- OLED_WrCmd           (see above)
+ |  |  |  |  
+ |  |  |  +- OLED_WrDat           (see above)
+ |  |  |     
+ |  |  +- delayms             
+ |  |  |    
+ |  |  +- OLED_Init            (see above)
+ |  |     
+ |  +- delayms              (see above)
+ |     
  +- _Startup            
     | 
     +- Init                
@@ -2061,18 +2058,6 @@ DEPENDENCY TREE
  | 
  +- Pit0_interrupt      
     | 
-    +- delayms              (see above)
-    |  
-    +- LCD_CutPixel        
-    |  | 
-    |  +- OLED_Set_XY          (see above)
-    |  |  
-    |  +- OLED_WrCmd           (see above)
-    |  |  
-    |  +- OLED_WrDat           (see above)
-    |     
-    +- LCD_PutPixel         (see above)
-    |  
     +- GetData             
     |  | 
     |  +- Single_ReadI2C      
@@ -2108,5 +2093,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 8
-Total size of all blocks to be downloaded: 3064
+Total size of all blocks to be downloaded: 3134
 

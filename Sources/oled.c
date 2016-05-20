@@ -500,6 +500,8 @@ void OLED_Delay_ms(unsigned int ms)
  */
 void OLED_Init(void)        
 {
+    flag = 0;
+    count = 0;
     SCL_DDR = 1;
     SDA_DDR = 1;
     RST_DDR = 1;

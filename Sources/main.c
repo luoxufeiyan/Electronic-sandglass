@@ -2,6 +2,8 @@
 
 void Oled_ControlShow(void)  
 {    
+
+    
     if(flag == 0){
     int i,j;
    	OLED_Write_String(33,2,"x:");
@@ -10,20 +12,13 @@ void Oled_ControlShow(void)
     OLED_Write_Num6(35, 3, acy/50);
     OLED_Write_String(33,4,"z:");
     OLED_Write_Num6(35, 4, acz/50);
-    
-   /*for(j=1;j<=62;j++) {
-
-        
-        LCD_PutPixel(i,i);
-        LCD_PutPixel((63-i),i); 
-
-    } */ 
-    /**/for(i=0;i<30;i++)  //»­É³×Ó
+    /*for(i=0;i<30;i++)  //»­É³×Ó
     {
       LCD_PutPixel(shazi_x[i],shazi_y[i]);
     } 
     
-    /*LCD_PutPixel(6,0);
+    
+    LCD_PutPixel(6,0);
     LCD_PutPixel(12,0);
     LCD_PutPixel(18,0);
     LCD_PutPixel(24,0);
@@ -32,7 +27,7 @@ void Oled_ControlShow(void)
     LCD_PutPixel(39,0);
     LCD_PutPixel(45,0);
     LCD_PutPixel(51,0);
-    LCD_PutPixel(57,0);
+    LCD_PutPixel(57,0);*/
     
     LCD_PutPixel(12,6);
     LCD_PutPixel(18,6);
@@ -58,7 +53,7 @@ void Oled_ControlShow(void)
     LCD_PutPixel(30,24);
     LCD_PutPixel(33,24);
     
-    LCD_PutPixel(12,5);
+    /*LCD_PutPixel(12,5);
 //*****************»­É³Â©±ß½ç**********************    
     LCD_PutPixel(0,0);
     LCD_PutPixel((63-0),0);
@@ -90,26 +85,26 @@ void Oled_ControlShow(void)
     LCD_PutPixel(33,31); 
     LCD_PutPixel(33,32);  */
             
-    
+    count ++;
     }
     if(flag == 1){
 
     
     
     }
-    if(flag == 2){
-    
-    
+    if(count <= 29){
+      LCD_CutPixel(liusha_x[count],liusha_y[count]);
+      delayms(500);
+      LCD_PutPixel((63-liusha_x[count]),(63-liusha_y[count]));
+      delayms(500);
+      flag = 1;
+      count ++;
+    }else if(count==30){
+      count = 0; 
+      flag = 0;
+      OLED_Init(); 
     }
-    if(flag == 3){
     
-    
-    }
-    if(flag == 4){
-    
-    
-    }   
-   
 }
 
 void ALL_init(void)
@@ -126,7 +121,6 @@ void main(void)
 {
    DisableInterrupts;
    ALL_init(); 
-   //Oled_ControlShow();
    EnableInterrupts;
   
    for(;;) 
@@ -147,18 +141,6 @@ void interrupt 68 Pit0_interrupt(void)
     	acy=GetData(ACCEL_YOUT_H);	
     	acz=GetData(ACCEL_ZOUT_H);	
       PITTF_PTF0=1;
-      delayms(1000);
-      if(count <= 29){
-         LCD_CutPixel(liusha_x[count],liusha_y[count]);
-         delayms(50);
-         LCD_PutPixel((63-liusha_x[count]),(63-liusha_y[count]));
-         delayms(50);
-         flag == 1;
-      }else if(count==30){
-        count == 0; 
-        flag == 0; 
-      }
-      count ++;
       EnableInterrupts; 
        
 }   
