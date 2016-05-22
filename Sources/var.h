@@ -12,6 +12,7 @@ extern uint8  work1;
 extern uint8  work0;
 extern uint8  flag;
 extern uint8  count;
+extern uint8  Time;
 //------------------------------------------------------------
 extern byte shazi_x[20];
 extern byte shazi_y[20];
