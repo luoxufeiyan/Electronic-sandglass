@@ -48,7 +48,7 @@ Section Name                    Size  Type     From       To       Segment
 .rodata1                           9     R     0xC241     0xC249   ROM_C000
 NON_BANKED                       522     R     0xC24A     0xC453   ROM_C000
 .copy                            782     R     0xC454     0xC761   ROM_C000
-.text                           1863     R   0xFE8000   0xFE8746   PAGE_FE
+.text                           2516     R   0xFE8000   0xFE89D3   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
 .data                           1012   R/W     0x2100     0x24F3   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
@@ -347,7 +347,7 @@ NON_BANKED                       522     R     0xC24A     0xC453   ROM_C000
 .vectSeg292_vect                   2     R     0xFFFE     0xFFFF   .vectSeg292
 
 Summary of section sizes per section type:
-READ_ONLY (R):         EAD (dec:     3757)
+READ_ONLY (R):        113A (dec:     4410)
 READ_WRITE (R/W):      50E (dec:     1294)
 NO_INIT (N/I):         168 (dec:      360)
 
@@ -657,9 +657,9 @@ MODULE:                 -- MC9S12XS128.c.o --
      _PITCNT3                                   356       2       2       0   .abs_section_356
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     Oled_ControlShow                        FE8000      E9     233       2   .text       
-     ALL_init                                FE80E9      25      37       2   .text       
-     main                                    FE810E       E      14       2   .text       
+     Oled_ControlShow                        FE8000     376     886      66   .text       
+     ALL_init                                FE8376      25      37       2   .text       
+     main                                    FE839B       E      14       2   .text       
      Pit0_interrupt                            C24A      4E      78       1   NON_BANKED  
 - VARIABLES:
      STRING.x..1                               C241       3       3       1   .rodata1    
@@ -668,7 +668,7 @@ MODULE:                 -- main.c.o --
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
-     Init                                    FE811C      29      41       2   .text       
+     Init                                    FE83A9      29      41       2   .text       
      _Startup                                  C000       F      15       0   .init       
 - VARIABLES:
      _startupData                              C00F       6       6       3   .startData  
@@ -703,17 +703,17 @@ MODULE:                 -- VREGS.C.o (ansixbf.lib) --
 - VARIABLES:
 MODULE:                 -- PLL.c.o --
 - PROCEDURES:
-     Pll_Init                                FE8145      13      19       2   .text       
+     Pll_Init                                FE83D2      13      19       2   .text       
 - VARIABLES:
 MODULE:                 -- var.c.o --
 - PROCEDURES:
 - VARIABLES:
      shazi_x                                   2100      14      20       1   .data       
      shazi_y                                   2114      14      20       1   .data       
-     liusha_x                                  2128      14      20       2   .data       
-     liusha_y                                  213C      14      20       2   .data       
-     flag                                      24F4       1       1       3   .bss        
-     count                                     24F5       1       1       4   .bss        
+     liusha_x                                  2128      14      20       3   .data       
+     liusha_y                                  213C      14      20       3   .data       
+     flag                                      24F4       1       1       4   .bss        
+     count                                     24F5       1       1       6   .bss        
      acx                                       24F6       4       4       4   .bss        
      acy                                       24FA       4       4       4   .bss        
      acz                                       24FE       4       4       4   .bss        
@@ -722,48 +722,48 @@ MODULE:                 -- var.c.o --
      coz                                       250A       4       4       2   .bss        
 MODULE:                 -- PWM.c.o --
 - PROCEDURES:
-     Pwm0_Init                               FE8158      23      35       2   .text       
+     Pwm0_Init                               FE83E5      23      35       2   .text       
 - VARIABLES:
 MODULE:                 -- MCU6050.c.o --
 - PROCEDURES:
-     I2C_Init                                FE817B      17      23       2   .text       
-     I2C_Start                               FE8192      27      39       6   .text       
-     I2C_Stop                                FE81B9      23      35       4   .text       
-     I2C_SendACK                             FE81DC      23      35       2   .text       
-     I2C_RecvACK                             FE81FF      1F      31       2   .text       
-     I2C_SendByte                            FE821E      40      64      12   .text       
-     I2C_RecvByte                            FE825E      41      65       2   .text       
-     Single_WriteI2C                         FE829F      1D      29      10   .text       
-     Single_ReadI2C                          FE82BC      2B      43       4   .text       
-     InitMPU6050                             FE82E7      32      50       2   .text       
-     GetData                                 FE8319      22      34       2   .text       
+     I2C_Init                                FE8408      17      23       2   .text       
+     I2C_Start                               FE841F      27      39       6   .text       
+     I2C_Stop                                FE8446      23      35       4   .text       
+     I2C_SendACK                             FE8469      23      35       2   .text       
+     I2C_RecvACK                             FE848C      1F      31       2   .text       
+     I2C_SendByte                            FE84AB      40      64      12   .text       
+     I2C_RecvByte                            FE84EB      41      65       2   .text       
+     Single_WriteI2C                         FE852C      1D      29      10   .text       
+     Single_ReadI2C                          FE8549      2B      43       4   .text       
+     InitMPU6050                             FE8574      32      50       2   .text       
+     GetData                                 FE85A6      22      34       2   .text       
 - VARIABLES:
 MODULE:                 -- delay.c.o --
 - PROCEDURES:
-     delayms                                 FE833B      1B      27       4   .text       
-     delayus                                 FE8356       B      11      28   .text       
+     delayms                                 FE85C8      1B      27       4   .text       
+     delayus                                 FE85E3       B      11      28   .text       
 - VARIABLES:
 MODULE:                 -- LQ12864.c.o --
 - PROCEDURES:
-     LCD_WrDat                               FE8361      35      53      12   .text       
-     LCD_WrCmd                               FE8396      35      53      34   .text       
-     LCD_Set_Pos                             FE83CB      1F      31      12   .text       
-     LCD_Fill                                FE83EA      32      50       2   .text       
-     LCD_DLY_ms                              FE841C      17      23       2   .text       
-     LCD_Init                                FE8433      94     148       4   .text       
-     OLED_Write_Char                         FE84C7      8A     138      12   .text       
-     OLED_Write_Num6                         FE8551      AA     170       6   .text       
-     LCD_PutPixel                            FE85FB      48      72       4   .text       
-     LCD_CutPixel                            FE8643      3E      62       2   .text       
-     LCD_P6x8Str                             FE8681      59      89       6   .text       
-     Draw_BMP                                FE86DA      3A      58       2   .text       
+     LCD_WrDat                               FE85EE      35      53      12   .text       
+     LCD_WrCmd                               FE8623      35      53      34   .text       
+     LCD_Set_Pos                             FE8658      1F      31      12   .text       
+     LCD_Fill                                FE8677      32      50       2   .text       
+     LCD_DLY_ms                              FE86A9      17      23       2   .text       
+     LCD_Init                                FE86C0      94     148       4   .text       
+     OLED_Write_Char                         FE8754      8A     138      12   .text       
+     OLED_Write_Num6                         FE87DE      AA     170       6   .text       
+     LCD_PutPixel                            FE8888      48      72      16   .text       
+     LCD_CutPixel                            FE88D0      3E      62       6   .text       
+     LCD_P6x8Str                             FE890E      59      89       6   .text       
+     Draw_BMP                                FE8967      3A      58       2   .text       
 - VARIABLES:
      F6x8                                      C019     228     552       1   .rodata     
      SmallChars                                2150     1A4     420       1   .data       
      shalou64x64                               22F4     200     512       1   .data       
 MODULE:                 -- PIT.c.o --
 - PROCEDURES:
-     PIT_Init012                             FE8714      33      51       2   .text       
+     PIT_Init012                             FE89A1      33      51       2   .text       
 - VARIABLES:
 
 *********************************************************************************************
@@ -771,7 +771,7 @@ MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   MC9S12XS128.c.o                            360      0      0
-  main.c.o                                     0    362     11
+  main.c.o                                     0   1015     11
   Start12.c.o                                  0     56      0
   FCONV.C.o (ansixbf.lib)                      0    118      0
   FREGS.C.o (ansixbf.lib)                      0     40      0
@@ -1690,12 +1690,12 @@ OBJECT LIST SORTED BY ADDRESS
      _PITCNT3                                   356       2       2       0   .abs_section_356
      shazi_x                                   2100      14      20       1   .data       
      shazi_y                                   2114      14      20       1   .data       
-     liusha_x                                  2128      14      20       2   .data       
-     liusha_y                                  213C      14      20       2   .data       
+     liusha_x                                  2128      14      20       3   .data       
+     liusha_y                                  213C      14      20       3   .data       
      SmallChars                                2150     1A4     420       1   .data       
      shalou64x64                               22F4     200     512       1   .data       
-     flag                                      24F4       1       1       3   .bss        
-     count                                     24F5       1       1       4   .bss        
+     flag                                      24F4       1       1       4   .bss        
+     count                                     24F5       1       1       6   .bss        
      acx                                       24F6       4       4       4   .bss        
      acy                                       24FA       4       4       4   .bss        
      acz                                       24FE       4       4       4   .bss        
@@ -1724,38 +1724,38 @@ OBJECT LIST SORTED BY ADDRESS
      L_PSHK                                    C442       8       8       1   NON_BANKED  
      SL_PULK                                   C44A       A      10       1   NON_BANKED  
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
-     Oled_ControlShow                        FE8000      E9     233       2   .text       
-     ALL_init                                FE80E9      25      37       2   .text       
-     main                                    FE810E       E      14       2   .text       
-     Init                                    FE811C      29      41       2   .text       
-     Pll_Init                                FE8145      13      19       2   .text       
-     Pwm0_Init                               FE8158      23      35       2   .text       
-     I2C_Init                                FE817B      17      23       2   .text       
-     I2C_Start                               FE8192      27      39       6   .text       
-     I2C_Stop                                FE81B9      23      35       4   .text       
-     I2C_SendACK                             FE81DC      23      35       2   .text       
-     I2C_RecvACK                             FE81FF      1F      31       2   .text       
-     I2C_SendByte                            FE821E      40      64      12   .text       
-     I2C_RecvByte                            FE825E      41      65       2   .text       
-     Single_WriteI2C                         FE829F      1D      29      10   .text       
-     Single_ReadI2C                          FE82BC      2B      43       4   .text       
-     InitMPU6050                             FE82E7      32      50       2   .text       
-     GetData                                 FE8319      22      34       2   .text       
-     delayms                                 FE833B      1B      27       4   .text       
-     delayus                                 FE8356       B      11      28   .text       
-     LCD_WrDat                               FE8361      35      53      12   .text       
-     LCD_WrCmd                               FE8396      35      53      34   .text       
-     LCD_Set_Pos                             FE83CB      1F      31      12   .text       
-     LCD_Fill                                FE83EA      32      50       2   .text       
-     LCD_DLY_ms                              FE841C      17      23       2   .text       
-     LCD_Init                                FE8433      94     148       4   .text       
-     OLED_Write_Char                         FE84C7      8A     138      12   .text       
-     OLED_Write_Num6                         FE8551      AA     170       6   .text       
-     LCD_PutPixel                            FE85FB      48      72       4   .text       
-     LCD_CutPixel                            FE8643      3E      62       2   .text       
-     LCD_P6x8Str                             FE8681      59      89       6   .text       
-     Draw_BMP                                FE86DA      3A      58       2   .text       
-     PIT_Init012                             FE8714      33      51       2   .text       
+     Oled_ControlShow                        FE8000     376     886      66   .text       
+     ALL_init                                FE8376      25      37       2   .text       
+     main                                    FE839B       E      14       2   .text       
+     Init                                    FE83A9      29      41       2   .text       
+     Pll_Init                                FE83D2      13      19       2   .text       
+     Pwm0_Init                               FE83E5      23      35       2   .text       
+     I2C_Init                                FE8408      17      23       2   .text       
+     I2C_Start                               FE841F      27      39       6   .text       
+     I2C_Stop                                FE8446      23      35       4   .text       
+     I2C_SendACK                             FE8469      23      35       2   .text       
+     I2C_RecvACK                             FE848C      1F      31       2   .text       
+     I2C_SendByte                            FE84AB      40      64      12   .text       
+     I2C_RecvByte                            FE84EB      41      65       2   .text       
+     Single_WriteI2C                         FE852C      1D      29      10   .text       
+     Single_ReadI2C                          FE8549      2B      43       4   .text       
+     InitMPU6050                             FE8574      32      50       2   .text       
+     GetData                                 FE85A6      22      34       2   .text       
+     delayms                                 FE85C8      1B      27       4   .text       
+     delayus                                 FE85E3       B      11      28   .text       
+     LCD_WrDat                               FE85EE      35      53      12   .text       
+     LCD_WrCmd                               FE8623      35      53      34   .text       
+     LCD_Set_Pos                             FE8658      1F      31      12   .text       
+     LCD_Fill                                FE8677      32      50       2   .text       
+     LCD_DLY_ms                              FE86A9      17      23       2   .text       
+     LCD_Init                                FE86C0      94     148       4   .text       
+     OLED_Write_Char                         FE8754      8A     138      12   .text       
+     OLED_Write_Num6                         FE87DE      AA     170       6   .text       
+     LCD_PutPixel                            FE8888      48      72      16   .text       
+     LCD_CutPixel                            FE88D0      3E      62       6   .text       
+     LCD_P6x8Str                             FE890E      59      89       6   .text       
+     Draw_BMP                                FE8967      3A      58       2   .text       
+     PIT_Init012                             FE89A1      33      51       2   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -1958,7 +1958,8 @@ _Vector_68                USES Pit0_interrupt
 Oled_ControlShow          USES STRING.x..1 LCD_P6x8Str acx _FUTRUNC 
                                 OLED_Write_Num6 STRING.y..2 acy STRING.z..3 acz flag 
                                 shalou64x64 Draw_BMP shazi_x shazi_y LCD_PutPixel count 
-                                liusha_x liusha_y LCD_CutPixel delayms LCD_Init 
+                                liusha_x liusha_y LCD_CutPixel Oled_ControlShow 
+                                LCD_Init delayms 
 ALL_init                  USES Pll_Init PIT_Init012 _DDRAB _DDRS _DDRM _PORTAB 
                                 LCD_Init InitMPU6050 I2C_Init Pwm0_Init 
 main                      USES ALL_init Oled_ControlShow 
@@ -2111,10 +2112,10 @@ DEPENDENCY TREE
  |     |  |  
  |     |  +- LCD_WrDat            (see above)
  |     |     
- |     +- delayms             
- |     |    
  |     +- LCD_Init             (see above)
- |        
+ |     |  
+ |     +- delayms             
+ |          
  +- _Startup            
     | 
     +- Init                
@@ -2160,5 +2161,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 8
-Total size of all blocks to be downloaded: 3757
+Total size of all blocks to be downloaded: 4410
 
