@@ -1,11 +1,11 @@
 #ifndef _MCU6050_H_
 #define _MCU6050_H_
 
-#define SCL PORTA_PA0  			//IIC时钟引脚定义
-#define SDA PORTA_PA1			//IIC数据引脚定义
+#define SCL PTS_PTS0  			//IIC时钟引脚定义
+#define SDA PTS_PTS2			//IIC数据引脚定义
 
-#define SCLIO DDRA_DDRA0
-#define SDAIO DDRA_DDRA1
+#define SCLIO DDRS_DDRS0
+#define SDAIO DDRS_DDRS2
 //****************************************
 // 定义MPU6050内部地址
 //****************************************

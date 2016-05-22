@@ -3,115 +3,57 @@
 void Oled_ControlShow(void)  
 {    
 
-    
-    if(flag == 0){
-    int i,j;
-   	OLED_Write_String(33,2,"x:");
+    int i,j;	
+    LCD_P6x8Str(66,2,"x:");
     OLED_Write_Num6(35, 2, acx);
-  	OLED_Write_String(33,3,"y:");
-    OLED_Write_Num6(35, 3, acy/50);
-    OLED_Write_String(33,4,"z:");
-    OLED_Write_Num6(35, 4, acz/50);
-    /*for(i=0;i<30;i++)  //»­É³×Ó
-    {
-      LCD_PutPixel(shazi_x[i],shazi_y[i]);
-    } 
-    
-    
-    LCD_PutPixel(6,0);
-    LCD_PutPixel(12,0);
-    LCD_PutPixel(18,0);
-    LCD_PutPixel(24,0);
-    LCD_PutPixel(30,0);
-    LCD_PutPixel(33,0);
-    LCD_PutPixel(39,0);
-    LCD_PutPixel(45,0);
-    LCD_PutPixel(51,0);
-    LCD_PutPixel(57,0);*/
-    
-    LCD_PutPixel(12,6);
-    LCD_PutPixel(18,6);
-    LCD_PutPixel(24,6);
-    LCD_PutPixel(30,6);
-    LCD_PutPixel(33,6);
-    LCD_PutPixel(39,6);
-    LCD_PutPixel(45,6);
-    LCD_PutPixel(51,6);
-    
-    LCD_PutPixel(18,12);
-    LCD_PutPixel(24,12);
-    LCD_PutPixel(30,12);
-    LCD_PutPixel(33,12);
-    LCD_PutPixel(39,12);
-    LCD_PutPixel(45,12);
-    
-    LCD_PutPixel(24,18);
-    LCD_PutPixel(30,18);
-    LCD_PutPixel(33,18);
-    LCD_PutPixel(39,18);
-    
-    LCD_PutPixel(30,24);
-    LCD_PutPixel(33,24);
-    
-    /*LCD_PutPixel(12,5);
-//*****************»­É³Â©±ß½ç**********************    
-    LCD_PutPixel(0,0);
-    LCD_PutPixel((63-0),0);
-    LCD_PutPixel(6,6);
-    LCD_PutPixel((63-6),6);
-    LCD_PutPixel(12,12);
-    LCD_PutPixel((63-12),12);
-    LCD_PutPixel(18,18);
-    LCD_PutPixel((63-18),18);
-    LCD_PutPixel(24,24);
-    LCD_PutPixel((63-24),24);
-    LCD_PutPixel(30,30);
-    LCD_PutPixel((63-30),30);
-    LCD_PutPixel(33,33);
-    LCD_PutPixel((63-33),33);
-    LCD_PutPixel(39,39);
-    LCD_PutPixel((63-39),39);
-    LCD_PutPixel(45,45);
-    LCD_PutPixel((63-45),45);
-    LCD_PutPixel(51,51);
-    LCD_PutPixel((63-51),51);
-    LCD_PutPixel(57,57);
-    LCD_PutPixel((63-57),57);
-    LCD_PutPixel(63,63);
-    LCD_PutPixel((63-63),63);
-    
-    LCD_PutPixel(30,31);
-    LCD_PutPixel(30,32);
-    LCD_PutPixel(33,31); 
-    LCD_PutPixel(33,32);  */
-            
-    count ++;
+    LCD_P6x8Str(66,3,"y:");
+    OLED_Write_Num6(35, 3, acy);
+    LCD_P6x8Str(66,4,"z:");
+    OLED_Write_Num6(35, 4, acz);
+    if(flag == 0){
+
+      Draw_BMP(0,0,64,7,shalou64x64);
+      for(i=0;i<20;i++)  //»­É³×Ó
+      {
+        LCD_PutPixel(shazi_x[i],shazi_y[i]);
+      }   
+      
     }
     if(flag == 1){
 
     
     
     }
-    if(count <= 29){
-      LCD_CutPixel(liusha_x[count],liusha_y[count]);
+    if(count <= 19){
+     // LCD_CLS();
+      //LCD_CutPixel(liusha_x[count],liusha_y[count]);
+     // for(j=count;j<30;j++){
+        LCD_CutPixel(liusha_x[count],liusha_y[count]);
+      //}
       delayms(500);
-      LCD_PutPixel((63-liusha_x[count]),(63-liusha_y[count]));
+     // for(j=0;j<count;j++){
+        LCD_PutPixel((63-liusha_x[count]),(63-liusha_y[count]));
+      //}
       delayms(500);
       flag = 1;
       count ++;
-    }else if(count==30){
+    }else if(count==20){
       count = 0; 
       flag = 0;
-      OLED_Init(); 
-    }
+      LCD_Init(); 
+    }         
     
 }
 
 void ALL_init(void)
 {
-    PLL_init(); 
-    OLED_Init();    
-    PIT_Init012();           
+    Pll_Init();
+    PIT_Init012();
+    DDRB=0XFF;
+    DDRS=0XFF;
+    DDRM=0XFF;
+    PORTB=0XFF;
+    LCD_Init();              
     InitMPU6050();
     I2C_Init();
     Pwm0_Init();
@@ -126,7 +68,19 @@ void main(void)
    for(;;) 
    {
      Oled_ControlShow();
-     delayms(1000);
+    // delayms(1000);
+     /* LCD_Fill(0xff);//ºÚÆÁ 
+      delayms(700); 
+      LCD_Fill(0x00);//ÁÁÆÁ
+      delayms(1000);      
+      LCD_Print(8,0,"±±¾©ÁúÇðÖÇÄÜ¿Æ¼¼");  //ºº×Ö×Ö·û´®ÏÔÊ¾
+      LCD_Print(15,2,"ÖÇÄÜ³µÊ×Ñ¡Òº¾§");   //ºº×Ö×Ö·û´®ÏÔÊ¾
+      LCD_P8x16Str(48,4,"OLED");          //Ó¢ÎÄ×Ö·û´®ÏÔÊ¾
+      LCD_P6x8Str(16,6,"chiusir@yahoo.cn");//Ó¢ÎÄ×Ö·û´®ÏÔÊ¾ 
+      LCD_P6x8Str(34,7,"2011-09-03");      //Ó¢ÎÄ×Ö·û´®ÏÔÊ¾
+      delayms(2000);      
+      LCD_CLS();                           //ÇåÆÁ
+      Draw_BMP(0,0,64,7,shalou64x64); *///Í¼Æ¬ÏÔÊ¾
    }
 }
 
@@ -139,7 +93,10 @@ void interrupt 68 Pit0_interrupt(void)
       DisableInterrupts;
       acx=GetData(ACCEL_XOUT_H);	
     	acy=GetData(ACCEL_YOUT_H);	
-    	acz=GetData(ACCEL_ZOUT_H);	
+    	acz=GetData(ACCEL_ZOUT_H);
+    	cox=GetData(GYRO_XOUT_H);	
+    	coy=GetData(GYRO_YOUT_H);	
+    	coz=GetData(GYRO_ZOUT_H);		
       PITTF_PTF0=1;
       EnableInterrupts; 
        
