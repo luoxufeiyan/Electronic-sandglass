@@ -11,19 +11,34 @@ void Oled_ControlShow(void)
     LCD_P6x8Str(66,4,"z:");
     OLED_Write_Num6(35, 4, coz);
     LCD_Print(66,0,"电子沙漏");
-    if(flag == 0){
-      Draw_BMP(0,0,64,7,shalou64x64);
-      for(i=0;i<20;i++)  //画沙子
-      {
-        LCD_PutPixel(shazi_x[i],shazi_y[i]);
-      }   
-      
+    if(flag == 0){    //模式选择
+      if(flag == flag_last){}
+      else{
+        LCD_Init();
+        if(coz>=6000&&coz<=7000){
+          Draw_BMP(0,0,64,7,shalou64x64);
+          for(i=0;i<count;i++)  //画沙子
+            LCD_PutPixel(shazi_x[i],shazi_y[i]);
+          for(j=0;j<=19-count;j++)
+            LCD_PutPixel(liusha_x[j],liusha_y[j]);
+            delayms(Time);
+          flag = 1;
+        }else if(coz<6000&&coz>=0){
+          Draw_BMP(0,0,64,7,shalou64x64);
+          for(i=0;i<count;i++)  //画沙子
+            LCD_PutPixel(liushaxia_x[i],liushaxia_y[i]);
+          for(j=19-count;j>=0;j--)
+            LCD_PutPixel(63-liushaxia_x[j],63-liushaxia_y[j]);
+            delayms(Time);
+          flag = 2;  
+        }
+      }
     }
     
-    if(count <= 19){
+    if(flag == 1){                             //顺序流沙
+     if(count <= 19){
         LCD_CutPixel(liusha_x[count],liusha_y[count]);
         delayms(Time);
-        if(flag == 1){
           if(count%2==0) { 
             if(liusha_y[count]==6){
               if(liusha_x[count]==30){
@@ -187,16 +202,29 @@ void Oled_ControlShow(void)
             else if(liusha_y[count]==24){            
             }
           }
-        } 
         LCD_PutPixel((63-liusha_x[count]),(63-liusha_y[count]));
         delayms(Time);
         flag = 1;
         count ++;
-      }else if(count==20){
+      }else if(count==20){      
+        flag = 0; 
         count = 0; 
-        flag = 0;
         LCD_Init(); 
-      }         
+      }
+    }
+    
+    if(flag == 2){
+      if(count==19){
+
+      } 
+      else if(count<=19){
+      }
+    }
+    
+    if(flag == 3){
+        
+    }
+            
     
 }
 

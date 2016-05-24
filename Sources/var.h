@@ -11,13 +11,18 @@ extern uint16  Angle;
 extern uint8  work1;
 extern uint8  work0;
 extern uint8  flag;
+extern uint8  flag_last;
 extern uint8  count;
 extern uint8  Time;
 //------------------------------------------------------------
 extern byte shazi_x[20];
 extern byte shazi_y[20];
+extern byte shazixia_x[20];
+extern byte shazixia_y[20];
 extern byte liusha_x[20];
 extern byte liusha_y[20];
+extern byte liushaxia_x[20];
+extern byte liushaxia_y[20];
 extern float acx;
 extern float acy;
 extern float acz;
