@@ -13,6 +13,7 @@
 #include "PWM.h"
 #include "delay.h"
 #include "LQ12864.h"
+#include <math.h>
 
 
 #endif

@@ -13,6 +13,7 @@
  void OLED_Write_Num6(unsigned char x,unsigned char y,unsigned int num);
  void LCD_PutPixel(byte x,byte y);
  void LCD_CutPixel(byte x,byte y);
+ void LCD_Change_Str_4(byte x, byte y, int16 data);
  void LCD_Rectangle(byte x1,byte y1,byte x2,byte y2,byte gif);
  void Draw_LQLogo(void);
  void Draw_LibLogo(void);

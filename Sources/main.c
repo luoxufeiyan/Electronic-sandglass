@@ -5,11 +5,12 @@ void Oled_ControlShow(void)
 
     int i,j,x=0;	
     LCD_P6x8Str(66,2,"x:");
-    OLED_Write_Num6(35, 2, acx);
+    OLED_Write_Num6(35, 2, cox);
     LCD_P6x8Str(66,3,"y:");
-    OLED_Write_Num6(35, 3, acy);
+    OLED_Write_Num6(35, 3, coy);
     LCD_P6x8Str(66,4,"z:");
-    OLED_Write_Num6(35, 4, acz);
+    OLED_Write_Num6(35, 4, coz);
+    LCD_Print(66,0,"µç×ÓÉ³Â©");
     if(flag == 0){
       Draw_BMP(0,0,64,7,shalou64x64);
       for(i=0;i<20;i++)  //»­É³×Ó
@@ -222,6 +223,7 @@ void main(void)
    for(;;) 
    {
      Oled_ControlShow();
+     
     // delayms(1000);
      /* LCD_Fill(0xff);//ºÚÆÁ 
       delayms(700); 
@@ -247,10 +249,10 @@ void interrupt 68 Pit0_interrupt(void)
       DisableInterrupts;
       acx=GetData(ACCEL_XOUT_H);	
     	acy=GetData(ACCEL_YOUT_H);	
-    	acz=GetData(ACCEL_ZOUT_H);
-    	cox=GetData(GYRO_XOUT_H);	
-    	coy=GetData(GYRO_YOUT_H);	
-    	coz=GetData(GYRO_ZOUT_H);		
+    	acz=GetData(ACCEL_ZOUT_H);	
+    	coz= MPU6050_GetAngle(acx,acy,acz,0);	
+    	cox= MPU6050_GetAngle(acx,acy,acz,1);
+    	coy= MPU6050_GetAngle(acx,acy,acz,2);
       PITTF_PTF0=1;
       EnableInterrupts; 
        
