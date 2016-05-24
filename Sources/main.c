@@ -11,11 +11,12 @@ void Oled_ControlShow(void)
     LCD_P6x8Str(66,4,"z:");
     OLED_Write_Num6(35, 4, coz);
     LCD_Print(66,0,"µç×ÓÉ³Â©");
+    delayms(Time);
     if(flag == 0){    //Ä£Ê½Ñ¡Ôñ
-      if(flag == flag_last){}
-      else{
-        LCD_Init();
-        if(coz>=6000&&coz<=7000){
+    
+    
+ /**********************Ë³ÐòÉ³Â©*******************************/   
+    
           Draw_BMP(0,0,64,7,shalou64x64);
           for(i=0;i<count;i++)  //»­É³×Ó
             LCD_PutPixel(shazi_x[i],shazi_y[i]);
@@ -23,19 +24,28 @@ void Oled_ControlShow(void)
             LCD_PutPixel(liusha_x[j],liusha_y[j]);
             delayms(Time);
           flag = 1;
-        }else if(coz<6000&&coz>=0){
-          Draw_BMP(0,0,64,7,shalou64x64);
+          
+ /*************************************************************/          
+          
+          
+ /**********************ÄæÏòÉ³Â©*****************************/         
+         /* Draw_BMP(0,0,64,7,shalou64x64);
           for(i=0;i<count;i++)  //»­É³×Ó
-            LCD_PutPixel(liushaxia_x[i],liushaxia_y[i]);
-          for(j=19-count;j>=0;j--)
-            LCD_PutPixel(63-liushaxia_x[j],63-liushaxia_y[j]);
+            LCD_PutPixel(shazixia_x[i],shazixia_y[i]);
+          for(j=0;j<=19-count;j++)
+            LCD_PutPixel(liushaxia_x[j],liushaxia_y[j]);
             delayms(Time);
-          flag = 2;  
-        }
-      }
+          flag = 1;*/
+          
+/***************************************************************/         
+          
+          
     }
     
-    if(flag == 1){                             //Ë³ÐòÁ÷É³
+    if(flag == 1){   
+    
+/***************************Ë³ÐòÁ÷É³***********************************/    
+                              //
      if(count <= 19){
         LCD_CutPixel(liusha_x[count],liusha_y[count]);
         delayms(Time);
@@ -210,7 +220,190 @@ void Oled_ControlShow(void)
         flag = 0; 
         count = 0; 
         LCD_Init(); 
+      }  
+/*******************************************************************/      
+      
+      
+/*************************ÄæÏòÉ³Â©³ÌÐò******************************/      
+     /* if(count <= 19){
+        LCD_CutPixel(liushaxia_x[count],liushaxia_y[count]);
+        delayms(Time);
+          if(count%2==1) { 
+            if(liushaxia_y[count]==57){
+              if(liushaxia_x[count]==30){
+                  for(x=0;x<3;x++){
+                  LCD_PutPixel(33,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(33,24-6*x);
+                  delayms(Time);
+                } 
+              }
+              else if(liushaxia_x[count]==24){
+                for(x=0;x<3;x++){
+                  LCD_PutPixel(33,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(33,24-6*x);
+                  delayms(Time);
+                }
+              }
+              else if(liushaxia_x[count]==18){
+                  for(x=0;x<2;x++){
+                    LCD_PutPixel(33,24-6*x);
+                    delayms(Time);
+                    LCD_CutPixel(33,24-6*x);
+                    delayms(Time);
+                  } 
+                  LCD_PutPixel(33+6,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(33+6,24-6*x);
+                  delayms(Time);
+              }
+              else if(liushaxia_x[count]==12){
+                  LCD_PutPixel(33,24);
+                  delayms(Time);
+                  LCD_CutPixel(33,24);
+                  delayms(Time);
+                  for(x=1;x<3;x++){ 
+                    LCD_PutPixel(33+6*x,24-6*x);
+                    delayms(Time);
+                    LCD_CutPixel(33+6*x,24-6*x);
+                  delayms(Time);}
+              }             
+            } 
+            else if(liushaxia_y[count]==51)
+            {
+              if(liushaxia_x[count]==30){
+                for(x=0;x<2;x++){
+                  LCD_PutPixel(33,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(33,24-6*x);
+                  delayms(Time);
+                } 
+              }
+              else if(liushaxia_x[count]==24){
+                for(x=0;x<2;x++){
+                  LCD_PutPixel(33,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(33,24-6*x);
+                  delayms(Time);
+                }
+              }
+              else if(liushaxia_x[count]==18){
+                LCD_PutPixel(33,24);
+                delayms(Time);
+                LCD_CutPixel(33,24);
+                delayms(Time);
+                LCD_PutPixel(33+6,24-6);
+                delayms(Time);
+                LCD_CutPixel(33+6,24-6);
+                delayms(Time);
+              }             
+            } 
+            else if(liushaxia_y[count]==45){
+                LCD_PutPixel(33,24);
+                delayms(Time);
+                LCD_CutPixel(33,24);
+                delayms(Time);
+            }
+            else if(liushaxia_y[count]==39){            
+            }
+                
+          }
+          else {
+            if(liushaxia_y[count]==57){
+              if(liushaxia_x[count]==33){
+                  for(x=0;x<3;x++){
+                  LCD_PutPixel(30,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(30,24-6*x);
+                  delayms(Time);
+                } 
+              }
+              else if(liushaxia_x[count]==39){
+                  for(x=0;x<3;x++){
+                  LCD_PutPixel(30,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(30,24-6*x);
+                  delayms(Time);
+                }
+              }
+              else if(liushaxia_x[count]==45){
+                  for(x=0;x<2;x++){
+                  LCD_PutPixel(30,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(30,24-6*x);
+                  delayms(Time);
+                } 
+                LCD_PutPixel(30-6,24-6*x);
+                delayms(Time);
+                LCD_CutPixel(30-6,24-6*x);
+                delayms(Time);
+              }
+              else if(liushaxia_x[count]==51){
+                  
+                LCD_PutPixel(30,24);
+                delayms(Time);
+                LCD_CutPixel(30,24);
+                delayms(Time);
+                for(x=1;x<3;x++){ 
+                  LCD_PutPixel(30-6*x,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(30-6*x,24-6*x);
+                  delayms(Time);
+                }
+              }  
+            } 
+            else if(liushaxia_y[count]==51)
+            {
+              if(liushaxia_x[count]==33){
+                for(x=0;x<2;x++){
+                  LCD_PutPixel(30,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(30,24-6*x);
+                  delayms(Time);
+                } 
+              }
+              else if(liushaxia_x[count]==39){
+                for(x=0;x<2;x++){
+                  LCD_PutPixel(30,24-6*x);
+                  delayms(Time);
+                  LCD_CutPixel(30,24-6*x);
+                  delayms(Time);
+                }
+              }
+              else if(liushaxia_x[count]==45){
+                LCD_PutPixel(30,24);
+                delayms(Time);
+                LCD_CutPixel(30,24);
+                delayms(Time);
+                LCD_PutPixel(30-6,24-6);
+                delayms(Time);
+                LCD_CutPixel(30-6,24-6);
+                delayms(Time);
+              }            
+            } 
+            else if(liushaxia_y[count]==45){
+                LCD_PutPixel(30,24);
+                delayms(Time);
+                LCD_CutPixel(30,24);
+                delayms(Time);
+            }
+            else if(liushaxia_y[count]==39){            
+            }
+          }
+        LCD_PutPixel((63-liushaxia_x[count]),(63-liushaxia_y[count]));
+        delayms(Time);
+        flag = 1;
+        count --;
+      }else if(count<0){      
+        flag = 0; 
+        count = 19; 
+        LCD_Init(); 
       }
+      */
+/********************************************************************/      
+      
+      
     }
     
     if(flag == 2){
