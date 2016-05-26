@@ -14,6 +14,7 @@ extern uint8  flag;
 extern uint8  flag_last;
 extern uint8  count;
 extern uint8  Time;
+extern uint8  locate;
 //------------------------------------------------------------
 extern byte shazi_x[20];
 extern byte shazi_y[20];
