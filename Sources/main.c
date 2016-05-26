@@ -12,8 +12,7 @@ void Oled_ControlShow(void)
     OLED_Write_Num6(35, 4, coz);
     LCD_Print(66,0,"电子沙漏");
     delayms(Time);
-    if(flag == 0){    //模式选择
-    
+    if(flag == 0){    //模式选择    
           if(locate==0){
  /**********************顺序沙漏*******************************/   
             Draw_BMP(0,0,64,7,shalou64x64);
@@ -26,7 +25,6 @@ void Oled_ControlShow(void)
           
  /*************************************************************/          
           }
-           
           else if(locate==1){
  /**********************逆向沙漏*****************************/         
             Draw_BMP(0,0,64,7,shalou64x64);
@@ -36,7 +34,6 @@ void Oled_ControlShow(void)
             LCD_PutPixel(liushaxia_x[j],liushaxia_y[j]);
             delayms(Time);
           flag = 1;
-          
 /***************************************************************/         
           }
     }
@@ -214,12 +211,13 @@ void Oled_ControlShow(void)
             delayms(Time);
             flag = 1;
             count ++;
-          }else if(count==20){      
+          }else if(count==19){      
             flag = 0; 
-            count = 0; 
-            LCD_Init();
+            count = 0;
+            //LCD_Init();
           } 
 /*******************************************************************/      
+        
         } 
         
         else if(locate==1){  
@@ -394,8 +392,8 @@ void Oled_ControlShow(void)
           delayms(Time);
           flag = 1;
           count --;
-        }else if(count<0){      
-          flag = 1; 
+        }else if(count<=0){      
+          flag = 0; 
           count = 19;
           LCD_Init(); 
         }
@@ -428,6 +426,7 @@ void main(void)
    for(;;) 
    {
      Oled_ControlShow();
+     
     // delayms(1000);
      /* LCD_Fill(0xff);//黑屏 
       delayms(2000);      
