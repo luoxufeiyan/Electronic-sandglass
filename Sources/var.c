@@ -7,7 +7,7 @@ uint8  work1 = 250;
 uint8  work0 = 0;
 uint8  flag = 0;
 uint8  flag_last = 0;
-uint8  count = 0;
+int8  count = 0;
 uint8  Time = 10;   //延时参数
 uint8  locate = 0;   //判断流沙方向，0正1反。默认为0；
 //-------------------------------------------------

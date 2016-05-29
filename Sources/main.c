@@ -16,7 +16,7 @@ void Oled_ControlShow(void)
           if(locate==0){
  /**********************Ë³ÐòÉ³Â©*******************************/   
             Draw_BMP(0,0,64,7,shalou64x64);
-          for(i=0;i<count;i++)  //»­É³×Ó
+          for(i=0;i<=count;i++)  //»­É³×Ó
             LCD_PutPixel(shazi_x[i],shazi_y[i]);
           for(j=0;j<=19-count;j++)
             LCD_PutPixel(liusha_x[j],liusha_y[j]);
@@ -28,7 +28,7 @@ void Oled_ControlShow(void)
           else if(locate==1){
  /**********************ÄæÏòÉ³Â©*****************************/         
             Draw_BMP(0,0,64,7,shalou64x64);
-          for(i=0;i<count;i++)  //»­É³×Ó
+          for(i=0;i<=count;i++)  //»­É³×Ó
             LCD_PutPixel(shazixia_x[i],shazixia_y[i]);
           for(j=0;j<=19-count;j++)
             LCD_PutPixel(liushaxia_x[j],liushaxia_y[j]);
@@ -41,7 +41,7 @@ void Oled_ControlShow(void)
     if(flag == 1){
         if(locate==0){    
 /***************************Ë³ÐòÁ÷É³***********************************/    
-          if(count <= 19){
+          if(count <= 19&&count >= 0){
             LCD_CutPixel(liusha_x[count],liusha_y[count]);
             delayms(Time);
               if(count%2==0) { 
@@ -211,10 +211,11 @@ void Oled_ControlShow(void)
             delayms(Time);
             flag = 1;
             count ++;
-          }else if(count==19){      
+          }else if(count>19){      
             flag = 0; 
-            count = 0;
-            //LCD_Init();
+            count = 19;
+            locate =1;
+           // LCD_Init();
           } 
 /*******************************************************************/      
         
@@ -222,7 +223,7 @@ void Oled_ControlShow(void)
         
         else if(locate==1){  
 /*************************ÄæÏòÉ³Â©³ÌÐò******************************/      
-        if(count <= 19){
+        if(count <= 19&&count >= 0){
           LCD_CutPixel(liushaxia_x[count],liushaxia_y[count]);
           delayms(Time);
             if(count%2==1) { 
@@ -392,10 +393,11 @@ void Oled_ControlShow(void)
           delayms(Time);
           flag = 1;
           count --;
-        }else if(count<=0){      
+        }else if(count<0){      
           flag = 0; 
-          count = 19;
-          LCD_Init(); 
+          count = 0;
+          locate = 0;
+        //  LCD_Init(); 
         }
 /********************************************************************/      
         }
