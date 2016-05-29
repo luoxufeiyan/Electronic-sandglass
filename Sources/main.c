@@ -15,11 +15,11 @@ void Oled_ControlShow(void)
     if(flag == 0){    //Ä£Ê½Ñ¡Ôñ 
             if(coz<50&&coz>0){
               locate = 1;
-              delayms(30);      
+              //delayms(5*Time);      
             }
             else {
               locate = 0;
-              delayms(30);
+              //delayms(5*Time);
             }    
           if(locate==0){
  /**********************Ë³ÐòÉ³Â©*******************************/  
@@ -29,13 +29,14 @@ void Oled_ControlShow(void)
             LCD_CutPixel(liusha_x[i],liusha_y[i]);
             LCD_PutPixel(liusha_x[i],liusha_y[i]);
           }*/
-          for(j=0;j<=19-count;j++) 
+          for(j=19;j>=count;j--) 
           {
             LCD_CutPixel(liusha_x[j],liusha_y[j]);
             LCD_PutPixel(liusha_x[j],liusha_y[j]); 
-          }
-          
-          for(i=0;i<=count;i++)  //»­É³×Ó
+          }  
+            
+            
+          for(i=19;i>=19-count;i--)  //»­É³×Ó
           {
             LCD_CutPixel(liushaxia_x[i],liushaxia_y[i]);
             LCD_PutPixel(liushaxia_x[i],liushaxia_y[i]); 
@@ -254,16 +255,15 @@ void Oled_ControlShow(void)
             delayms(Time); 
             if(coz<50&&coz>0){
               locate = 1;
-              delayms(30); 
-              flag =0;      
+              delayms(5*Time); 
+              flag = 0;     
             }
             else {
               locate = 0;
-              delayms(30);
+              delayms(5*Time);
               flag = 1; 
-              count ++;
             }
-            
+           count++; 
           }else if(count>19){      
             flag = 0; 
             count = 0;
@@ -446,15 +446,15 @@ void Oled_ControlShow(void)
           delayms(Time);
           if(coz<50&&coz>=0){
               locate = 1;
-              delayms(30); 
-              flag =1;
-              count --;      
+              delayms(5*Time); 
+              flag =1;     
             }
             else {
               locate = 0;
-              delayms(30);
+              delayms(5*Time);
               flag = 0; 
             }
+            count --;
         }else if(count<0){      
           flag = 0; 
           count = 19;
