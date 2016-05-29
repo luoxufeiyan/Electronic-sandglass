@@ -3,6 +3,7 @@
 #include "includes.h"
  extern byte longqiu96x64[768];
  extern byte shalou64x64[512];
+ extern byte shijian64x32[256];
  void LCD_Init(void);
  void LCD_CLS(void);
  void LCD_P6x8Str(byte x,byte y,byte ch[]);

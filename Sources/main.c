@@ -4,12 +4,12 @@ void Oled_ControlShow(void)
 {    
 
     int i,j,x=0;	
-    LCD_P6x8Str(66,2,"x:");
-    OLED_Write_Num6(35, 2, cox);
+   /* LCD_P6x8Str(66,4,"x:");
+    OLED_Write_Num6(35, 4, cox);
     LCD_P6x8Str(66,3,"y:");
-    OLED_Write_Num6(35, 3, coy);
-    LCD_P6x8Str(66,4,"z:");
-    OLED_Write_Num6(35, 4, coz);
+    OLED_Write_Num6(35, 3, coy);*/
+    LCD_P6x8Str(66,2,"z:");
+    OLED_Write_Num6(35, 2, coz);
     LCD_Print(66,0,"电子沙漏");
     delayms(Time);
     if(flag == 0){    //模式选择 
@@ -261,12 +261,16 @@ void Oled_ControlShow(void)
             else {
               locate = 0;
               delayms(5*Time);
+              count++;
               flag = 1; 
             }
-           count++; 
+            
           }else if(count>19){      
             flag = 0; 
             count = 0;
+            Draw_BMP(0,2,64,5,shijian64x32);
+            LCD_Print(8,3,"时间到!");
+            delayms(2000);
             //locate =1;
            // LCD_Init();
           } 
@@ -447,6 +451,7 @@ void Oled_ControlShow(void)
           if(coz<50&&coz>=0){
               locate = 1;
               delayms(5*Time); 
+              count --;
               flag =1;     
             }
             else {
@@ -454,10 +459,13 @@ void Oled_ControlShow(void)
               delayms(5*Time);
               flag = 0; 
             }
-            count --;
+            
         }else if(count<0){      
           flag = 0; 
           count = 19;
+          Draw_BMP(0,2,64,5,shijian64x32);
+          LCD_Print(8,3,"时间到!");
+          delayms(2000);
         //  locate = 0;
         //  LCD_Init(); 
         }
