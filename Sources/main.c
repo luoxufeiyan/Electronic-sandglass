@@ -12,14 +12,39 @@ void Oled_ControlShow(void)
     OLED_Write_Num6(35, 4, coz);
     LCD_Print(66,0,"µç×ÓÉ³Â©");
     delayms(Time);
-    if(flag == 0){    //Ä£Ê½Ñ¡Ôñ    
+    if(flag == 0){    //Ä£Ê½Ñ¡Ôñ 
+            if(coz<50&&coz>0){
+              locate = 1;
+              delayms(30);      
+            }
+            else {
+              locate = 0;
+              delayms(30);
+            }    
           if(locate==0){
- /**********************Ë³ÐòÉ³Â©*******************************/   
+ /**********************Ë³ÐòÉ³Â©*******************************/  
             Draw_BMP(0,0,64,7,shalou64x64);
+        /*  for(i=0;i<=count;i++)  //»­É³×Ó
+          {
+            LCD_CutPixel(liusha_x[i],liusha_y[i]);
+            LCD_PutPixel(liusha_x[i],liusha_y[i]);
+          }*/
+          for(j=0;j<=19-count;j++) 
+          {
+            LCD_CutPixel(liusha_x[j],liusha_y[j]);
+            LCD_PutPixel(liusha_x[j],liusha_y[j]); 
+          }
+          
           for(i=0;i<=count;i++)  //»­É³×Ó
-            LCD_PutPixel(shazi_x[i],shazi_y[i]);
-          for(j=0;j<=19-count;j++)
-            LCD_PutPixel(liusha_x[j],liusha_y[j]);
+          {
+            LCD_CutPixel(liushaxia_x[i],liushaxia_y[i]);
+            LCD_PutPixel(liushaxia_x[i],liushaxia_y[i]); 
+          }
+        /*  for(j=0;j<=19-count;j++) 
+          {
+            LCD_CutPixel(liushaxia_x[j],liushaxia_y[j]);
+            LCD_PutPixel(liushaxia_x[j],liushaxia_y[j]); 
+          }*/
             delayms(Time);
           flag = 1; 
           
@@ -28,10 +53,28 @@ void Oled_ControlShow(void)
           else if(locate==1){
  /**********************ÄæÏòÉ³Â©*****************************/         
             Draw_BMP(0,0,64,7,shalou64x64);
+      /*    for(i=0;i<=count;i++)  //»­É³×Ó
+          {
+            LCD_CutPixel(liusha_x[i],liusha_y[i]);
+            LCD_PutPixel(liusha_x[i],liusha_y[i]);
+          }*/
+          for(j=0;j<=19-count;j++) 
+          {
+            LCD_CutPixel(liusha_x[j],liusha_y[j]);
+            LCD_PutPixel(liusha_x[j],liusha_y[j]); 
+          }  
+            
+            
           for(i=0;i<=count;i++)  //»­É³×Ó
-            LCD_PutPixel(shazixia_x[i],shazixia_y[i]);
-          for(j=0;j<=19-count;j++)
-            LCD_PutPixel(liushaxia_x[j],liushaxia_y[j]);
+          {
+            LCD_CutPixel(liushaxia_x[i],liushaxia_y[i]);
+            LCD_PutPixel(liushaxia_x[i],liushaxia_y[i]); 
+          }
+        /*  for(j=0;j<=19-count;j++) 
+          {
+            LCD_CutPixel(liushaxia_x[j],liushaxia_y[j]);
+            LCD_PutPixel(liushaxia_x[j],liushaxia_y[j]); 
+          }*/
             delayms(Time);
           flag = 1;
 /***************************************************************/         
@@ -208,13 +251,23 @@ void Oled_ControlShow(void)
                 }
               }
             LCD_PutPixel((63-liusha_x[count]),(63-liusha_y[count]));
-            delayms(Time);
-            flag = 1;
-            count ++;
+            delayms(Time); 
+            if(coz<50&&coz>0){
+              locate = 1;
+              delayms(30); 
+              flag =0;      
+            }
+            else {
+              locate = 0;
+              delayms(30);
+              flag = 1; 
+              count ++;
+            }
+            
           }else if(count>19){      
             flag = 0; 
-            count = 19;
-            locate =1;
+            count = 0;
+            //locate =1;
            // LCD_Init();
           } 
 /*******************************************************************/      
@@ -391,18 +444,28 @@ void Oled_ControlShow(void)
             }
           LCD_PutPixel((63-liushaxia_x[count]),(63-liushaxia_y[count]));
           delayms(Time);
-          flag = 1;
-          count --;
+          if(coz<50&&coz>=0){
+              locate = 1;
+              delayms(30); 
+              flag =1;
+              count --;      
+            }
+            else {
+              locate = 0;
+              delayms(30);
+              flag = 0; 
+            }
         }else if(count<0){      
           flag = 0; 
-          count = 0;
-          locate = 0;
+          count = 19;
+        //  locate = 0;
         //  LCD_Init(); 
         }
 /********************************************************************/      
         }
       
-    }      
+    } 
+  
 }
 
 void ALL_init(void)
