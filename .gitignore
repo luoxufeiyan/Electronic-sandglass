@@ -30,3 +30,4 @@
 
 # Debug files
 *.dSYM/
+DZSL_Data/Standard/TargetDataWindows.tdt

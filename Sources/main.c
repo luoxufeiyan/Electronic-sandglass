@@ -13,7 +13,7 @@ void Oled_ControlShow(void)
     LCD_Print(66,0,"电子沙漏");
     delayms(Time);
     if(flag == 0){    //模式选择 
-            if(coz<50&&coz>0){
+            if(coz<50&&coz>0){//判断流沙方向
               locate = 1;
               //delayms(5*Time);      
             }
@@ -269,9 +269,8 @@ void Oled_ControlShow(void)
             flag = 0; 
             count = 0;
             Draw_BMP(0,2,64,5,shijian64x32);
-            LCD_Print(8,3,"时间到!");
+            LCD_Print(8,3,"时间到!");//绘制提示框
             delayms(2000);
-            //locate =1;
            // LCD_Init();
           } 
 /*******************************************************************/      
