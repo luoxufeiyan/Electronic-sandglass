@@ -16,6 +16,7 @@ You may need `Code warrior` IDE.
 
 # Known BUGS
 * Third sand location
-* ~~screen mess ~~ fixed
+* ~~screen mess~~ fixed
+
 #License
 MIT
