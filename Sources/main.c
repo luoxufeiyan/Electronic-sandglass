@@ -13,7 +13,7 @@ void Oled_ControlShow(void)
     LCD_Print(66,0,"电子沙漏");
     delayms(Time);
     if(flag == 0){    //模式选择 
-            if(coz<50&&coz>0){
+            if(coz<50&&coz>0){//判断流沙方向
               locate = 1;
               //delayms(5*Time);      
             }
@@ -29,14 +29,14 @@ void Oled_ControlShow(void)
             LCD_CutPixel(liusha_x[i],liusha_y[i]);
             LCD_PutPixel(liusha_x[i],liusha_y[i]);
           }*/
-          for(j=19;j>=count;j--) 
+          for(j=19;j>count;j--) 
           {
             LCD_CutPixel(liusha_x[j],liusha_y[j]);
             LCD_PutPixel(liusha_x[j],liusha_y[j]); 
           }  
             
             
-          for(i=19;i>=19-count;i--)  //画沙子
+          for(i=19;i>19-count;i--)  //画沙子
           {
             LCD_CutPixel(liushaxia_x[i],liushaxia_y[i]);
             LCD_PutPixel(liushaxia_x[i],liushaxia_y[i]); 
@@ -269,9 +269,8 @@ void Oled_ControlShow(void)
             flag = 0; 
             count = 0;
             Draw_BMP(0,2,64,5,shijian64x32);
-            LCD_Print(8,3,"时间到!");
+            LCD_Print(8,3,"时间到!");//绘制提示框
             delayms(2000);
-            //locate =1;
            // LCD_Init();
           } 
 /*******************************************************************/      
