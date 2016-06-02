@@ -268,10 +268,9 @@ void Oled_ControlShow(void)
           }else if(count>19){      
             flag = 0; 
             count = 0;
-            Draw_BMP(0,2,64,5,shijian64x32);
+            Draw_BMP(0,2,64,5,shijian64x32);//画提示框
             LCD_Print(8,3,"时间到!");
             delayms(2000);
-            //locate =1;
            // LCD_Init();
           } 
 /*******************************************************************/      
@@ -522,7 +521,6 @@ void interrupt 68 Pit0_interrupt(void)
     	cox= MPU6050_GetAngle(acx,acy,acz,1);
     	coy= MPU6050_GetAngle(acx,acy,acz,2);
       PITTF_PTF0=1;
-<<<<<<< HEAD
       delayms(1000);
       if(count <= 29){
          LCD_CutPixel(liusha_x[count],liusha_y[count]);
@@ -535,9 +533,6 @@ void interrupt 68 Pit0_interrupt(void)
         flag = 0; 
       }
       count ++;
-=======
->>>>>>> refs/remotes/origin/master
-      EnableInterrupts; 
        
 }   
 
