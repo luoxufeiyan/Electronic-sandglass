@@ -154,3 +154,27 @@ int GetData(uchar REG_Address)
 	L=Single_ReadI2C(REG_Address+1);
 	return (H<<8)+L;   //合成数据
 }
+//**************************************
+//得到角度
+//dir要得到的角度返回角度值1°
+//**************************************
+int MPU6050_GetAngle(float x, float y,float z,uint dir)
+{
+  float temp;
+  float res = 0;
+  switch(dir) {
+    case 0:     //Z轴角度
+      temp = sqrt((x*x+y*y))/z;
+      res = atan(temp);
+      break;
+    case 1:     //X轴角度
+      temp = x/sqrt((y*y+z*z));
+      res = atan(temp);
+      break;
+    case 2:     //Y轴角度
+      temp = y/sqrt((x*x+z*z));
+      res = atan(temp);
+      break;
+  }
+  return res*180/3.14;
+}

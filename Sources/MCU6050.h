@@ -1,11 +1,11 @@
 #ifndef _MCU6050_H_
 #define _MCU6050_H_
 
-#define SCL PORTA_PA0  			//IIC时钟引脚定义
-#define SDA PORTA_PA1			//IIC数据引脚定义
+#define SCL PTS_PTS0  			//IIC时钟引脚定义
+#define SDA PTS_PTS2			//IIC数据引脚定义
 
-#define SCLIO DDRA_DDRA0
-#define SDAIO DDRA_DDRA1
+#define SCLIO DDRS_DDRS0
+#define SDAIO DDRS_DDRS2
 //****************************************
 // 定义MPU6050内部地址
 //****************************************
@@ -46,5 +46,6 @@ uchar I2C_RecvByte(void);
 uchar Single_ReadI2C(uchar REG_Address);						//读取I2C数据
 void  Single_WriteI2C(uchar REG_Address,uchar REG_data);	//向I2C写入数据
 int GetData(uchar REG_Address);
+int MPU6050_GetAngle(float x, float y,float z,uint dir);
 
 #endif
