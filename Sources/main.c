@@ -29,14 +29,14 @@ void Oled_ControlShow(void)
             LCD_CutPixel(liusha_x[i],liusha_y[i]);
             LCD_PutPixel(liusha_x[i],liusha_y[i]);
           }*/
-          for(j=19;j>=count;j--) 
+          for(j=19;j>count;j--) 
           {
             LCD_CutPixel(liusha_x[j],liusha_y[j]);
             LCD_PutPixel(liusha_x[j],liusha_y[j]); 
           }  
             
             
-          for(i=19;i>=19-count;i--)  //»­É³×Ó
+          for(i=19;i>19-count;i--)  //»­É³×Ó
           {
             LCD_CutPixel(liushaxia_x[i],liushaxia_y[i]);
             LCD_PutPixel(liushaxia_x[i],liushaxia_y[i]); 

@@ -1,5 +1,5 @@
 *** EVALUATION ***
-PROGRAM "C:\Users\Ðñ\Desktop\Electronic-sandglass\bin\Project.abs"
+PROGRAM "C:\Users\Ðñ\Documents\GitHub\Electronic-sandglass\bin\Project.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -2023,7 +2023,7 @@ Filling bytes inserted
  02382100
 ------- ROM-ADDRESS: 0xD6B7 ---- RAM-ADDRESS: 0x2100 ---- SIZE       1 ---
 Name of initialized Object : Time
- 0A
+ 32
 ------- ROM-ADDRESS: 0xD6B8 ---- RAM-ADDRESS: 0x2101 ---- SIZE      20 ---
 Name of initialized Object : liusha_x
  1E2118271E 21122D1827 1E210C3312
