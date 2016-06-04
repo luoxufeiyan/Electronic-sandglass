@@ -123,17 +123,15 @@ void Oled_ControlShow(void)
           else if(locate==4){
  /**********************右下流沙*****************************/         
             Draw_BMP(0,0,64,7,shalou64x64);
-          for(j=0;j<19-count;j++) 
+          for(j=19;j>count;j--)
           {
             LCD_CutPixel(celiuyuo_x[j],celiuyuo_y[j]);
             LCD_PutPixel(celiuyuo_x[j],celiuyuo_y[j]); 
           }  
-            
-            
-          for(i=19;i>19-count;i--)  //画沙子
+          for(i=0;i<=count;i++)  //画沙子
           {
-            LCD_CutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]);
-            LCD_PutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]); 
+            LCD_CutPixel(celiuyuoxia_x[i],celiuyuoxia_y[i]);
+            LCD_PutPixel(celiuyuoxia_x[i],celiuyuoxia_y[i]); 
           }
             delayms(Time);
           flag = 1;
@@ -589,6 +587,110 @@ void Oled_ControlShow(void)
         if(count <= 19&&count >= 0){
           LCD_CutPixel(celiuzuo_x[count],celiuzuo_y[count]);
           delayms(Time);
+          
+          if(count == 2){
+            LCD_PutPixel(18,51);
+            delayms(Time);
+            LCD_CutPixel(18,51);
+            delayms(Time);
+          }else if(count == 4){
+            LCD_PutPixel(24,51);
+            delayms(Time);
+            LCD_CutPixel(24,51);
+            delayms(Time);
+          }
+          
+          else if(count == 6){
+            LCD_PutPixel(24,45);
+            delayms(Time);
+            LCD_CutPixel(24,45);
+            delayms(Time);
+            LCD_PutPixel(30,51);
+            delayms(Time);
+            LCD_CutPixel(30,51);
+            delayms(Time);
+          }else if(count == 7){
+            LCD_PutPixel(24,45);
+            delayms(Time);
+            LCD_CutPixel(24,45);
+            delayms(Time);
+          }
+          
+          else if(count == 9){
+            LCD_PutPixel(30,45);
+            delayms(Time);
+            LCD_CutPixel(30,45);
+            delayms(Time);
+            LCD_PutPixel(33,51);
+            delayms(Time);
+            LCD_CutPixel(33,51);
+            delayms(Time);
+          }else if(count == 10){
+            LCD_PutPixel(30,45);
+            delayms(Time);
+            LCD_CutPixel(30,45);
+            delayms(Time);
+          }
+          
+          else if(count == 12){
+            LCD_PutPixel(30,39);
+            delayms(Time);
+            LCD_CutPixel(30,39);
+            delayms(Time);
+            LCD_PutPixel(33,45);
+            delayms(Time);
+            LCD_CutPixel(33,45);
+            delayms(Time);
+            LCD_PutPixel(39,51);
+            delayms(Time);
+            LCD_CutPixel(39,51);
+            delayms(Time);
+          }else if(count == 13){
+            LCD_PutPixel(30,39);
+            delayms(Time);
+            LCD_CutPixel(30,39);
+            delayms(Time);
+            LCD_PutPixel(33,45);
+            delayms(Time);
+            LCD_CutPixel(33,45);
+            delayms(Time);
+          }else if(count == 14){
+            LCD_PutPixel(30,39);
+            delayms(Time);
+            LCD_CutPixel(30,39);
+            delayms(Time);
+          }
+          
+          else if(count == 16){
+            LCD_PutPixel(33,39);
+            delayms(Time);
+            LCD_CutPixel(33,39);
+            delayms(Time);
+            LCD_PutPixel(39,45);
+            delayms(Time);
+            LCD_CutPixel(39,45);
+            delayms(Time);
+            LCD_PutPixel(45,51);
+            delayms(Time);
+            LCD_CutPixel(45,51);
+            delayms(Time);
+          }else if(count == 17){
+            LCD_PutPixel(33,39);
+            delayms(Time);
+            LCD_CutPixel(33,39);
+            delayms(Time);
+            LCD_PutPixel(39,45);
+            delayms(Time);
+            LCD_CutPixel(39,45);
+            delayms(Time);
+          }else if(count == 18){
+            LCD_PutPixel(33,39);
+            delayms(Time);
+            LCD_CutPixel(33,39);
+            delayms(Time);
+          }
+             
+          
           LCD_PutPixel((63-celiuzuo_x[count]),(63-celiuzuo_y[count]));
           delayms(Time); 
           if(coz<50&&coz>0){
@@ -638,6 +740,109 @@ void Oled_ControlShow(void)
         if(count <= 19&&count >= 0){
           LCD_CutPixel(63-celiuyuo_x[19-count],63-celiuyuo_y[19-count]);
           delayms(Time);
+          
+          if(count == 17){
+            LCD_PutPixel(18,12);
+            delayms(Time);
+            LCD_CutPixel(18,12);
+            delayms(Time);
+          }else if(count == 15){
+            LCD_PutPixel(24,12);
+            delayms(Time);
+            LCD_CutPixel(24,12);
+            delayms(Time);
+          }
+          
+          else if(count == 13){
+            LCD_PutPixel(24,18);
+            delayms(Time);
+            LCD_CutPixel(24,18);
+            delayms(Time);
+            LCD_PutPixel(30,12);
+            delayms(Time);
+            LCD_CutPixel(30,12);
+            delayms(Time);
+          }else if(count == 12){
+            LCD_PutPixel(24,18);
+            delayms(Time);
+            LCD_CutPixel(24,18);
+            delayms(Time);
+          }
+          
+          else if(count == 10){
+            LCD_PutPixel(30,18);
+            delayms(Time);
+            LCD_CutPixel(30,18);
+            delayms(Time);
+            LCD_PutPixel(33,12);
+            delayms(Time);
+            LCD_CutPixel(33,12);
+            delayms(Time);
+          }else if(count == 9){
+            LCD_PutPixel(30,18);
+            delayms(Time);
+            LCD_CutPixel(10,18);
+            delayms(Time);
+          }
+          
+          else if(count == 7){
+            LCD_PutPixel(30,24);
+            delayms(Time);
+            LCD_CutPixel(30,24);
+            delayms(Time);
+            LCD_PutPixel(33,18);
+            delayms(Time);
+            LCD_CutPixel(33,18);
+            delayms(Time);
+            LCD_PutPixel(39,12);
+            delayms(Time);
+            LCD_CutPixel(39,12);
+            delayms(Time);
+          }else if(count == 6){
+            LCD_PutPixel(30,24);
+            delayms(Time);
+            LCD_CutPixel(30,24);
+            delayms(Time);
+            LCD_PutPixel(33,18);
+            delayms(Time);
+            LCD_CutPixel(33,18);
+            delayms(Time);
+          }else if(count == 5){
+            LCD_PutPixel(30,24);
+            delayms(Time);
+            LCD_CutPixel(30,24);
+            delayms(Time);
+          }
+          
+          else if(count == 3){
+            LCD_PutPixel(33,24);
+            delayms(Time);
+            LCD_CutPixel(33,24);
+            delayms(Time);
+            LCD_PutPixel(39,18);
+            delayms(Time);
+            LCD_CutPixel(39,18);
+            delayms(Time);
+            LCD_PutPixel(45,12);
+            delayms(Time);
+            LCD_CutPixel(45,12);
+            delayms(Time);
+          }else if(count == 2){
+            LCD_PutPixel(33,24);
+            delayms(Time);
+            LCD_CutPixel(33,24);
+            delayms(Time);
+            LCD_PutPixel(39,18);
+            delayms(Time);
+            LCD_CutPixel(39,18);
+            delayms(Time);
+          }else if(count == 1){
+            LCD_PutPixel(33,24);
+            delayms(Time);
+            LCD_CutPixel(33,24);
+            delayms(Time);
+          }
+          
           LCD_PutPixel((celiuyuo_x[19-count]),(celiuyuo_y[19-count]));
           delayms(Time);  
            if(coz<50&&coz>0){
@@ -686,6 +891,109 @@ void Oled_ControlShow(void)
         if(count <= 19&&count >= 0){
           LCD_CutPixel(celiuyuo_x[count],celiuyuo_y[count]);
           delayms(Time);
+          
+          if(count == 2){
+            LCD_PutPixel(45,51);
+            delayms(Time);
+            LCD_CutPixel(45,51);
+            delayms(Time);
+          }else if(count == 4){
+            LCD_PutPixel(39,51);
+            delayms(Time);
+            LCD_CutPixel(39,51);
+            delayms(Time);
+          }
+          
+          else if(count == 6){
+            LCD_PutPixel(39,45);
+            delayms(Time);
+            LCD_CutPixel(39,45);
+            delayms(Time);
+            LCD_PutPixel(33,51);
+            delayms(Time);
+            LCD_CutPixel(33,51);
+            delayms(Time);
+          }else if(count == 7){
+            LCD_PutPixel(39,45);
+            delayms(Time);
+            LCD_CutPixel(39,45);
+            delayms(Time);
+          }
+          
+          else if(count == 9){
+            LCD_PutPixel(33,45);
+            delayms(Time);
+            LCD_CutPixel(33,45);
+            delayms(Time);
+            LCD_PutPixel(30,51);
+            delayms(Time);
+            LCD_CutPixel(30,51);
+            delayms(Time);
+          }else if(count == 10){
+            LCD_PutPixel(33,45);
+            delayms(Time);
+            LCD_CutPixel(33,45);
+            delayms(Time);
+          }
+          
+          else if(count == 12){
+            LCD_PutPixel(33,39);
+            delayms(Time);
+            LCD_CutPixel(33,39);
+            delayms(Time);
+            LCD_PutPixel(30,45);
+            delayms(Time);
+            LCD_CutPixel(30,45);
+            delayms(Time);
+            LCD_PutPixel(24,51);
+            delayms(Time);
+            LCD_CutPixel(24,51);
+            delayms(Time);
+          }else if(count == 13){
+            LCD_PutPixel(33,39);
+            delayms(Time);
+            LCD_CutPixel(33,39);
+            delayms(Time);
+            LCD_PutPixel(30,45);
+            delayms(Time);
+            LCD_CutPixel(30,45);
+            delayms(Time);
+          }else if(count == 14){
+            LCD_PutPixel(33,39);
+            delayms(Time);
+            LCD_CutPixel(33,39);
+            delayms(Time);
+          }
+          
+          else if(count == 16){
+            LCD_PutPixel(30,39);
+            delayms(Time);
+            LCD_CutPixel(30,39);
+            delayms(Time);
+            LCD_PutPixel(24,45);
+            delayms(Time);
+            LCD_CutPixel(24,45);
+            delayms(Time);
+            LCD_PutPixel(18,51);
+            delayms(Time);
+            LCD_CutPixel(18,51);
+            delayms(Time);
+          }else if(count == 17){
+            LCD_PutPixel(30,39);
+            delayms(Time);
+            LCD_CutPixel(30,39);
+            delayms(Time);       
+            LCD_PutPixel(24,45);
+            delayms(Time);
+            LCD_CutPixel(24,45);
+            delayms(Time);
+          }else if(count == 18){
+            LCD_PutPixel(30,39);
+            delayms(Time);
+            LCD_CutPixel(30,39);
+            delayms(Time);
+          }
+          
           LCD_PutPixel((63-celiuyuo_x[count]),(63-celiuyuo_y[count]));
           delayms(Time);
            if(coz<50&&coz>0){
@@ -734,6 +1042,109 @@ void Oled_ControlShow(void)
         if(count <= 19&&count >= 0){
           LCD_CutPixel(63-celiuzuo_x[19-count],63-celiuzuo_y[19-count]);
           delayms(Time);
+          
+          if(count == 17){
+            LCD_PutPixel(45,12);
+            delayms(Time);
+            LCD_CutPixel(45,12);
+            delayms(Time);
+          }else if(count == 15){
+            LCD_PutPixel(39,12);
+            delayms(Time);
+            LCD_CutPixel(39,12);
+            delayms(Time);
+          }
+          
+          else if(count == 13){
+            LCD_PutPixel(39,18);
+            delayms(Time);
+            LCD_CutPixel(39,18);
+            delayms(Time);
+            LCD_PutPixel(33,12);
+            delayms(Time);
+            LCD_CutPixel(33,12);
+            delayms(Time);
+          }else if(count == 12){
+            LCD_PutPixel(39,18);
+            delayms(Time);
+            LCD_CutPixel(39,18);
+            delayms(Time);
+          }
+          
+          else if(count == 10){
+            LCD_PutPixel(33,18);
+            delayms(Time);
+            LCD_CutPixel(33,18);
+            delayms(Time);
+            LCD_PutPixel(30,12);
+            delayms(Time);
+            LCD_CutPixel(30,12);
+            delayms(Time);
+          }else if(count == 9){
+            LCD_PutPixel(33,18);
+            delayms(Time);
+            LCD_CutPixel(33,18);
+            delayms(Time);
+          }
+          
+          else if(count == 7){
+            LCD_PutPixel(33,24);
+            delayms(Time);
+            LCD_CutPixel(33,24);
+            delayms(Time);
+            LCD_PutPixel(30,18);
+            delayms(Time);
+            LCD_CutPixel(30,18);
+            delayms(Time);
+            LCD_PutPixel(24,12);
+            delayms(Time);
+            LCD_CutPixel(24,12);
+            delayms(Time);
+          }else if(count == 6){
+            LCD_PutPixel(33,24);
+            delayms(Time);
+            LCD_CutPixel(33,24);
+            delayms(Time);
+            LCD_PutPixel(30,18);
+            delayms(Time);
+            LCD_CutPixel(30,18);
+            delayms(Time);
+          }else if(count == 5){
+            LCD_PutPixel(33,24);
+            delayms(Time);
+            LCD_CutPixel(33,24);
+            delayms(Time);
+          }
+          
+          else if(count == 3){
+            LCD_PutPixel(30,24);
+            delayms(Time);
+            LCD_CutPixel(30,24);
+            delayms(Time);
+            LCD_PutPixel(24,18);
+            delayms(Time);
+            LCD_CutPixel(24,18);
+            delayms(Time);
+            LCD_PutPixel(18,12);
+            delayms(Time);
+            LCD_CutPixel(18,12);
+            delayms(Time);
+          }else if(count == 2){
+            LCD_PutPixel(30,24);
+            delayms(Time);
+            LCD_CutPixel(30,24);
+            delayms(Time);
+            LCD_PutPixel(24,18);
+            delayms(Time);
+            LCD_CutPixel(24,18);
+            delayms(Time);
+          }else if(count == 1){
+            LCD_PutPixel(30,24);
+            delayms(Time);
+            LCD_CutPixel(30,24);
+            delayms(Time);
+          }     
+          
           LCD_PutPixel((celiuzuo_x[19-count]),(celiuzuo_y[19-count]));
           delayms(Time);
            if(coz<50&&coz>0){
@@ -773,13 +1184,9 @@ void Oled_ControlShow(void)
            // LCD_Init();
         }
 /********************************************************************/      
-        
-        
+
         }
-        
-        
-        
-      
+
     } 
   
 }
