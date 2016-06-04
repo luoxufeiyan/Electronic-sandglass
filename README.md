@@ -14,5 +14,9 @@ You may need `Code warrior` IDE.
 * finish message
 * gravity detect
 
+# Known BUGS
+* Third sand location
+* ~~screen mess~~ fixed
+
 #License
 MIT

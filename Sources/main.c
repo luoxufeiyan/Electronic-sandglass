@@ -21,8 +21,13 @@ void Oled_ControlShow(void)
         }
       }*/
     if(flag == 0){    //模式选择 
+<<<<<<< HEAD
             if(coz<50&&coz>0){
               locate = 1;   //1
+=======
+            if(coz<50&&coz>0){//判断流沙方向
+              locate = 1;
+>>>>>>> 0d865ec05abc7be1f3a5895b00d138bbda0db236
               //delayms(5*Time);      
             }
             else {
@@ -32,7 +37,16 @@ void Oled_ControlShow(void)
           if(locate==0){
  /**********************顺序沙漏*******************************/  
             Draw_BMP(0,0,64,7,shalou64x64);
+<<<<<<< HEAD
           for(j=19;j>=count;j--) 
+=======
+        /*  for(i=0;i<=count;i++)  //画沙子
+          {
+            LCD_CutPixel(liusha_x[i],liusha_y[i]);
+            LCD_PutPixel(liusha_x[i],liusha_y[i]);
+          }*/
+          for(j=19;j>count;j--) 
+>>>>>>> 0d865ec05abc7be1f3a5895b00d138bbda0db236
           {
             LCD_CutPixel(liusha_x[j],liusha_y[j]);
             LCD_PutPixel(liusha_x[j],liusha_y[j]); 
@@ -333,10 +347,16 @@ void Oled_ControlShow(void)
           }else if(count>19){      
             flag = 0; 
             count = 0;
+<<<<<<< HEAD
            // Draw_BMP(0,2,64,5,shijian64x32);
            // LCD_Print(8,3,"时间到!");
            //delayms(2000);
             //locate =1;
+=======
+            Draw_BMP(0,2,64,5,shijian64x32);
+            LCD_Print(8,3,"时间到!");//绘制提示框
+            delayms(2000);
+>>>>>>> 0d865ec05abc7be1f3a5895b00d138bbda0db236
            // LCD_Init();
           } 
 /*******************************************************************/      

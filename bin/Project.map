@@ -1,5 +1,5 @@
 *** EVALUATION ***
-PROGRAM "C:\Works\gitskills\Electronic-sandglass\bin\Project.abs"
+PROGRAM "C:\Users\Ðñ\Documents\GitHub\Electronic-sandglass\bin\Project.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -2032,11 +2032,16 @@ Name of initialized Object : count
  13
 ------- ROM-ADDRESS: 0xD6AE ---- RAM-ADDRESS: 0x2101 ---- SIZE       1 ---
 Name of initialized Object : Time
+<<<<<<< HEAD
  2C
 ------- ROM-ADDRESS: 0xD6AF ---- RAM-ADDRESS: 0x2102 ---- SIZE       1 ---
 Name of initialized Object : locate
  02
 ------- ROM-ADDRESS: 0xD6B0 ---- RAM-ADDRESS: 0x2103 ---- SIZE      20 ---
+=======
+ 32
+------- ROM-ADDRESS: 0xD6B8 ---- RAM-ADDRESS: 0x2101 ---- SIZE      20 ---
+>>>>>>> 0d865ec05abc7be1f3a5895b00d138bbda0db236
 Name of initialized Object : liusha_x
  1E2118271E 21122D1827 1E210C3312
  2D18271E21

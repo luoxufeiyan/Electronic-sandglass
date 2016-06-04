@@ -7,9 +7,15 @@ uint8  work1 = 250;
 uint8  work0 = 0;
 uint8  flag = 0;
 uint8  flag_last = 0;
+<<<<<<< HEAD
 int8  count = 19;
 uint8  Time = 300;   //延时参数
 uint8  locate = 2;   //判断流沙方向，0正1反。默认为0；
+=======
+int8  count = 0;
+uint8  Time = 50;   //延时参数
+uint8  locate = 0;   //判断流沙方向，0正1反。默认为0；
+>>>>>>> 0d865ec05abc7be1f3a5895b00d138bbda0db236
 //-------------------------------------------------
 byte shazi_x[20]={                ////初始化沙子横坐标位置
   //6,12,18,24,30,33,39,45,51,57,   
