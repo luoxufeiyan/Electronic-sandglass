@@ -4,31 +4,34 @@ void Oled_ControlShow(void)
 {    
 
     int i,j,x=0;	
-   /* LCD_P6x8Str(66,4,"x:");
+    LCD_P6x8Str(66,4,"x:");
     OLED_Write_Num6(35, 4, cox);
     LCD_P6x8Str(66,3,"y:");
-    OLED_Write_Num6(35, 3, coy);*/
+    OLED_Write_Num6(35, 3, coy);
     LCD_P6x8Str(66,2,"z:");
     OLED_Write_Num6(35, 2, coz);
     LCD_Print(66,0,"电子沙漏");
     delayms(Time);
+    /*  if(count>19||count<0){
+        if(locate == 0){
+          count = 0;
+        }
+        if(locate == 1){
+          count = 19;
+        }
+      }*/
     if(flag == 0){    //模式选择 
             if(coz<50&&coz>0){
-              locate = 1;
+              locate = 1;   //1
               //delayms(5*Time);      
             }
             else {
-              locate = 0;
+              locate = 0;   //0
               //delayms(5*Time);
             }    
           if(locate==0){
  /**********************顺序沙漏*******************************/  
             Draw_BMP(0,0,64,7,shalou64x64);
-        /*  for(i=0;i<=count;i++)  //画沙子
-          {
-            LCD_CutPixel(liusha_x[i],liusha_y[i]);
-            LCD_PutPixel(liusha_x[i],liusha_y[i]);
-          }*/
           for(j=19;j>=count;j--) 
           {
             LCD_CutPixel(liusha_x[j],liusha_y[j]);
@@ -36,16 +39,11 @@ void Oled_ControlShow(void)
           }  
             
             
-          for(i=19;i>=19-count;i--)  //画沙子
+          for(i=19;i>19-count;i--)  //画沙子
           {
-            LCD_CutPixel(liushaxia_x[i],liushaxia_y[i]);
-            LCD_PutPixel(liushaxia_x[i],liushaxia_y[i]); 
+            LCD_CutPixel(63-liushaxia_x[i],liushaxia_y[i]);
+            LCD_PutPixel(63-liushaxia_x[i],liushaxia_y[i]); 
           }
-        /*  for(j=0;j<=19-count;j++) 
-          {
-            LCD_CutPixel(liushaxia_x[j],liushaxia_y[j]);
-            LCD_PutPixel(liushaxia_x[j],liushaxia_y[j]); 
-          }*/
             delayms(Time);
           flag = 1; 
           
@@ -54,15 +52,10 @@ void Oled_ControlShow(void)
           else if(locate==1){
  /**********************逆向沙漏*****************************/         
             Draw_BMP(0,0,64,7,shalou64x64);
-      /*    for(i=0;i<=count;i++)  //画沙子
+          for(j=0;j<19-count;j++) 
           {
-            LCD_CutPixel(liusha_x[i],liusha_y[i]);
-            LCD_PutPixel(liusha_x[i],liusha_y[i]);
-          }*/
-          for(j=0;j<=19-count;j++) 
-          {
-            LCD_CutPixel(liusha_x[j],liusha_y[j]);
-            LCD_PutPixel(liusha_x[j],liusha_y[j]); 
+            LCD_CutPixel(63-liusha_x[j],liusha_y[j]);
+            LCD_PutPixel(63-liusha_x[j],liusha_y[j]); 
           }  
             
             
@@ -71,15 +64,87 @@ void Oled_ControlShow(void)
             LCD_CutPixel(liushaxia_x[i],liushaxia_y[i]);
             LCD_PutPixel(liushaxia_x[i],liushaxia_y[i]); 
           }
-        /*  for(j=0;j<=19-count;j++) 
-          {
-            LCD_CutPixel(liushaxia_x[j],liushaxia_y[j]);
-            LCD_PutPixel(liushaxia_x[j],liushaxia_y[j]); 
-          }*/
             delayms(Time);
           flag = 1;
 /***************************************************************/         
           }
+          else if(locate==2){
+ /**********************左下流沙*****************************/         
+            Draw_BMP(0,0,64,7,shalou64x64);
+          for(j=0;j<19-count;j++) 
+          {
+            LCD_CutPixel(celiuzuo_x[j],celiuzuo_y[j]);
+            LCD_PutPixel(celiuzuo_x[j],celiuzuo_y[j]); 
+          }  
+            
+            
+          for(i=0;i<=count;i++)  //画沙子
+          {
+            LCD_CutPixel(63-celiuzuo_x[i],63-celiuzuo_y[i]);
+            LCD_PutPixel(63-celiuzuo_x[i],63-celiuzuo_y[i]); 
+          }
+            delayms(Time);
+          flag = 1;
+/***************************************************************/         
+          }
+          else if(locate==3){
+ /**********************左上流沙*****************************/         
+            Draw_BMP(0,0,64,7,shalou64x64);
+          for(j=0;j<19-count;j++) 
+          {
+            LCD_CutPixel(celiuyuo_x[j],celiuyuo_y[j]);
+            LCD_PutPixel(celiuyuo_x[j],celiuyuo_y[j]); 
+          }  
+            
+            
+          for(i=0;i<=count;i++)  //画沙子
+          {
+            LCD_CutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]);
+            LCD_PutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]); 
+          }
+            delayms(Time);
+          flag = 1;
+/***************************************************************/         
+          }
+          else if(locate==4){
+ /**********************右下流沙*****************************/         
+            Draw_BMP(0,0,64,7,shalou64x64);
+          for(j=0;j<19-count;j++) 
+          {
+            LCD_CutPixel(celiuyuo_x[j],celiuyuo_y[j]);
+            LCD_PutPixel(celiuyuo_x[j],celiuyuo_y[j]); 
+          }  
+            
+            
+          for(i=0;i<count;i++)  //画沙子
+          {
+            LCD_CutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]);
+            LCD_PutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]); 
+          }
+            delayms(Time);
+          flag = 1;
+/***************************************************************/         
+          }
+          else if(locate==5){
+ /**********************右上流沙*****************************/         
+            Draw_BMP(0,0,64,7,shalou64x64);
+          for(j=0;j<19-count;j++) 
+          {
+            LCD_CutPixel(celiuzuo_x[j],celiuzuo_y[j]);
+            LCD_PutPixel(celiuzuo_x[j],celiuzuo_y[j]); 
+          }  
+            
+            
+          for(i=0;i<=count;i++)  //画沙子
+          {
+            LCD_CutPixel(63-celiuzuo_x[i],63-celiuzuo_y[i]);
+            LCD_PutPixel(63-celiuzuo_x[i],63-celiuzuo_y[i]); 
+          }
+            delayms(Time);
+          flag = 1;
+/***************************************************************/         
+          }
+          
     }
     
     if(flag == 1){
@@ -268,9 +333,9 @@ void Oled_ControlShow(void)
           }else if(count>19){      
             flag = 0; 
             count = 0;
-            Draw_BMP(0,2,64,5,shijian64x32);
-            LCD_Print(8,3,"时间到!");
-            delayms(2000);
+           // Draw_BMP(0,2,64,5,shijian64x32);
+           // LCD_Print(8,3,"时间到!");
+           //delayms(2000);
             //locate =1;
            // LCD_Init();
           } 
@@ -463,14 +528,113 @@ void Oled_ControlShow(void)
         }else if(count<0){      
           flag = 0; 
           count = 19;
-          Draw_BMP(0,2,64,5,shijian64x32);
-          LCD_Print(8,3,"时间到!");
-          delayms(2000);
+        //  Draw_BMP(0,2,64,5,shijian64x32);
+        //  LCD_Print(8,3,"时间到!");
+        //  delayms(2000);
         //  locate = 0;
         //  LCD_Init(); 
         }
 /********************************************************************/      
         }
+        else if(locate==2){
+          
+/*************************左下沙漏程序******************************/      
+        if(count <= 19&&count >= 0){
+          LCD_CutPixel(celiuzuo_x[count],celiuzuo_y[count]);
+          delayms(Time);
+          LCD_PutPixel((63-celiuzuo_x[count]),(63-celiuzuo_y[count]));
+          delayms(Time);
+          locate = 2; 
+          count ++;
+          flag =1;      
+        }else if(count>19){      
+            flag = 0; 
+            count = 0;
+           // Draw_BMP(0,2,64,5,shijian64x32);
+            //LCD_Print(8,3,"时间到!");
+            //delayms(2000);
+            //locate =1;
+           // LCD_Init();
+        }
+/********************************************************************/      
+        
+        
+        }
+        else if(locate==3){
+          
+/*************************左上沙漏程序******************************/      
+        if(count <= 19&&count >= 0){
+          LCD_CutPixel(63-celiuyuo_x[19-count],63-celiuyuo_y[19-count]);
+          delayms(Time);
+          LCD_PutPixel((celiuyuo_x[19-count]),(celiuyuo_y[19-count]));
+          delayms(Time);
+          locate = 3; 
+          count --;
+          flag =1;      
+        }else if(count<0){      
+            flag = 0; 
+            count = 19;
+           // Draw_BMP(0,2,64,5,shijian64x32);
+            //LCD_Print(8,3,"时间到!");
+            //delayms(2000);
+            //locate =1;
+           // LCD_Init();
+        }
+/********************************************************************/      
+        
+        
+        }
+        else if(locate==4){
+          
+/*************************右下沙漏程序******************************/      
+        if(count <= 19&&count >= 0){
+          LCD_CutPixel(celiuyuo_x[count],celiuyuo_y[count]);
+          delayms(Time);
+          LCD_PutPixel((63-celiuyuo_x[count]),(63-celiuyuo_y[count]));
+          delayms(Time);
+          locate = 4; 
+          count ++;
+          flag =1;      
+        }else if(count>19){      
+            flag = 0; 
+            count = 0;
+           // Draw_BMP(0,2,64,5,shijian64x32);
+            //LCD_Print(8,3,"时间到!");
+            //delayms(2000);
+            //locate =1;
+           // LCD_Init();
+        }
+/********************************************************************/      
+        
+        
+        }
+        else if(locate==5){
+          
+/*************************右下沙漏程序******************************/      
+        if(count <= 19&&count >= 0){
+          LCD_CutPixel(63-celiuzuo_x[19-count],63-celiuzuo_y[19-count]);
+          delayms(Time);
+          LCD_PutPixel((celiuzuo_x[19-count]),(celiuzuo_y[19-count]));
+          delayms(Time);
+          locate = 5; 
+          count --;
+          flag =1;      
+        }else if(count<0){      
+            flag = 0; 
+            count = 19;
+           // Draw_BMP(0,2,64,5,shijian64x32);
+            //LCD_Print(8,3,"时间到!");
+            //delayms(2000);
+            //locate =1;
+           // LCD_Init();
+        }
+/********************************************************************/      
+        
+        
+        }
+        
+        
+        
       
     } 
   
