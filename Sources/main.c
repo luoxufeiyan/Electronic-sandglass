@@ -21,32 +21,34 @@ void Oled_ControlShow(void)
         }
       }*/
     if(flag == 0){    //模式选择 
-<<<<<<< HEAD
             if(coz<50&&coz>0){
-              locate = 1;   //1
-=======
-            if(coz<50&&coz>0){//判断流沙方向
-              locate = 1;
->>>>>>> 0d865ec05abc7be1f3a5895b00d138bbda0db236
+              if(coy>-10&&coy<10){
+                
+                locate = 1;   //1  
+              } else if(coy>=10&&coy<70){
+                locate = 5;
+              }else {
+                locate = 3;
+              }
               //delayms(5*Time);      
             }
             else {
-              locate = 0;   //0
+              
+              if(coy>-10&&coy<10){
+                
+                locate = 0;   //0  
+              } else if(coy>=10&&coy<70){
+                locate = 4;
+              }else {
+                locate = 2;
+              }
               //delayms(5*Time);
             }    
           if(locate==0){
  /**********************顺序沙漏*******************************/  
             Draw_BMP(0,0,64,7,shalou64x64);
-<<<<<<< HEAD
           for(j=19;j>=count;j--) 
-=======
-        /*  for(i=0;i<=count;i++)  //画沙子
-          {
-            LCD_CutPixel(liusha_x[i],liusha_y[i]);
-            LCD_PutPixel(liusha_x[i],liusha_y[i]);
-          }*/
-          for(j=19;j>count;j--) 
->>>>>>> 0d865ec05abc7be1f3a5895b00d138bbda0db236
+
           {
             LCD_CutPixel(liusha_x[j],liusha_y[j]);
             LCD_PutPixel(liusha_x[j],liusha_y[j]); 
@@ -65,7 +67,7 @@ void Oled_ControlShow(void)
           }
           else if(locate==1){
  /**********************逆向沙漏*****************************/         
-            Draw_BMP(0,0,64,7,shalou64x64);
+            Draw_BMP(0,0,64,7,shalou64x64);         
           for(j=0;j<19-count;j++) 
           {
             LCD_CutPixel(63-liusha_x[j],liusha_y[j]);
@@ -85,17 +87,15 @@ void Oled_ControlShow(void)
           else if(locate==2){
  /**********************左下流沙*****************************/         
             Draw_BMP(0,0,64,7,shalou64x64);
-          for(j=0;j<19-count;j++) 
+          for(j=19;j>count;j--)
           {
             LCD_CutPixel(celiuzuo_x[j],celiuzuo_y[j]);
             LCD_PutPixel(celiuzuo_x[j],celiuzuo_y[j]); 
           }  
-            
-            
           for(i=0;i<=count;i++)  //画沙子
           {
-            LCD_CutPixel(63-celiuzuo_x[i],63-celiuzuo_y[i]);
-            LCD_PutPixel(63-celiuzuo_x[i],63-celiuzuo_y[i]); 
+            LCD_CutPixel(celiuzuoxia_x[i],celiuzuoxia_y[i]);
+            LCD_PutPixel(celiuzuoxia_x[i],celiuzuoxia_y[i]); 
           }
             delayms(Time);
           flag = 1;
@@ -111,7 +111,7 @@ void Oled_ControlShow(void)
           }  
             
             
-          for(i=0;i<=count;i++)  //画沙子
+          for(i=19;i>19-count;i--)  //画沙子
           {
             LCD_CutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]);
             LCD_PutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]); 
@@ -130,7 +130,7 @@ void Oled_ControlShow(void)
           }  
             
             
-          for(i=0;i<count;i++)  //画沙子
+          for(i=19;i>19-count;i--)  //画沙子
           {
             LCD_CutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]);
             LCD_PutPixel(63-celiuyuo_x[i],63-celiuyuo_y[i]); 
@@ -149,7 +149,7 @@ void Oled_ControlShow(void)
           }  
             
             
-          for(i=0;i<=count;i++)  //画沙子
+          for(i=19;i>19-count;i--)  //画沙子
           {
             LCD_CutPixel(63-celiuzuo_x[i],63-celiuzuo_y[i]);
             LCD_PutPixel(63-celiuzuo_x[i],63-celiuzuo_y[i]); 
@@ -332,31 +332,41 @@ void Oled_ControlShow(void)
               }
             LCD_PutPixel((63-liusha_x[count]),(63-liusha_y[count]));
             delayms(Time); 
+
             if(coz<50&&coz>0){
-              locate = 1;
-              delayms(5*Time); 
-              flag = 0;     
+              if(coy>-10&&coy<10){
+                locate = 1;   //1  
+                flag = 0;
+              } else if(coy>=10&&coy<70){
+                locate = 5;
+                flag = 0;
+              }else {
+                locate = 3;
+                flag = 0;
+              }     
             }
             else {
-              locate = 0;
-              delayms(5*Time);
-              count++;
-              flag = 1; 
-            }
+              if(coy>-10&&coy<10){
+                locate = 0;   //1
+                delayms(5*Time);
+                count++;
+                flag = 1; 
+              } else if(coy>=10&&coy<70){
+                locate = 4;
+                flag = 0;
+              }else {
+                locate = 2;
+                flag = 0;
+              }
+            } 
             
           }else if(count>19){      
             flag = 0; 
             count = 0;
-<<<<<<< HEAD
            // Draw_BMP(0,2,64,5,shijian64x32);
            // LCD_Print(8,3,"时间到!");
            //delayms(2000);
             //locate =1;
-=======
-            Draw_BMP(0,2,64,5,shijian64x32);
-            LCD_Print(8,3,"时间到!");//绘制提示框
-            delayms(2000);
->>>>>>> 0d865ec05abc7be1f3a5895b00d138bbda0db236
            // LCD_Init();
           } 
 /*******************************************************************/      
@@ -533,17 +543,34 @@ void Oled_ControlShow(void)
             }
           LCD_PutPixel((63-liushaxia_x[count]),(63-liushaxia_y[count]));
           delayms(Time);
-          if(coz<50&&coz>=0){
-              locate = 1;
-              delayms(5*Time); 
-              count --;
-              flag =1;     
+
+            if(coz<50&&coz>0){
+              if(coy>-10&&coy<10){
+                
+                locate = 1;   //1  
+                delayms(5*Time);
+                count --;
+                flag = 1;
+              } else if(coy>=10&&coy<70){
+                locate = 5;
+                flag = 0;
+              }else {
+                locate = 3;
+                flag = 0;
+              }      
             }
             else {
-              locate = 0;
-              delayms(5*Time);
-              flag = 0; 
-            }
+              if(coy>-10&&coy<10){
+                locate = 0;   //1
+                flag = 0;
+              } else if(coy>=10&&coy<70){
+                locate = 4;
+                flag = 0;
+              }else {
+                locate = 2;
+                flag = 0;
+              } 
+            } 
             
         }else if(count<0){      
           flag = 0; 
@@ -563,10 +590,35 @@ void Oled_ControlShow(void)
           LCD_CutPixel(celiuzuo_x[count],celiuzuo_y[count]);
           delayms(Time);
           LCD_PutPixel((63-celiuzuo_x[count]),(63-celiuzuo_y[count]));
-          delayms(Time);
-          locate = 2; 
-          count ++;
-          flag =1;      
+          delayms(Time); 
+          if(coz<50&&coz>0){
+              if(coy>-10&&coy<10){
+                locate = 1;   //1  
+                flag =0;
+              } else if(coy>=10&&coy<70){
+                locate = 5;
+                flag =0;
+              }else {
+                locate = 3;
+                flag =0;
+              }
+              //delayms(5*Time);      
+            }
+            else {
+              if(coy>-10&&coy<10){
+                locate = 0;   //0 
+                flag =0; 
+              } else if(coy>=10&&coy<70){
+                locate = 4;
+                flag =0;
+              }else {
+                locate = 2;
+                count ++;
+                flag =0;
+              }
+              //delayms(5*Time);
+            }   
+        
         }else if(count>19){      
             flag = 0; 
             count = 0;
@@ -587,10 +639,34 @@ void Oled_ControlShow(void)
           LCD_CutPixel(63-celiuyuo_x[19-count],63-celiuyuo_y[19-count]);
           delayms(Time);
           LCD_PutPixel((celiuyuo_x[19-count]),(celiuyuo_y[19-count]));
-          delayms(Time);
-          locate = 3; 
-          count --;
-          flag =1;      
+          delayms(Time);  
+           if(coz<50&&coz>0){
+              if(coy>-10&&coy<10){
+                locate = 1;   //1  
+                flag =0;
+              } else if(coy>=10&&coy<70){
+                locate = 5;
+                flag =0;
+              }else {
+                locate = 3;
+                count --;
+                flag =1;
+              }
+              //delayms(5*Time);      
+            }
+            else {
+              if(coy>-10&&coy<10){
+                locate = 0;   //0 
+                flag =0; 
+              } else if(coy>=10&&coy<70){
+                locate = 4;
+                flag =0;
+              }else {
+                locate = 2;
+                flag =0;
+              }
+              //delayms(5*Time);
+            }      
         }else if(count<0){      
             flag = 0; 
             count = 19;
@@ -612,9 +688,33 @@ void Oled_ControlShow(void)
           delayms(Time);
           LCD_PutPixel((63-celiuyuo_x[count]),(63-celiuyuo_y[count]));
           delayms(Time);
-          locate = 4; 
-          count ++;
-          flag =1;      
+           if(coz<50&&coz>0){
+              if(coy>-10&&coy<10){
+                locate = 1;   //1  
+                flag =0;
+              } else if(coy>=10&&coy<70){
+                locate = 5;
+                flag =0;
+              }else {
+                locate = 3;
+                flag =0;
+              }
+              //delayms(5*Time);      
+            }
+            else {
+              if(coy>-10&&coy<10){
+                locate = 0;   //0 
+                flag =0; 
+              } else if(coy>=10&&coy<70){
+                locate = 4;
+                count ++;
+                flag =1;
+              }else {
+                locate = 2;
+                flag =0;
+              }
+              //delayms(5*Time);
+            }        
         }else if(count>19){      
             flag = 0; 
             count = 0;
@@ -630,15 +730,39 @@ void Oled_ControlShow(void)
         }
         else if(locate==5){
           
-/*************************右下沙漏程序******************************/      
+/*************************右上沙漏程序******************************/      
         if(count <= 19&&count >= 0){
           LCD_CutPixel(63-celiuzuo_x[19-count],63-celiuzuo_y[19-count]);
           delayms(Time);
           LCD_PutPixel((celiuzuo_x[19-count]),(celiuzuo_y[19-count]));
           delayms(Time);
-          locate = 5; 
-          count --;
-          flag =1;      
+           if(coz<50&&coz>0){
+              if(coy>-10&&coy<10){
+                locate = 1;   //1  
+                flag =0;
+              } else if(coy>=10&&coy<70){
+                locate = 5;
+                count --;
+                flag =1;
+              }else {
+                locate = 3;
+                flag =0;
+              }
+              //delayms(5*Time);      
+            }
+            else {
+              if(coy>-10&&coy<10){
+                locate = 0;   //0 
+                flag =0; 
+              } else if(coy>=10&&coy<70){
+                locate = 4;
+                flag =0;
+              }else {
+                locate = 2;
+                flag =0;
+              }
+              //delayms(5*Time);
+            }      
         }else if(count<0){      
             flag = 0; 
             count = 19;

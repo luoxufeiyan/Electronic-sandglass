@@ -1,5 +1,5 @@
 *** EVALUATION ***
-PROGRAM "C:\Users\Ðñ\Documents\GitHub\Electronic-sandglass\bin\Project.abs"
+PROGRAM "C:\Works\gitskills\Electronic-sandglass\bin\Project.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -45,7 +45,7 @@ Entry point: 0xC000 (_Startup)
 _startupData is allocated at 0xC00F and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x2100     1122
+  _Range   pZeroOut       0x2100     1162
   _Copy    *toCopyDownBeg 0xD6A9
 } _startupData;
 
@@ -58,10 +58,10 @@ Section Name                    Size  Type     From       To       Segment
 .rodata                         3019     R     0xC019     0xCBE3   ROM_C000
 .rodata1                          18     R     0xCBE4     0xCBF5   ROM_C000
 NON_BANKED                      2739     R     0xCBF6     0xD6A8   ROM_C000
-.copy                            865     R     0xD6A9     0xDA09   ROM_C000
-.text                           8909     R   0xFE8000   0xFEA2CC   PAGE_FE
+.copy                            905     R     0xD6A9     0xDA31   ROM_C000
+.text                           9548     R   0xFE8000   0xFEA54B   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
-.data                           1095   R/W     0x2100     0x2546   RAM
+.data                           1135   R/W     0x2100     0x256E   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
 .abs_section_b                     1   N/I        0xB        0xB   .absSeg2
@@ -354,13 +354,13 @@ NON_BANKED                      2739     R     0xCBF6     0xD6A8   ROM_C000
 .abs_section_354                   2   N/I      0x354      0x355   .absSeg289
 .abs_section_356                   2   N/I      0x356      0x357   .absSeg290
 .abs_section_ff76                  2     R     0xFF76     0xFF77   .absSeg291
-.bss                              25   R/W     0x2547     0x255F   RAM
-.common                            2   R/W     0x2560     0x2561   RAM
+.bss                              25   R/W     0x256F     0x2587   RAM
+.common                            2   R/W     0x2588     0x2589   RAM
 .vectSeg292_vect                   2     R     0xFFFE     0xFFFF   .vectSeg292
 
 Summary of section sizes per section type:
-READ_ONLY (R):        3CDB (dec:    15579)
-READ_WRITE (R/W):      562 (dec:     1378)
+READ_ONLY (R):        3F82 (dec:    16258)
+READ_WRITE (R/W):      58A (dec:     1418)
 NO_INIT (N/I):         168 (dec:      360)
 
 *********************************************************************************************
@@ -669,9 +669,9 @@ MODULE:                 -- MC9S12XS128.c.o --
      _PITCNT3                                   356       2       2       0   .abs_section_356
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     Oled_ControlShow                        FE8000     AAF    2735     304   .text       
-     ALL_init                                FE8AAF      25      37       2   .text       
-     main                                    FE8AD4       E      14       2   .text       
+     Oled_ControlShow                        FE8000     D2E    3374     390   .text       
+     ALL_init                                FE8D2E      25      37       2   .text       
+     main                                    FE8D53       E      14       2   .text       
      Pit0_interrupt                            CBF6      AA     170       4   NON_BANKED  
 - VARIABLES:
      STRING.x..1                               CBE4       3       3       1   .rodata1    
@@ -681,7 +681,7 @@ MODULE:                 -- main.c.o --
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
-     Init                                    FE8AE2      29      41       2   .text       
+     Init                                    FE8D61      29      41       2   .text       
      _Startup                                  C000       F      15       0   .init       
 - VARIABLES:
      _startupData                              C00F       6       6       3   .startData  
@@ -689,14 +689,14 @@ MODULE:                 -- Start12.c.o --
      __SEG_END_SSTACK                          2100       0       0       1               
 MODULE:                 -- MATH.C.o (ansixbf.lib) --
 - PROCEDURES:
-     logb                                    FE8B0B      20      32       4   .text       
-     fabs                                    FE8B2B      2C      44       6   .text       
-     is_special                              FE8B57      56      86       8   .text       
-     sqrt_r                                  FE8BAD     1EB     491      14   .text       
-     sqrt                                    FE8D98      A2     162       7   .text       
-     SetSign                                 FE8E3A      4C      76      14   .text       
-     atan2                                   FE8E86     B10    2832     120   .text       
-     atan                                    FE9996      36      54       2   .text       
+     logb                                    FE8D8A      20      32       4   .text       
+     fabs                                    FE8DAA      2C      44       6   .text       
+     is_special                              FE8DD6      56      86       8   .text       
+     sqrt_r                                  FE8E2C     1EB     491      14   .text       
+     sqrt                                    FE9017      A2     162       7   .text       
+     SetSign                                 FE90B9      4C      76      14   .text       
+     atan2                                   FE9105     B10    2832     120   .text       
+     atan                                    FE9C15      36      54       2   .text       
 - VARIABLES:
      infinity                                  C019       8       8       8   .rodata     
      nan_union                                 C021       8       8       4   .rodata     
@@ -760,7 +760,7 @@ MODULE:                 -- FADD.C.o (ansixbf.lib) --
 - VARIABLES:
 MODULE:                 -- FCMP.C.o (ansixbf.lib) --
 - PROCEDURES:
-     _FCMP                                     D2FD      26      38       2   NON_BANKED  
+     _FCMP                                     D2FD      26      38       6   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- FCONV.C.o (ansixbf.lib) --
 - PROCEDURES:
@@ -800,7 +800,7 @@ MODULE:                 -- rtshc12.c.o (ansixbf.lib) --
      _CASE_CHECKED                             D671       B      11       1   NON_BANKED  
      _CASE_CHECKED_BYTE                        D67C      14      20       4   NON_BANKED  
 - VARIABLES:
-     errno                                     2560       2       2       3   .common     
+     errno                                     2588       2       2       3   .common     
 MODULE:                 -- VREGS.C.o (ansixbf.lib) --
 - PROCEDURES:
      L_NEGK                                    D690       7       7       2   NON_BANKED  
@@ -809,80 +809,82 @@ MODULE:                 -- VREGS.C.o (ansixbf.lib) --
 - VARIABLES:
 MODULE:                 -- PLL.c.o --
 - PROCEDURES:
-     Pll_Init                                FE99CC      13      19       2   .text       
+     Pll_Init                                FE9C4B      13      19       2   .text       
 - VARIABLES:
 MODULE:                 -- var.c.o --
 - PROCEDURES:
 - VARIABLES:
-     count                                     2100       1       1      21   .data       
+     count                                     2100       1       1      22   .data       
      Time                                      2101       1       1       2   .data       
-     locate                                    2102       1       1      12   .data       
+     locate                                    2102       1       1      14   .data       
      liusha_x                                  2103      14      20       4   .data       
      liusha_y                                  2117      14      20       4   .data       
      liushaxia_x                               212B      14      20       4   .data       
      liushaxia_y                               213F      14      20       4   .data       
      celiuzuo_x                                2153      14      20       6   .data       
      celiuzuo_y                                2167      14      20       6   .data       
-     celiuyuo_x                                217B      14      20       6   .data       
-     celiuyuo_y                                218F      14      20       6   .data       
-     flag                                      2547       1       1       9   .bss        
-     acx                                       2548       4       4       8   .bss        
-     acy                                       254C       4       4       8   .bss        
-     acz                                       2550       4       4       6   .bss        
-     cox                                       2554       4       4       4   .bss        
-     coy                                       2558       4       4       4   .bss        
-     coz                                       255C       4       4       9   .bss        
+     celiuzuoxia_x                             217B      14      20       2   .data       
+     celiuzuoxia_y                             218F      14      20       2   .data       
+     celiuyuo_x                                21A3      14      20       6   .data       
+     celiuyuo_y                                21B7      14      20       6   .data       
+     flag                                      256F       1       1      11   .bss        
+     acx                                       2570       4       4       8   .bss        
+     acy                                       2574       4       4       8   .bss        
+     acz                                       2578       4       4       6   .bss        
+     cox                                       257C       4       4       4   .bss        
+     coy                                       2580       4       4       8   .bss        
+     coz                                       2584       4       4       8   .bss        
 MODULE:                 -- PWM.c.o --
 - PROCEDURES:
-     Pwm0_Init                               FE99DF      23      35       2   .text       
+     Pwm0_Init                               FE9C5E      23      35       2   .text       
 - VARIABLES:
 MODULE:                 -- MCU6050.c.o --
 - PROCEDURES:
-     I2C_Init                                FE9A02      17      23       2   .text       
-     I2C_Start                               FE9A19      27      39       6   .text       
-     I2C_Stop                                FE9A40      23      35       4   .text       
-     I2C_SendACK                             FE9A63      23      35       2   .text       
-     I2C_RecvACK                             FE9A86      1F      31       2   .text       
-     I2C_SendByte                            FE9AA5      40      64      12   .text       
-     I2C_RecvByte                            FE9AE5      41      65       2   .text       
-     Single_WriteI2C                         FE9B26      1D      29      10   .text       
-     Single_ReadI2C                          FE9B43      2B      43       4   .text       
-     InitMPU6050                             FE9B6E      32      50       2   .text       
-     GetData                                 FE9BA0      22      34       2   .text       
-     MPU6050_GetAngle                        FE9BC2     14C     332      12   .text       
+     I2C_Init                                FE9C81      17      23       2   .text       
+     I2C_Start                               FE9C98      27      39       6   .text       
+     I2C_Stop                                FE9CBF      23      35       4   .text       
+     I2C_SendACK                             FE9CE2      23      35       2   .text       
+     I2C_RecvACK                             FE9D05      1F      31       2   .text       
+     I2C_SendByte                            FE9D24      40      64      12   .text       
+     I2C_RecvByte                            FE9D64      41      65       2   .text       
+     Single_WriteI2C                         FE9DA5      1D      29      10   .text       
+     Single_ReadI2C                          FE9DC2      2B      43       4   .text       
+     InitMPU6050                             FE9DED      32      50       2   .text       
+     GetData                                 FE9E1F      22      34       2   .text       
+     MPU6050_GetAngle                        FE9E41     14C     332      12   .text       
 - VARIABLES:
 MODULE:                 -- delay.c.o --
 - PROCEDURES:
-     delayms                                 FE9D0E      1B      27       4   .text       
-     delayus                                 FE9D29       B      11      28   .text       
+     delayms                                 FE9F8D      1B      27       4   .text       
+     delayus                                 FE9FA8       B      11      28   .text       
 - VARIABLES:
 MODULE:                 -- LQ12864.c.o --
 - PROCEDURES:
-     LCD_WrDat                               FE9D34      35      53      20   .text       
-     LCD_WrCmd                               FE9D69      35      53      34   .text       
-     LCD_Set_Pos                             FE9D9E      1F      31      22   .text       
-     LCD_Fill                                FE9DBD      32      50       2   .text       
-     LCD_DLY_ms                              FE9DEF      17      23       2   .text       
-     LCD_Init                                FE9E06      94     148       2   .text       
-     OLED_Write_Char                         FE9E9A      8A     138      12   .text       
-     OLED_Write_Num6                         FE9F24      AA     170       6   .text       
-     LCD_PutPixel                            FE9FCE      48      72      44   .text       
-     LCD_CutPixel                            FEA016      3E      62      28   .text       
-     LCD_P6x8Str                             FEA054      59      89       6   .text       
-     LCD_P8x16Str                            FEA0AD      79     121       2   .text       
-     LCD_P14x16Str                           FEA126      D7     215       3   .text       
-     LCD_Print                               FEA1FD      63      99       2   .text       
-     Draw_BMP                                FEA260      3A      58       2   .text       
+     LCD_WrDat                               FE9FB3      35      53      20   .text       
+     LCD_WrCmd                               FE9FE8      35      53      34   .text       
+     LCD_Set_Pos                             FEA01D      1F      31      22   .text       
+     LCD_Fill                                FEA03C      32      50       2   .text       
+     LCD_DLY_ms                              FEA06E      17      23       2   .text       
+     LCD_Init                                FEA085      94     148       2   .text       
+     OLED_Write_Char                         FEA119      8A     138      12   .text       
+     OLED_Write_Num6                         FEA1A3      AA     170       6   .text       
+     LCD_PutPixel                            FEA24D      48      72      46   .text       
+     LCD_CutPixel                            FEA295      3E      62      30   .text       
+     LCD_P6x8Str                             FEA2D3      59      89       6   .text       
+     LCD_P8x16Str                            FEA32C      79     121       2   .text       
+     LCD_P14x16Str                           FEA3A5      D7     215       3   .text       
+     LCD_Print                               FEA47C      63      99       2   .text       
+     Draw_BMP                                FEA4DF      3A      58       2   .text       
 - VARIABLES:
      F6x8                                      C029     228     552       1   .rodata     
      F14x16_Idx                                C251      3F      63       3   .rodata     
      F14x16                                    C290     364     868       1   .rodata     
      F8X16                                     C5F4     5F0    1520       2   .rodata     
-     SmallChars                                21A3     1A4     420       1   .data       
-     shalou64x64                               2347     200     512       1   .data       
+     SmallChars                                21CB     1A4     420       1   .data       
+     shalou64x64                               236F     200     512       1   .data       
 MODULE:                 -- PIT.c.o --
 - PROCEDURES:
-     PIT_Init012                             FEA29A      33      51       2   .text       
+     PIT_Init012                             FEA519      33      51       2   .text       
 - VARIABLES:
 
 *********************************************************************************************
@@ -890,7 +892,7 @@ MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   MC9S12XS128.c.o                            360      0      0
-  main.c.o                                     0   2956     20
+  main.c.o                                     0   3595     20
   Start12.c.o                                  0     56      0
   MATH.C.o (ansixbf.lib)                       0   3777     16
   DADD.C.o (ansixbf.lib)                       0    228      0
@@ -908,13 +910,13 @@ MODULE STATISTIC
   rtshc12.c.o (ansixbf.lib)                    2    321      0
   VREGS.C.o (ansixbf.lib)                      0     25      0
   PLL.c.o                                      0     19      0
-  var.c.o                                    188      0      0
+  var.c.o                                    228      0      0
   PWM.c.o                                      0     35      0
   MCU6050.c.o                                  0    780      0
   delay.c.o                                    0     38      0
   LQ12864.c.o                                932   1382   3003
   PIT.c.o                                      0     51      0
-  other                                      256     12    865
+  other                                      256     12    905
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
@@ -929,7 +931,8 @@ SECTION: ".text"
   Draw_BMP PIT_Init012 
 SECTION: ".data"
   count Time locate liusha_x liusha_y liushaxia_x liushaxia_y celiuzuo_x 
-  celiuzuo_y celiuyuo_x celiuyuo_y SmallChars shalou64x64 
+  celiuzuo_y celiuzuoxia_x celiuzuoxia_y celiuyuo_x celiuyuo_y SmallChars 
+  shalou64x64 
 SECTION: ".bss"
   flag acx acy acz cox coy coz 
 SECTION: ".init"
@@ -1829,27 +1832,29 @@ OBJECT LIST SORTED BY ADDRESS
      _PITCNT2                                   352       2       2       0   .abs_section_352
      _PITLD3                                    354       2       2       0   .abs_section_354
      _PITCNT3                                   356       2       2       0   .abs_section_356
-     count                                     2100       1       1      21   .data       
+     count                                     2100       1       1      22   .data       
      Time                                      2101       1       1       2   .data       
-     locate                                    2102       1       1      12   .data       
+     locate                                    2102       1       1      14   .data       
      liusha_x                                  2103      14      20       4   .data       
      liusha_y                                  2117      14      20       4   .data       
      liushaxia_x                               212B      14      20       4   .data       
      liushaxia_y                               213F      14      20       4   .data       
      celiuzuo_x                                2153      14      20       6   .data       
      celiuzuo_y                                2167      14      20       6   .data       
-     celiuyuo_x                                217B      14      20       6   .data       
-     celiuyuo_y                                218F      14      20       6   .data       
-     SmallChars                                21A3     1A4     420       1   .data       
-     shalou64x64                               2347     200     512       1   .data       
-     flag                                      2547       1       1       9   .bss        
-     acx                                       2548       4       4       8   .bss        
-     acy                                       254C       4       4       8   .bss        
-     acz                                       2550       4       4       6   .bss        
-     cox                                       2554       4       4       4   .bss        
-     coy                                       2558       4       4       4   .bss        
-     coz                                       255C       4       4       9   .bss        
-     errno                                     2560       2       2       3   .common     
+     celiuzuoxia_x                             217B      14      20       2   .data       
+     celiuzuoxia_y                             218F      14      20       2   .data       
+     celiuyuo_x                                21A3      14      20       6   .data       
+     celiuyuo_y                                21B7      14      20       6   .data       
+     SmallChars                                21CB     1A4     420       1   .data       
+     shalou64x64                               236F     200     512       1   .data       
+     flag                                      256F       1       1      11   .bss        
+     acx                                       2570       4       4       8   .bss        
+     acy                                       2574       4       4       8   .bss        
+     acz                                       2578       4       4       6   .bss        
+     cox                                       257C       4       4       4   .bss        
+     coy                                       2580       4       4       8   .bss        
+     coz                                       2584       4       4       8   .bss        
+     errno                                     2588       2       2       3   .common     
      _Startup                                  C000       F      15       0   .init       
      infinity                                  C019       8       8       8   .rodata     
      nan_union                                 C021       8       8       4   .rodata     
@@ -1896,7 +1901,7 @@ OBJECT LIST SORTED BY ADDRESS
      D_NORMK                                   D213      77     119       5   NON_BANKED  
      F_ADDKL                                   D28A      5E      94       1   NON_BANKED  
      _FADD                                     D2E8      15      21       2   NON_BANKED  
-     _FCMP                                     D2FD      26      38       2   NON_BANKED  
+     _FCMP                                     D2FD      26      38       6   NON_BANKED  
      F_TOLONGK                                 D323      32      50       1   NON_BANKED  
      F_FRLONGK                                 D355      1E      30       1   NON_BANKED  
      _FSFLOAT                                  D373      12      18       1   NON_BANKED  
@@ -1927,50 +1932,50 @@ OBJECT LIST SORTED BY ADDRESS
      L_PSHK                                    D697       8       8       2   NON_BANKED  
      SL_PULK                                   D69F       A      10       1   NON_BANKED  
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
-     Oled_ControlShow                        FE8000     AAF    2735     304   .text       
-     ALL_init                                FE8AAF      25      37       2   .text       
-     main                                    FE8AD4       E      14       2   .text       
-     Init                                    FE8AE2      29      41       2   .text       
-     logb                                    FE8B0B      20      32       4   .text       
-     fabs                                    FE8B2B      2C      44       6   .text       
-     is_special                              FE8B57      56      86       8   .text       
-     sqrt_r                                  FE8BAD     1EB     491      14   .text       
-     sqrt                                    FE8D98      A2     162       7   .text       
-     SetSign                                 FE8E3A      4C      76      14   .text       
-     atan2                                   FE8E86     B10    2832     120   .text       
-     atan                                    FE9996      36      54       2   .text       
-     Pll_Init                                FE99CC      13      19       2   .text       
-     Pwm0_Init                               FE99DF      23      35       2   .text       
-     I2C_Init                                FE9A02      17      23       2   .text       
-     I2C_Start                               FE9A19      27      39       6   .text       
-     I2C_Stop                                FE9A40      23      35       4   .text       
-     I2C_SendACK                             FE9A63      23      35       2   .text       
-     I2C_RecvACK                             FE9A86      1F      31       2   .text       
-     I2C_SendByte                            FE9AA5      40      64      12   .text       
-     I2C_RecvByte                            FE9AE5      41      65       2   .text       
-     Single_WriteI2C                         FE9B26      1D      29      10   .text       
-     Single_ReadI2C                          FE9B43      2B      43       4   .text       
-     InitMPU6050                             FE9B6E      32      50       2   .text       
-     GetData                                 FE9BA0      22      34       2   .text       
-     MPU6050_GetAngle                        FE9BC2     14C     332      12   .text       
-     delayms                                 FE9D0E      1B      27       4   .text       
-     delayus                                 FE9D29       B      11      28   .text       
-     LCD_WrDat                               FE9D34      35      53      20   .text       
-     LCD_WrCmd                               FE9D69      35      53      34   .text       
-     LCD_Set_Pos                             FE9D9E      1F      31      22   .text       
-     LCD_Fill                                FE9DBD      32      50       2   .text       
-     LCD_DLY_ms                              FE9DEF      17      23       2   .text       
-     LCD_Init                                FE9E06      94     148       2   .text       
-     OLED_Write_Char                         FE9E9A      8A     138      12   .text       
-     OLED_Write_Num6                         FE9F24      AA     170       6   .text       
-     LCD_PutPixel                            FE9FCE      48      72      44   .text       
-     LCD_CutPixel                            FEA016      3E      62      28   .text       
-     LCD_P6x8Str                             FEA054      59      89       6   .text       
-     LCD_P8x16Str                            FEA0AD      79     121       2   .text       
-     LCD_P14x16Str                           FEA126      D7     215       3   .text       
-     LCD_Print                               FEA1FD      63      99       2   .text       
-     Draw_BMP                                FEA260      3A      58       2   .text       
-     PIT_Init012                             FEA29A      33      51       2   .text       
+     Oled_ControlShow                        FE8000     D2E    3374     390   .text       
+     ALL_init                                FE8D2E      25      37       2   .text       
+     main                                    FE8D53       E      14       2   .text       
+     Init                                    FE8D61      29      41       2   .text       
+     logb                                    FE8D8A      20      32       4   .text       
+     fabs                                    FE8DAA      2C      44       6   .text       
+     is_special                              FE8DD6      56      86       8   .text       
+     sqrt_r                                  FE8E2C     1EB     491      14   .text       
+     sqrt                                    FE9017      A2     162       7   .text       
+     SetSign                                 FE90B9      4C      76      14   .text       
+     atan2                                   FE9105     B10    2832     120   .text       
+     atan                                    FE9C15      36      54       2   .text       
+     Pll_Init                                FE9C4B      13      19       2   .text       
+     Pwm0_Init                               FE9C5E      23      35       2   .text       
+     I2C_Init                                FE9C81      17      23       2   .text       
+     I2C_Start                               FE9C98      27      39       6   .text       
+     I2C_Stop                                FE9CBF      23      35       4   .text       
+     I2C_SendACK                             FE9CE2      23      35       2   .text       
+     I2C_RecvACK                             FE9D05      1F      31       2   .text       
+     I2C_SendByte                            FE9D24      40      64      12   .text       
+     I2C_RecvByte                            FE9D64      41      65       2   .text       
+     Single_WriteI2C                         FE9DA5      1D      29      10   .text       
+     Single_ReadI2C                          FE9DC2      2B      43       4   .text       
+     InitMPU6050                             FE9DED      32      50       2   .text       
+     GetData                                 FE9E1F      22      34       2   .text       
+     MPU6050_GetAngle                        FE9E41     14C     332      12   .text       
+     delayms                                 FE9F8D      1B      27       4   .text       
+     delayus                                 FE9FA8       B      11      28   .text       
+     LCD_WrDat                               FE9FB3      35      53      20   .text       
+     LCD_WrCmd                               FE9FE8      35      53      34   .text       
+     LCD_Set_Pos                             FEA01D      1F      31      22   .text       
+     LCD_Fill                                FEA03C      32      50       2   .text       
+     LCD_DLY_ms                              FEA06E      17      23       2   .text       
+     LCD_Init                                FEA085      94     148       2   .text       
+     OLED_Write_Char                         FEA119      8A     138      12   .text       
+     OLED_Write_Num6                         FEA1A3      AA     170       6   .text       
+     LCD_PutPixel                            FEA24D      48      72      46   .text       
+     LCD_CutPixel                            FEA295      3E      62      30   .text       
+     LCD_P6x8Str                             FEA2D3      59      89       6   .text       
+     LCD_P8x16Str                            FEA32C      79     121       2   .text       
+     LCD_P14x16Str                           FEA3A5      D7     215       3   .text       
+     LCD_Print                               FEA47C      63      99       2   .text       
+     Draw_BMP                                FEA4DF      3A      58       2   .text       
+     PIT_Init012                             FEA519      33      51       2   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -2014,10 +2019,10 @@ MATH.C.o (ansixbf.lib):
 rtshc12.c.o (ansixbf.lib):
   _PowOfTwo_8 _PowOfTwo_16 _PowOfTwo_32 
 var.c.o:
-  Angle work1 shazi_x shazi_y shazixia_x shazixia_y t D P work0 flag_last 
-  co_all co_all_now co_all_bef ac_x_eve ac_y_eve ac_z_eve last_ac_x last_ac_y 
-  ac_x_max ac_y_max ac_x ac_y ac_z co_x_eve co_y_eve co_z_eve co_x co_y co_z 
-  hubu hubu0 CY 
+  Angle work1 shazi_x shazi_y shazixia_x shazixia_y celiuyuoxia_x 
+  celiuyuoxia_y t D P work0 flag_last co_all co_all_now co_all_bef ac_x_eve 
+  ac_y_eve ac_z_eve last_ac_x last_ac_y ac_x_max ac_y_max ac_x ac_y ac_z 
+  co_x_eve co_y_eve co_z_eve co_x co_y co_z hubu hubu0 CY 
 LQ12864.c.o:
   F3X3 LIBLOGO60x58 STRING..4d.2 STRING..5d.3 longqiu96x64 shijian64x32 
 
@@ -2026,22 +2031,17 @@ COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
 ------- ROM-ADDRESS: 0xD6A9 ---- SIZE       4 ---
 Filling bytes inserted
- 02972100
+ 02BF2100
 ------- ROM-ADDRESS: 0xD6AD ---- RAM-ADDRESS: 0x2100 ---- SIZE       1 ---
 Name of initialized Object : count
- 13
+ 0D
 ------- ROM-ADDRESS: 0xD6AE ---- RAM-ADDRESS: 0x2101 ---- SIZE       1 ---
 Name of initialized Object : Time
-<<<<<<< HEAD
- 2C
+ 32
 ------- ROM-ADDRESS: 0xD6AF ---- RAM-ADDRESS: 0x2102 ---- SIZE       1 ---
 Name of initialized Object : locate
  02
 ------- ROM-ADDRESS: 0xD6B0 ---- RAM-ADDRESS: 0x2103 ---- SIZE      20 ---
-=======
- 32
-------- ROM-ADDRESS: 0xD6B8 ---- RAM-ADDRESS: 0x2101 ---- SIZE      20 ---
->>>>>>> 0d865ec05abc7be1f3a5895b00d138bbda0db236
 Name of initialized Object : liusha_x
  1E2118271E 21122D1827 1E210C3312
  2D18271E21
@@ -2066,17 +2066,25 @@ Name of initialized Object : celiuzuo_y
  0606060C06 0C060C1206 0C12060C12
  18060C1218
 ------- ROM-ADDRESS: 0xD728 ---- RAM-ADDRESS: 0x217B ---- SIZE      20 ---
-Name of initialized Object : celiuyuo_x
+Name of initialized Object : celiuzuoxia_x
  0C1218121E 18211E1827 211E2D2721
  1E332D2721
 ------- ROM-ADDRESS: 0xD73C ---- RAM-ADDRESS: 0x218F ---- SIZE      20 ---
+Name of initialized Object : celiuzuoxia_y
+ 3939393339 3339332D39 332D39332D
+ 2739332D27
+------- ROM-ADDRESS: 0xD750 ---- RAM-ADDRESS: 0x21A3 ---- SIZE      20 ---
+Name of initialized Object : celiuyuo_x
+ 0C1218121E 18211E1827 211E2D2721
+ 1E332D2721
+------- ROM-ADDRESS: 0xD764 ---- RAM-ADDRESS: 0x21B7 ---- SIZE      20 ---
 Name of initialized Object : celiuyuo_y
  0606060C06 0C060C1206 0C12060C12
  18060C1218
-------- ROM-ADDRESS: 0xD750 ---- SIZE       1 ---
+------- ROM-ADDRESS: 0xD778 ---- SIZE       1 ---
 Filling bytes inserted
  00
-------- ROM-ADDRESS: 0xD751 ---- RAM-ADDRESS: 0x21A4 ---- SIZE     215 ---
+------- ROM-ADDRESS: 0xD779 ---- RAM-ADDRESS: 0x21CC ---- SIZE     215 ---
 Name of initialized Object : SmallChars:1
  3E5149453E 0000427F40 0000426151
  4946002141 454B310018 14127F1000
@@ -2093,17 +2101,17 @@ Name of initialized Object : SmallChars:1
  3F4040403F 001F204020 1F003F4038
  403F006314 0814630007 0870080700
  6151494543
-------- ROM-ADDRESS: 0xD828 ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xD850 ---- SIZE       8 ---
 Filling bytes inserted
  0000000000 000000
-------- ROM-ADDRESS: 0xD830 ---- RAM-ADDRESS: 0x2283 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD858 ---- RAM-ADDRESS: 0x22AB ---- SIZE      20 ---
 Name of initialized Object : SmallChars:224
  3636000000 0808080808 0020100804
  0200006060
-------- ROM-ADDRESS: 0xD844 ---- SIZE       5 ---
+------- ROM-ADDRESS: 0xD86C ---- SIZE       5 ---
 Filling bytes inserted
  0000000000
-------- ROM-ADDRESS: 0xD849 ---- RAM-ADDRESS: 0x229C ---- SIZE     171 ---
+------- ROM-ADDRESS: 0xD871 ---- RAM-ADDRESS: 0x22C4 ---- SIZE     171 ---
 Name of initialized Object : SmallChars:249
  A060000004 0201020408 08082A1C08
  0020545454 78007F4844 4438003844
@@ -2117,86 +2125,86 @@ Name of initialized Object : SmallChars:249
  003C404020 7C001C2040 201C003C40
  30403C0044 2810284400 1CA0A0A07C
  004464544C 44
-------- ROM-ADDRESS: 0xD8F4 ---- RAM-ADDRESS: 0x2347 ---- SIZE      64 ---
+------- ROM-ADDRESS: 0xD91C ---- RAM-ADDRESS: 0x236F ---- SIZE      64 ---
 Name of initialized Object : shalou64x64
  0103050911 2141810101 0101010101
  0101010101 0101010101 0101010101
  0101010101 0101010101 0101010101
  0101010101 0101010101 0181412111
  09050301
-------- ROM-ADDRESS: 0xD934 ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xD95C ---- SIZE       8 ---
 Filling bytes inserted
  0000000000 000000
-------- ROM-ADDRESS: 0xD93C ---- RAM-ADDRESS: 0x238F ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xD964 ---- RAM-ADDRESS: 0x23B7 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:72
  0102040810 204080
-------- ROM-ADDRESS: 0xD944 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD96C ---- SIZE       4 ---
 Filling bytes inserted
- 000823B7
-------- ROM-ADDRESS: 0xD948 ---- RAM-ADDRESS: 0x23B7 ---- SIZE       8 ---
+ 000823DF
+------- ROM-ADDRESS: 0xD970 ---- RAM-ADDRESS: 0x23DF ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:112
  8040201008 040201
-------- ROM-ADDRESS: 0xD950 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD978 ---- SIZE       4 ---
 Filling bytes inserted
- 000823D7
-------- ROM-ADDRESS: 0xD954 ---- RAM-ADDRESS: 0x23D7 ---- SIZE       8 ---
+ 000823FF
+------- ROM-ADDRESS: 0xD97C ---- RAM-ADDRESS: 0x23FF ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:144
  0102040810 204080
-------- ROM-ADDRESS: 0xD95C ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD984 ---- SIZE       4 ---
 Filling bytes inserted
- 000823EF
-------- ROM-ADDRESS: 0xD960 ---- RAM-ADDRESS: 0x23EF ---- SIZE       8 ---
+ 00082417
+------- ROM-ADDRESS: 0xD988 ---- RAM-ADDRESS: 0x2417 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:168
  8040201008 040201
-------- ROM-ADDRESS: 0xD968 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD990 ---- SIZE       4 ---
 Filling bytes inserted
- 0010241F
-------- ROM-ADDRESS: 0xD96C ---- RAM-ADDRESS: 0x241F ---- SIZE      16 ---
+ 00102447
+------- ROM-ADDRESS: 0xD994 ---- RAM-ADDRESS: 0x2447 ---- SIZE      16 ---
 Name of initialized Object : shalou64x64:216
  0102040810 20C00000C0 2010080402
  01
-------- ROM-ADDRESS: 0xD97C ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD9A4 ---- SIZE       4 ---
 Filling bytes inserted
- 0010245F
-------- ROM-ADDRESS: 0xD980 ---- RAM-ADDRESS: 0x245F ---- SIZE      16 ---
+ 00102487
+------- ROM-ADDRESS: 0xD9A8 ---- RAM-ADDRESS: 0x2487 ---- SIZE      16 ---
 Name of initialized Object : shalou64x64:280
  8040201008 0403000003 0408102040
  80
-------- ROM-ADDRESS: 0xD990 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD9B8 ---- SIZE       4 ---
 Filling bytes inserted
- 00082497
-------- ROM-ADDRESS: 0xD994 ---- RAM-ADDRESS: 0x2497 ---- SIZE       8 ---
+ 000824BF
+------- ROM-ADDRESS: 0xD9BC ---- RAM-ADDRESS: 0x24BF ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:336
  8040201008 040201
-------- ROM-ADDRESS: 0xD99C ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD9C4 ---- SIZE       4 ---
 Filling bytes inserted
- 000824AF
-------- ROM-ADDRESS: 0xD9A0 ---- RAM-ADDRESS: 0x24AF ---- SIZE       8 ---
+ 000824D7
+------- ROM-ADDRESS: 0xD9C8 ---- RAM-ADDRESS: 0x24D7 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:360
  0102040810 204080
-------- ROM-ADDRESS: 0xD9A8 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD9D0 ---- SIZE       4 ---
 Filling bytes inserted
- 000824CF
-------- ROM-ADDRESS: 0xD9AC ---- RAM-ADDRESS: 0x24CF ---- SIZE       8 ---
+ 000824F7
+------- ROM-ADDRESS: 0xD9D4 ---- RAM-ADDRESS: 0x24F7 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:392
  8040201008 040201
-------- ROM-ADDRESS: 0xD9B4 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD9DC ---- SIZE       4 ---
 Filling bytes inserted
- 005024F7
-------- ROM-ADDRESS: 0xD9B8 ---- RAM-ADDRESS: 0x24F7 ---- SIZE       8 ---
+ 0050251F
+------- ROM-ADDRESS: 0xD9E0 ---- RAM-ADDRESS: 0x251F ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:432
  0102040810 204080
-------- ROM-ADDRESS: 0xD9C0 ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xD9E8 ---- SIZE       8 ---
 Filling bytes inserted
  0000000000 000000
-------- ROM-ADDRESS: 0xD9C8 ---- RAM-ADDRESS: 0x2507 ---- SIZE      64 ---
+------- ROM-ADDRESS: 0xD9F0 ---- RAM-ADDRESS: 0x252F ---- SIZE      64 ---
 Name of initialized Object : shalou64x64:448
  80C0A09088 8482818080 8080808080
  8080808080 8080808080 8080808080
  8080808080 8080808080 8080808080
  8080808080 8080808080 8081828488
  90A0C080
-------- ROM-ADDRESS: 0xDA08 ---- SIZE       2 ---
+------- ROM-ADDRESS: 0xDA30 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -2244,12 +2252,12 @@ L_PSHK                    USES L_NEGK
 SL_PULK                   USES L_NEGK 
 _Vector_68                USES Pit0_interrupt 
 Oled_ControlShow          USES STRING.x..1 LCD_P6x8Str cox _FUTRUNC 
-                                OLED_Write_Num6 STRING.y..2 coy STRING.z..3 coz 
-                                STRING..........4 LCD_Print Oled_ControlShow flag locate 
-                                liushaxia_x liusha_x count LCD_PutPixel liusha_y 
-                                LCD_CutPixel liushaxia_y celiuyuo_x celiuyuo_y celiuzuo_x 
-                                celiuzuo_y Time delayms shalou64x64 Draw_BMP _FCMP 
-                                _BDIVMODS 
+                                OLED_Write_Num6 STRING.y..2 Oled_ControlShow STRING.z..3 coz 
+                                STRING..........4 LCD_Print flag locate liushaxia_x liusha_x 
+                                celiuzuoxia_x celiuzuoxia_y LCD_CutPixel LCD_PutPixel 
+                                celiuzuo_x celiuzuo_y count liusha_y liushaxia_y 
+                                celiuyuo_x celiuyuo_y Time delayms _FCMP coy shalou64x64 
+                                Draw_BMP _BDIVMODS 
 ALL_init                  USES Pll_Init PIT_Init012 _DDRAB _DDRS _DDRM _PORTAB 
                                 LCD_Init InitMPU6050 I2C_Init Pwm0_Init 
 main                      USES ALL_init Oled_ControlShow 
@@ -2408,6 +2416,14 @@ DEPENDENCY TREE
  |     |     |  
  |     |     +- LCD_WrDat            (see above)
  |     |        
+ |     +- LCD_CutPixel        
+ |     |  | 
+ |     |  +- LCD_Set_Pos          (see above)
+ |     |  |  
+ |     |  +- LCD_WrCmd            (see above)
+ |     |  |  
+ |     |  +- LCD_WrDat            (see above)
+ |     |     
  |     +- LCD_PutPixel        
  |     |  | 
  |     |  +- LCD_Set_Pos          (see above)
@@ -2418,15 +2434,9 @@ DEPENDENCY TREE
  |     |  |  
  |     |  +- LCD_WrDat            (see above)
  |     |     
- |     +- LCD_CutPixel        
- |     |  | 
- |     |  +- LCD_Set_Pos          (see above)
- |     |  |  
- |     |  +- LCD_WrCmd            (see above)
- |     |  |  
- |     |  +- LCD_WrDat            (see above)
- |     |     
  |     +- delayms             
+ |     |    
+ |     +- _FCMP               
  |     |    
  |     +- Draw_BMP            
  |     |  | 
@@ -2434,8 +2444,6 @@ DEPENDENCY TREE
  |     |  |  
  |     |  +- LCD_WrDat            (see above)
  |     |     
- |     +- _FCMP               
- |     |    
  |     +- _BDIVMODS           
  |          
  +- _Startup            
@@ -2703,5 +2711,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 9
-Total size of all blocks to be downloaded: 15579
+Total size of all blocks to be downloaded: 16258
 
