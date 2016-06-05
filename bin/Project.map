@@ -32,6 +32,7 @@ rtshc12.c.o (ansixbf.lib)               Model: BANKED,        Lang: ANSI-C
 VREGS.C.o (ansixbf.lib)                 Model: BANKED,        Lang: ANSI-C
 PLL.c.o                                 Model: BANKED,        Lang: ANSI-C
 var.c.o                                 Model: BANKED,        Lang: ANSI-C
+control.c.o                             Model: BANKED,        Lang: ANSI-C
 PWM.c.o                                 Model: BANKED,        Lang: ANSI-C
 MCU6050.c.o                             Model: BANKED,        Lang: ANSI-C
 delay.c.o                               Model: BANKED,        Lang: ANSI-C
@@ -45,8 +46,8 @@ Entry point: 0xC000 (_Startup)
 _startupData is allocated at 0xC00F and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x2100     1202
-  _Copy    *toCopyDownBeg 0xD6A9
+  _Range   pZeroOut       0x2100     1463
+  _Copy    *toCopyDownBeg 0xD6E6
 } _startupData;
 
 *********************************************************************************************
@@ -56,12 +57,12 @@ Section Name                    Size  Type     From       To       Segment
 .init                             15     R     0xC000     0xC00E   ROM_C000
 .startData                        10     R     0xC00F     0xC018   ROM_C000
 .rodata                         3019     R     0xC019     0xCBE3   ROM_C000
-.rodata1                          18     R     0xCBE4     0xCBF5   ROM_C000
-NON_BANKED                      2739     R     0xCBF6     0xD6A8   ROM_C000
-.copy                            945     R     0xD6A9     0xDA59   ROM_C000
-.text                          11250     R   0xFE8000   0xFEABF1   PAGE_FE
+.rodata1                          75     R     0xCBE4     0xCC2E   ROM_C000
+NON_BANKED                      2743     R     0xCC2F     0xD6E5   ROM_C000
+.copy                           1094     R     0xD6E6     0xDB2B   ROM_C000
+.text                          11560     R   0xFE8000   0xFEAD27   PAGE_FE
 .stack                           256   R/W     0x2000     0x20FF   RAM
-.data                           1175   R/W     0x2100     0x2596   RAM
+.data                           1433   R/W     0x2100     0x2698   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
 .abs_section_b                     1   N/I        0xB        0xB   .absSeg2
@@ -354,13 +355,13 @@ NON_BANKED                      2739     R     0xCBF6     0xD6A8   ROM_C000
 .abs_section_354                   2   N/I      0x354      0x355   .absSeg289
 .abs_section_356                   2   N/I      0x356      0x357   .absSeg290
 .abs_section_ff76                  2     R     0xFF76     0xFF77   .absSeg291
-.bss                              25   R/W     0x2597     0x25AF   RAM
-.common                            2   R/W     0x25B0     0x25B1   RAM
+.bss                              28   R/W     0x2699     0x26B4   RAM
+.common                            2   R/W     0x26B5     0x26B6   RAM
 .vectSeg292_vect                   2     R     0xFFFE     0xFFFF   .vectSeg292
 
 Summary of section sizes per section type:
-READ_ONLY (R):        4650 (dec:    18000)
-READ_WRITE (R/W):      5B2 (dec:     1458)
+READ_ONLY (R):        4858 (dec:    18520)
+READ_WRITE (R/W):      6B7 (dec:     1719)
 NO_INIT (N/I):         168 (dec:      360)
 
 *********************************************************************************************
@@ -536,11 +537,11 @@ MODULE:                 -- MC9S12XS128.c.o --
      _PERT                                      244       1       1       0   .abs_section_244
      _PPST                                      245       1       1       0   .abs_section_245
      _PTTRR                                     247       1       1       0   .abs_section_247
-     _PTS                                       248       1       1      22   .abs_section_248
+     _PTS                                       248       1       1      27   .abs_section_248
      _PTIS                                      249       1       1       0   .abs_section_249
-     _DDRS                                      24A       1       1      14   .abs_section_24a
+     _DDRS                                      24A       1       1      17   .abs_section_24a
      _RDRS                                      24B       1       1       0   .abs_section_24b
-     _PERS                                      24C       1       1       0   .abs_section_24c
+     _PERS                                      24C       1       1       1   .abs_section_24c
      _PPSS                                      24D       1       1       0   .abs_section_24d
      _WOMS                                      24E       1       1       0   .abs_section_24e
      _PTM                                       250       1       1      15   .abs_section_250
@@ -567,11 +568,11 @@ MODULE:                 -- MC9S12XS128.c.o --
      _PPSH                                      265       1       1       0   .abs_section_265
      _PIEH                                      266       1       1       0   .abs_section_266
      _PIFH                                      267       1       1       0   .abs_section_267
-     _PTJ                                       268       1       1       0   .abs_section_268
+     _PTJ                                       268       1       1       3   .abs_section_268
      _PTIJ                                      269       1       1       0   .abs_section_269
-     _DDRJ                                      26A       1       1       0   .abs_section_26a
+     _DDRJ                                      26A       1       1       1   .abs_section_26a
      _RDRJ                                      26B       1       1       0   .abs_section_26b
-     _PERJ                                      26C       1       1       0   .abs_section_26c
+     _PERJ                                      26C       1       1       1   .abs_section_26c
      _PPSJ                                      26D       1       1       0   .abs_section_26d
      _PIEJ                                      26E       1       1       0   .abs_section_26e
      _PIFJ                                      26F       1       1       0   .abs_section_26f
@@ -669,19 +670,32 @@ MODULE:                 -- MC9S12XS128.c.o --
      _PITCNT3                                   356       2       2       0   .abs_section_356
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     Oled_ControlShow                        FE8000    13D4    5076     744   .text       
-     ALL_init                                FE93D4      25      37       2   .text       
-     main                                    FE93F9       E      14       2   .text       
-     Pit0_interrupt                            CBF6      AA     170       4   NON_BANKED  
+     Key_Init                                FE8000      19      25       2   .text       
+     Oled_Key                                FE8019      6E     110       2   .text       
+     Oled_ControlShow                        FE8087    146D    5229     759   .text       
+     ALL_init                                FE94F4      29      41       2   .text       
+     main                                    FE951D       E      14       2   .text       
+     Pit0_interrupt                            CC2F      AE     174       4   NON_BANKED  
 - VARIABLES:
-     STRING.x..1                               CBE4       3       3       1   .rodata1    
-     STRING.y..2                               CBE7       3       3       1   .rodata1    
-     STRING.z..3                               CBEA       3       3       1   .rodata1    
-     STRING..........4                         CBED       9       9       1   .rodata1    
+     STRING.T..1                               CBE4       3       3       1   .rodata1    
+     STRING.T..2                               CBE7       3       3       1   .rodata1    
+     STRING.x..3                               CBEA       3       3       1   .rodata1    
+     STRING.y..4                               CBED       3       3       1   .rodata1    
+     STRING.z..5                               CBF0       3       3       1   .rodata1    
+     STRING..........6                         CBF3       9       9       1   .rodata1    
+     STRING.T..7                               CBFC       3       3       1   .rodata1    
+     STRING.........8                          CBFF       8       8       1   .rodata1    
+     STRING.........9                          CC07       8       8       1   .rodata1    
+     STRING.........10                         CC0F       8       8       1   .rodata1    
+     STRING.........11                         CC17       8       8       1   .rodata1    
+     STRING.........12                         CC1F       8       8       1   .rodata1    
+     STRING.........13                         CC27       8       8       1   .rodata1    
+     DELAY_NUM                                 2100       2       2       1   .data       
+     KEY_DOWN                                  2699       2       2       2   .bss        
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
-     Init                                    FE9407      29      41       2   .text       
+     Init                                    FE952B      29      41       2   .text       
      _Startup                                  C000       F      15       0   .init       
 - VARIABLES:
      _startupData                              C00F       6       6       3   .startData  
@@ -689,204 +703,210 @@ MODULE:                 -- Start12.c.o --
      __SEG_END_SSTACK                          2100       0       0       1               
 MODULE:                 -- MATH.C.o (ansixbf.lib) --
 - PROCEDURES:
-     logb                                    FE9430      20      32       4   .text       
-     fabs                                    FE9450      2C      44       6   .text       
-     is_special                              FE947C      56      86       8   .text       
-     sqrt_r                                  FE94D2     1EB     491      14   .text       
-     sqrt                                    FE96BD      A2     162       7   .text       
-     SetSign                                 FE975F      4C      76      14   .text       
-     atan2                                   FE97AB     B10    2832     120   .text       
-     atan                                    FEA2BB      36      54       2   .text       
+     logb                                    FE9554      20      32       4   .text       
+     fabs                                    FE9574      2C      44       6   .text       
+     is_special                              FE95A0      56      86       8   .text       
+     sqrt_r                                  FE95F6     1EB     491      14   .text       
+     sqrt                                    FE97E1      A2     162       7   .text       
+     SetSign                                 FE9883      4C      76      14   .text       
+     atan2                                   FE98CF     B10    2832     120   .text       
+     atan                                    FEA3DF      36      54       2   .text       
 - VARIABLES:
      infinity                                  C019       8       8       8   .rodata     
      nan_union                                 C021       8       8       4   .rodata     
 MODULE:                 -- DADD.C.o (ansixbf.lib) --
 - PROCEDURES:
-     D_ADDKL                                   CCA0      A6     166       1   NON_BANKED  
-     _DADD                                     CD46      11      17      37   NON_BANKED  
-     _DSUB                                     CD57      19      25       7   NON_BANKED  
-     _DNEG                                     CD70      14      20       2   NON_BANKED  
+     D_ADDKL                                   CCDD      A6     166       1   NON_BANKED  
+     _DADD                                     CD83      11      17      37   NON_BANKED  
+     _DSUB                                     CD94      19      25       7   NON_BANKED  
+     _DNEG                                     CDAD      14      20       2   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- DANSI.C.o (ansixbf.lib) --
 - PROCEDURES:
-     D_FREXP                                   CD84      20      32       1   NON_BANKED  
-     D_LDEXP                                   CDA4      18      24       1   NON_BANKED  
-     frexp                                     CDBC      1F      31       2   NON_BANKED  
-     RetErrDom                                 CDDB      1F      31       1   NON_BANKED  
-     ldexp                                     CDFA      27      39       5   NON_BANKED  
+     D_FREXP                                   CDC1      20      32       1   NON_BANKED  
+     D_LDEXP                                   CDE1      18      24       1   NON_BANKED  
+     frexp                                     CDF9      1F      31       2   NON_BANKED  
+     RetErrDom                                 CE18      1F      31       1   NON_BANKED  
+     ldexp                                     CE37      27      39       5   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- DCMP.C.o (ansixbf.lib) --
 - PROCEDURES:
-     _DCMP                                     CE21      30      48       3   NON_BANKED  
+     _DCMP                                     CE5E      30      48       3   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- DCONV.C.o (ansixbf.lib) --
 - PROCEDURES:
-     D_TOLONGK                                 CE51      31      49       1   NON_BANKED  
-     _DSTRUNC                                  CE82      19      25       2   NON_BANKED  
-     D_PSHK_UNARY                              CE9B      1E      30       1   NON_BANKED  
-     D_CLRK_UNARY                              CEB9       D      13       2   NON_BANKED  
-     D_MAXK_UNARY                              CEC6       A      10       1   NON_BANKED  
-     D_NORMK_UNARY                             CED0      53      83       1   NON_BANKED  
+     D_TOLONGK                                 CE8E      31      49       1   NON_BANKED  
+     _DSTRUNC                                  CEBF      19      25       2   NON_BANKED  
+     D_PSHK_UNARY                              CED8      1E      30       1   NON_BANKED  
+     D_CLRK_UNARY                              CEF6       D      13       2   NON_BANKED  
+     D_MAXK_UNARY                              CF03       A      10       1   NON_BANKED  
+     D_NORMK_UNARY                             CF0D      53      83       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- DFCONV.C.o (ansixbf.lib) --
 - PROCEDURES:
-     D_TOFK                                    CF23      3B      59       1   NON_BANKED  
-     D_FRFK                                    CF5E      10      16       1   NON_BANKED  
-     _DLONG                                    CF6E      17      23       5   NON_BANKED  
-     _DSHORT                                   CF85      15      21       1   NON_BANKED  
+     D_TOFK                                    CF60      3B      59       1   NON_BANKED  
+     D_FRFK                                    CF9B      10      16       1   NON_BANKED  
+     _DLONG                                    CFAB      17      23       5   NON_BANKED  
+     _DSHORT                                   CFC2      15      21       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- DMUL.C.o (ansixbf.lib) --
 - PROCEDURES:
-     D_DIVKL                                   CF9A      DD     221       1   NON_BANKED  
-     D_MULKL                                   D077      89     137       1   NON_BANKED  
-     _DMUL                                     D100      11      17       7   NON_BANKED  
-     _DDIV                                     D111      11      17       8   NON_BANKED  
+     D_DIVKL                                   CFD7      DD     221       1   NON_BANKED  
+     D_MULKL                                   D0B4      89     137       1   NON_BANKED  
+     _DMUL                                     D13D      11      17       7   NON_BANKED  
+     _DDIV                                     D14E      11      17       8   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- DREGS.C.o (ansixbf.lib) --
 - PROCEDURES:
-     D_PULK                                    D122      29      41       5   NON_BANKED  
-     D_PULL                                    D14B      25      37       5   NON_BANKED  
-     D_PSHK                                    D170      23      35       3   NON_BANKED  
-     D_STAL                                    D193      2A      42       2   NON_BANKED  
-     D_XGKL                                    D1BD      39      57       2   NON_BANKED  
-     D_CLRK                                    D1F6      13      19       3   NON_BANKED  
-     D_MAXK                                    D209       A      10       2   NON_BANKED  
-     D_NORMK                                   D213      77     119       5   NON_BANKED  
+     D_PULK                                    D15F      29      41       5   NON_BANKED  
+     D_PULL                                    D188      25      37       5   NON_BANKED  
+     D_PSHK                                    D1AD      23      35       3   NON_BANKED  
+     D_STAL                                    D1D0      2A      42       2   NON_BANKED  
+     D_XGKL                                    D1FA      39      57       2   NON_BANKED  
+     D_CLRK                                    D233      13      19       3   NON_BANKED  
+     D_MAXK                                    D246       A      10       2   NON_BANKED  
+     D_NORMK                                   D250      77     119       5   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- FADD.C.o (ansixbf.lib) --
 - PROCEDURES:
-     F_ADDKL                                   D28A      5E      94       1   NON_BANKED  
-     _FADD                                     D2E8      15      21       2   NON_BANKED  
+     F_ADDKL                                   D2C7      5E      94       1   NON_BANKED  
+     _FADD                                     D325      15      21       2   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- FCMP.C.o (ansixbf.lib) --
 - PROCEDURES:
-     _FCMP                                     D2FD      26      38       6   NON_BANKED  
+     _FCMP                                     D33A      26      38       6   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- FCONV.C.o (ansixbf.lib) --
 - PROCEDURES:
-     F_TOLONGK                                 D323      32      50       1   NON_BANKED  
-     F_FRLONGK                                 D355      1E      30       1   NON_BANKED  
-     _FSFLOAT                                  D373      12      18       1   NON_BANKED  
-     _FSTRUNC                                  D385      11      17       1   NON_BANKED  
-     _FUTRUNC                                  D396       3       3       3   NON_BANKED  
+     F_TOLONGK                                 D360      32      50       1   NON_BANKED  
+     F_FRLONGK                                 D392      1E      30       1   NON_BANKED  
+     _FSFLOAT                                  D3B0      12      18       1   NON_BANKED  
+     _FSTRUNC                                  D3C2      11      17       1   NON_BANKED  
+     _FUTRUNC                                  D3D3       3       3       3   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- FMUL.C.o (ansixbf.lib) --
 - PROCEDURES:
-     F_DIVKL                                   D399      84     132       1   NON_BANKED  
-     F_MULKL                                   D41D      57      87       1   NON_BANKED  
-     _FMUL                                     D474      14      20       5   NON_BANKED  
-     _FDIV                                     D488      1E      30       1   NON_BANKED  
+     F_DIVKL                                   D3D6      84     132       1   NON_BANKED  
+     F_MULKL                                   D45A      57      87       1   NON_BANKED  
+     _FMUL                                     D4B1      14      20       5   NON_BANKED  
+     _FDIV                                     D4C5      1E      30       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- FREGS.C.o (ansixbf.lib) --
 - PROCEDURES:
-     F_PULK                                    D4A6      15      21       5   NON_BANKED  
-     F_PULL                                    D4BB      15      21       3   NON_BANKED  
-     F_PSHK                                    D4D0      13      19       5   NON_BANKED  
-     F_XGKL                                    D4E3      21      33       2   NON_BANKED  
-     F_CLRK                                    D504       B      11       3   NON_BANKED  
-     F_MAXK                                    D50F       9       9       3   NON_BANKED  
-     F_NORMK                                   D518      37      55       3   NON_BANKED  
+     F_PULK                                    D4E3      15      21       5   NON_BANKED  
+     F_PULL                                    D4F8      15      21       3   NON_BANKED  
+     F_PSHK                                    D50D      13      19       5   NON_BANKED  
+     F_XGKL                                    D520      21      33       2   NON_BANKED  
+     F_CLRK                                    D541       B      11       3   NON_BANKED  
+     F_MAXK                                    D54C       9       9       3   NON_BANKED  
+     F_NORMK                                   D555      37      55       3   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- rtshc12.c.o (ansixbf.lib) --
 - PROCEDURES:
-     _BSHL                                     D54F       8       8       1   NON_BANKED  
-     _BDIVMODS                                 D557       B      11       1   NON_BANKED  
-     _LCMP                                     D562       A      10       1   NON_BANKED  
-     _lDivMod                                  D56C      B9     185       3   NON_BANKED  
-     _LDIVU                                    D625       E      14       2   NON_BANKED  
-     _NEG_P                                    D633       C      12       4   NON_BANKED  
-     _LMODS                                    D63F      2A      42       1   NON_BANKED  
-     _COPY                                     D669       8       8      13   NON_BANKED  
-     _CASE_CHECKED                             D671       B      11       1   NON_BANKED  
-     _CASE_CHECKED_BYTE                        D67C      14      20       4   NON_BANKED  
+     _BSHL                                     D58C       8       8       1   NON_BANKED  
+     _BDIVMODS                                 D594       B      11       1   NON_BANKED  
+     _LCMP                                     D59F       A      10       1   NON_BANKED  
+     _lDivMod                                  D5A9      B9     185       3   NON_BANKED  
+     _LDIVU                                    D662       E      14       2   NON_BANKED  
+     _NEG_P                                    D670       C      12       4   NON_BANKED  
+     _LMODS                                    D67C      2A      42       1   NON_BANKED  
+     _COPY                                     D6A6       8       8      13   NON_BANKED  
+     _CASE_CHECKED                             D6AE       B      11       1   NON_BANKED  
+     _CASE_CHECKED_BYTE                        D6B9      14      20       4   NON_BANKED  
 - VARIABLES:
-     errno                                     25B0       2       2       3   .common     
+     errno                                     26B5       2       2       3   .common     
 MODULE:                 -- VREGS.C.o (ansixbf.lib) --
 - PROCEDURES:
-     L_NEGK                                    D690       7       7       2   NON_BANKED  
-     L_PSHK                                    D697       8       8       2   NON_BANKED  
-     SL_PULK                                   D69F       A      10       1   NON_BANKED  
+     L_NEGK                                    D6CD       7       7       2   NON_BANKED  
+     L_PSHK                                    D6D4       8       8       2   NON_BANKED  
+     SL_PULK                                   D6DC       A      10       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- PLL.c.o --
 - PROCEDURES:
-     Pll_Init                                FEA2F1      13      19       2   .text       
+     Pll_Init                                FEA415      13      19       2   .text       
 - VARIABLES:
 MODULE:                 -- var.c.o --
 - PROCEDURES:
 - VARIABLES:
-     count                                     2100       1       1      23   .data       
-     Time                                      2101       1       1       2   .data       
-     locate                                    2102       1       1      14   .data       
-     liusha_x                                  2103      14      20       4   .data       
-     liusha_y                                  2117      14      20       4   .data       
-     liushaxia_x                               212B      14      20       4   .data       
-     liushaxia_y                               213F      14      20       4   .data       
-     celiuzuo_x                                2153      14      20       6   .data       
-     celiuzuo_y                                2167      14      20       6   .data       
-     celiuzuoxia_x                             217B      14      20       2   .data       
-     celiuzuoxia_y                             218F      14      20       2   .data       
-     celiuyuo_x                                21A3      14      20       6   .data       
-     celiuyuo_y                                21B7      14      20       6   .data       
-     celiuyuoxia_x                             21CB      14      20       2   .data       
-     celiuyuoxia_y                             21DF      14      20       2   .data       
-     flag                                      2597       1       1      11   .bss        
-     acx                                       2598       4       4       8   .bss        
-     acy                                       259C       4       4       8   .bss        
-     acz                                       25A0       4       4       6   .bss        
-     cox                                       25A4       4       4       4   .bss        
-     coy                                       25A8       4       4       8   .bss        
-     coz                                       25AC       4       4       8   .bss        
+     Time                                      2102       2       2       8   .data       
+     locate                                    2104       1       1      14   .data       
+     liusha_x                                  2105      14      20       4   .data       
+     liusha_y                                  2119      14      20       4   .data       
+     liushaxia_x                               212D      14      20       4   .data       
+     liushaxia_y                               2141      14      20       4   .data       
+     celiuzuo_x                                2155      14      20       6   .data       
+     celiuzuo_y                                2169      14      20       6   .data       
+     celiuzuoxia_x                             217D      14      20       2   .data       
+     celiuzuoxia_y                             2191      14      20       2   .data       
+     celiuyuo_x                                21A5      14      20       6   .data       
+     celiuyuo_y                                21B9      14      20       6   .data       
+     celiuyuoxia_x                             21CD      14      20       2   .data       
+     celiuyuoxia_y                             21E1      14      20       2   .data       
+     flag                                      269B       1       1      11   .bss        
+     count                                     269C       1       1      23   .bss        
+     acx                                       269D       4       4       8   .bss        
+     acy                                       26A1       4       4       8   .bss        
+     acz                                       26A5       4       4       6   .bss        
+     cox                                       26A9       4       4       4   .bss        
+     coy                                       26AD       4       4       8   .bss        
+     coz                                       26B1       4       4       8   .bss        
+MODULE:                 -- control.c.o --
+- PROCEDURES:
+     beep_on                                 FEA428       9       9       2   .text       
+     beep_off                                FEA431       9       9       2   .text       
+- VARIABLES:
 MODULE:                 -- PWM.c.o --
 - PROCEDURES:
-     Pwm0_Init                               FEA304      23      35       2   .text       
+     Pwm0_Init                               FEA43A      23      35       2   .text       
 - VARIABLES:
 MODULE:                 -- MCU6050.c.o --
 - PROCEDURES:
-     I2C_Init                                FEA327      17      23       2   .text       
-     I2C_Start                               FEA33E      27      39       6   .text       
-     I2C_Stop                                FEA365      23      35       4   .text       
-     I2C_SendACK                             FEA388      23      35       2   .text       
-     I2C_RecvACK                             FEA3AB      1F      31       2   .text       
-     I2C_SendByte                            FEA3CA      40      64      12   .text       
-     I2C_RecvByte                            FEA40A      41      65       2   .text       
-     Single_WriteI2C                         FEA44B      1D      29      10   .text       
-     Single_ReadI2C                          FEA468      2B      43       4   .text       
-     InitMPU6050                             FEA493      32      50       2   .text       
-     GetData                                 FEA4C5      22      34       2   .text       
-     MPU6050_GetAngle                        FEA4E7     14C     332      12   .text       
+     I2C_Init                                FEA45D      17      23       2   .text       
+     I2C_Start                               FEA474      27      39       6   .text       
+     I2C_Stop                                FEA49B      23      35       4   .text       
+     I2C_SendACK                             FEA4BE      23      35       2   .text       
+     I2C_RecvACK                             FEA4E1      1F      31       2   .text       
+     I2C_SendByte                            FEA500      40      64      12   .text       
+     I2C_RecvByte                            FEA540      41      65       2   .text       
+     Single_WriteI2C                         FEA581      1D      29      10   .text       
+     Single_ReadI2C                          FEA59E      2B      43       4   .text       
+     InitMPU6050                             FEA5C9      32      50       2   .text       
+     GetData                                 FEA5FB      22      34       2   .text       
+     MPU6050_GetAngle                        FEA61D     14C     332      12   .text       
 - VARIABLES:
 MODULE:                 -- delay.c.o --
 - PROCEDURES:
-     delayms                                 FEA633      1B      27       4   .text       
-     delayus                                 FEA64E       B      11      28   .text       
+     delayms                                 FEA769      1B      27      10   .text       
+     delayus                                 FEA784       B      11      28   .text       
 - VARIABLES:
 MODULE:                 -- LQ12864.c.o --
 - PROCEDURES:
-     LCD_WrDat                               FEA659      35      53      20   .text       
-     LCD_WrCmd                               FEA68E      35      53      34   .text       
-     LCD_Set_Pos                             FEA6C3      1F      31      22   .text       
-     LCD_Fill                                FEA6E2      32      50       2   .text       
-     LCD_DLY_ms                              FEA714      17      23       2   .text       
-     LCD_Init                                FEA72B      94     148       2   .text       
-     OLED_Write_Char                         FEA7BF      8A     138      12   .text       
-     OLED_Write_Num6                         FEA849      AA     170       6   .text       
-     LCD_PutPixel                            FEA8F3      48      72      54   .text       
-     LCD_CutPixel                            FEA93B      3E      62      38   .text       
-     LCD_P6x8Str                             FEA979      59      89       6   .text       
-     LCD_P8x16Str                            FEA9D2      79     121       2   .text       
-     LCD_P14x16Str                           FEAA4B      D7     215       3   .text       
-     LCD_Print                               FEAB22      63      99       2   .text       
-     Draw_BMP                                FEAB85      3A      58       2   .text       
+     LCD_WrDat                               FEA78F      35      53      20   .text       
+     LCD_WrCmd                               FEA7C4      35      53      34   .text       
+     LCD_Set_Pos                             FEA7F9      1F      31      22   .text       
+     LCD_Fill                                FEA818      32      50       2   .text       
+     LCD_DLY_ms                              FEA84A      17      23       2   .text       
+     LCD_Init                                FEA861      94     148       2   .text       
+     OLED_Write_Char                         FEA8F5      8A     138      12   .text       
+     OLED_Write_Num6                         FEA97F      AA     170      10   .text       
+     LCD_PutPixel                            FEAA29      48      72      54   .text       
+     LCD_CutPixel                            FEAA71      3E      62      38   .text       
+     LCD_P6x8Str                             FEAAAF      59      89      10   .text       
+     LCD_P8x16Str                            FEAB08      79     121       2   .text       
+     LCD_P14x16Str                           FEAB81      D7     215       3   .text       
+     LCD_Print                               FEAC58      63      99       4   .text       
+     Draw_BMP                                FEACBB      3A      58       4   .text       
 - VARIABLES:
      F6x8                                      C029     228     552       1   .rodata     
      F14x16_Idx                                C251      3F      63       3   .rodata     
      F14x16                                    C290     364     868       1   .rodata     
      F8X16                                     C5F4     5F0    1520       2   .rodata     
-     SmallChars                                21F3     1A4     420       1   .data       
-     shalou64x64                               2397     200     512       1   .data       
+     SmallChars                                21F5     1A4     420       1   .data       
+     shijian64x32                              2399     100     256       1   .data       
+     shalou64x64                               2499     200     512       1   .data       
 MODULE:                 -- PIT.c.o --
 - PROCEDURES:
-     PIT_Init012                             FEABBF      33      51       2   .text       
+     PIT_Init012                             FEACF5      33      51       2   .text       
 - VARIABLES:
 
 *********************************************************************************************
@@ -894,7 +914,7 @@ MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   MC9S12XS128.c.o                            360      0      0
-  main.c.o                                     0   5297     20
+  main.c.o                                     4   5593     77
   Start12.c.o                                  0     56      0
   MATH.C.o (ansixbf.lib)                       0   3777     16
   DADD.C.o (ansixbf.lib)                       0    228      0
@@ -912,37 +932,40 @@ MODULE STATISTIC
   rtshc12.c.o (ansixbf.lib)                    2    321      0
   VREGS.C.o (ansixbf.lib)                      0     25      0
   PLL.c.o                                      0     19      0
-  var.c.o                                    268      0      0
+  var.c.o                                    269      0      0
+  control.c.o                                  0     18      0
   PWM.c.o                                      0     35      0
   MCU6050.c.o                                  0    780      0
   delay.c.o                                    0     38      0
-  LQ12864.c.o                                932   1382   3003
+  LQ12864.c.o                               1188   1382   3003
   PIT.c.o                                      0     51      0
-  other                                      256     12    945
+  other                                      256     12   1094
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 SECTION: ".text"
-  Oled_ControlShow ALL_init main Init logb fabs is_special sqrt_r sqrt SetSign 
-  atan2 atan Pll_Init Pwm0_Init I2C_Init I2C_Start I2C_Stop I2C_SendACK 
-  I2C_RecvACK I2C_SendByte I2C_RecvByte Single_WriteI2C Single_ReadI2C 
-  InitMPU6050 GetData MPU6050_GetAngle delayms delayus LCD_WrDat LCD_WrCmd 
-  LCD_Set_Pos LCD_Fill LCD_DLY_ms LCD_Init OLED_Write_Char OLED_Write_Num6 
-  LCD_PutPixel LCD_CutPixel LCD_P6x8Str LCD_P8x16Str LCD_P14x16Str LCD_Print 
-  Draw_BMP PIT_Init012 
+  Key_Init Oled_Key Oled_ControlShow ALL_init main Init logb fabs is_special 
+  sqrt_r sqrt SetSign atan2 atan Pll_Init beep_on beep_off Pwm0_Init I2C_Init 
+  I2C_Start I2C_Stop I2C_SendACK I2C_RecvACK I2C_SendByte I2C_RecvByte 
+  Single_WriteI2C Single_ReadI2C InitMPU6050 GetData MPU6050_GetAngle delayms 
+  delayus LCD_WrDat LCD_WrCmd LCD_Set_Pos LCD_Fill LCD_DLY_ms LCD_Init 
+  OLED_Write_Char OLED_Write_Num6 LCD_PutPixel LCD_CutPixel LCD_P6x8Str 
+  LCD_P8x16Str LCD_P14x16Str LCD_Print Draw_BMP PIT_Init012 
 SECTION: ".data"
-  count Time locate liusha_x liusha_y liushaxia_x liushaxia_y celiuzuo_x 
+  DELAY_NUM Time locate liusha_x liusha_y liushaxia_x liushaxia_y celiuzuo_x 
   celiuzuo_y celiuzuoxia_x celiuzuoxia_y celiuyuo_x celiuyuo_y celiuyuoxia_x 
-  celiuyuoxia_y SmallChars shalou64x64 
+  celiuyuoxia_y SmallChars shijian64x32 shalou64x64 
 SECTION: ".bss"
-  flag acx acy acz cox coy coz 
+  KEY_DOWN flag count acx acy acz cox coy coz 
 SECTION: ".init"
   _Startup 
 SECTION: ".rodata"
   infinity nan_union F6x8 F14x16_Idx F14x16 F8X16 
 SECTION: ".rodata1"
-  STRING.x..1 STRING.y..2 STRING.z..3 STRING..........4 
+  STRING.T..1 STRING.T..2 STRING.x..3 STRING.y..4 STRING.z..5 
+  STRING..........6 STRING.T..7 STRING.........8 STRING.........9 
+  STRING.........10 STRING.........11 STRING.........12 STRING.........13 
 SECTION: "NON_BANKED"
   Pit0_interrupt D_ADDKL _DADD _DSUB _DNEG D_FREXP D_LDEXP frexp RetErrDom 
   ldexp _DCMP D_TOLONGK _DSTRUNC D_PSHK_UNARY D_CLRK_UNARY D_MAXK_UNARY 
@@ -1724,11 +1747,11 @@ OBJECT LIST SORTED BY ADDRESS
      _PERT                                      244       1       1       0   .abs_section_244
      _PPST                                      245       1       1       0   .abs_section_245
      _PTTRR                                     247       1       1       0   .abs_section_247
-     _PTS                                       248       1       1      22   .abs_section_248
+     _PTS                                       248       1       1      27   .abs_section_248
      _PTIS                                      249       1       1       0   .abs_section_249
-     _DDRS                                      24A       1       1      14   .abs_section_24a
+     _DDRS                                      24A       1       1      17   .abs_section_24a
      _RDRS                                      24B       1       1       0   .abs_section_24b
-     _PERS                                      24C       1       1       0   .abs_section_24c
+     _PERS                                      24C       1       1       1   .abs_section_24c
      _PPSS                                      24D       1       1       0   .abs_section_24d
      _WOMS                                      24E       1       1       0   .abs_section_24e
      _PTM                                       250       1       1      15   .abs_section_250
@@ -1755,11 +1778,11 @@ OBJECT LIST SORTED BY ADDRESS
      _PPSH                                      265       1       1       0   .abs_section_265
      _PIEH                                      266       1       1       0   .abs_section_266
      _PIFH                                      267       1       1       0   .abs_section_267
-     _PTJ                                       268       1       1       0   .abs_section_268
+     _PTJ                                       268       1       1       3   .abs_section_268
      _PTIJ                                      269       1       1       0   .abs_section_269
-     _DDRJ                                      26A       1       1       0   .abs_section_26a
+     _DDRJ                                      26A       1       1       1   .abs_section_26a
      _RDRJ                                      26B       1       1       0   .abs_section_26b
-     _PERJ                                      26C       1       1       0   .abs_section_26c
+     _PERJ                                      26C       1       1       1   .abs_section_26c
      _PPSJ                                      26D       1       1       0   .abs_section_26d
      _PIEJ                                      26E       1       1       0   .abs_section_26e
      _PIFJ                                      26F       1       1       0   .abs_section_26f
@@ -1834,31 +1857,34 @@ OBJECT LIST SORTED BY ADDRESS
      _PITCNT2                                   352       2       2       0   .abs_section_352
      _PITLD3                                    354       2       2       0   .abs_section_354
      _PITCNT3                                   356       2       2       0   .abs_section_356
-     count                                     2100       1       1      23   .data       
-     Time                                      2101       1       1       2   .data       
-     locate                                    2102       1       1      14   .data       
-     liusha_x                                  2103      14      20       4   .data       
-     liusha_y                                  2117      14      20       4   .data       
-     liushaxia_x                               212B      14      20       4   .data       
-     liushaxia_y                               213F      14      20       4   .data       
-     celiuzuo_x                                2153      14      20       6   .data       
-     celiuzuo_y                                2167      14      20       6   .data       
-     celiuzuoxia_x                             217B      14      20       2   .data       
-     celiuzuoxia_y                             218F      14      20       2   .data       
-     celiuyuo_x                                21A3      14      20       6   .data       
-     celiuyuo_y                                21B7      14      20       6   .data       
-     celiuyuoxia_x                             21CB      14      20       2   .data       
-     celiuyuoxia_y                             21DF      14      20       2   .data       
-     SmallChars                                21F3     1A4     420       1   .data       
-     shalou64x64                               2397     200     512       1   .data       
-     flag                                      2597       1       1      11   .bss        
-     acx                                       2598       4       4       8   .bss        
-     acy                                       259C       4       4       8   .bss        
-     acz                                       25A0       4       4       6   .bss        
-     cox                                       25A4       4       4       4   .bss        
-     coy                                       25A8       4       4       8   .bss        
-     coz                                       25AC       4       4       8   .bss        
-     errno                                     25B0       2       2       3   .common     
+     DELAY_NUM                                 2100       2       2       1   .data       
+     Time                                      2102       2       2       8   .data       
+     locate                                    2104       1       1      14   .data       
+     liusha_x                                  2105      14      20       4   .data       
+     liusha_y                                  2119      14      20       4   .data       
+     liushaxia_x                               212D      14      20       4   .data       
+     liushaxia_y                               2141      14      20       4   .data       
+     celiuzuo_x                                2155      14      20       6   .data       
+     celiuzuo_y                                2169      14      20       6   .data       
+     celiuzuoxia_x                             217D      14      20       2   .data       
+     celiuzuoxia_y                             2191      14      20       2   .data       
+     celiuyuo_x                                21A5      14      20       6   .data       
+     celiuyuo_y                                21B9      14      20       6   .data       
+     celiuyuoxia_x                             21CD      14      20       2   .data       
+     celiuyuoxia_y                             21E1      14      20       2   .data       
+     SmallChars                                21F5     1A4     420       1   .data       
+     shijian64x32                              2399     100     256       1   .data       
+     shalou64x64                               2499     200     512       1   .data       
+     KEY_DOWN                                  2699       2       2       2   .bss        
+     flag                                      269B       1       1      11   .bss        
+     count                                     269C       1       1      23   .bss        
+     acx                                       269D       4       4       8   .bss        
+     acy                                       26A1       4       4       8   .bss        
+     acz                                       26A5       4       4       6   .bss        
+     cox                                       26A9       4       4       4   .bss        
+     coy                                       26AD       4       4       8   .bss        
+     coz                                       26B1       4       4       8   .bss        
+     errno                                     26B5       2       2       3   .common     
      _Startup                                  C000       F      15       0   .init       
      infinity                                  C019       8       8       8   .rodata     
      nan_union                                 C021       8       8       4   .rodata     
@@ -1866,120 +1892,133 @@ OBJECT LIST SORTED BY ADDRESS
      F14x16_Idx                                C251      3F      63       3   .rodata     
      F14x16                                    C290     364     868       1   .rodata     
      F8X16                                     C5F4     5F0    1520       2   .rodata     
-     STRING.x..1                               CBE4       3       3       1   .rodata1    
-     STRING.y..2                               CBE7       3       3       1   .rodata1    
-     STRING.z..3                               CBEA       3       3       1   .rodata1    
-     STRING..........4                         CBED       9       9       1   .rodata1    
-     Pit0_interrupt                            CBF6      AA     170       4   NON_BANKED  
-     D_ADDKL                                   CCA0      A6     166       1   NON_BANKED  
-     _DADD                                     CD46      11      17      37   NON_BANKED  
-     _DSUB                                     CD57      19      25       7   NON_BANKED  
-     _DNEG                                     CD70      14      20       2   NON_BANKED  
-     D_FREXP                                   CD84      20      32       1   NON_BANKED  
-     D_LDEXP                                   CDA4      18      24       1   NON_BANKED  
-     frexp                                     CDBC      1F      31       2   NON_BANKED  
-     RetErrDom                                 CDDB      1F      31       1   NON_BANKED  
-     ldexp                                     CDFA      27      39       5   NON_BANKED  
-     _DCMP                                     CE21      30      48       3   NON_BANKED  
-     D_TOLONGK                                 CE51      31      49       1   NON_BANKED  
-     _DSTRUNC                                  CE82      19      25       2   NON_BANKED  
-     D_PSHK_UNARY                              CE9B      1E      30       1   NON_BANKED  
-     D_CLRK_UNARY                              CEB9       D      13       2   NON_BANKED  
-     D_MAXK_UNARY                              CEC6       A      10       1   NON_BANKED  
-     D_NORMK_UNARY                             CED0      53      83       1   NON_BANKED  
-     D_TOFK                                    CF23      3B      59       1   NON_BANKED  
-     D_FRFK                                    CF5E      10      16       1   NON_BANKED  
-     _DLONG                                    CF6E      17      23       5   NON_BANKED  
-     _DSHORT                                   CF85      15      21       1   NON_BANKED  
-     D_DIVKL                                   CF9A      DD     221       1   NON_BANKED  
-     D_MULKL                                   D077      89     137       1   NON_BANKED  
-     _DMUL                                     D100      11      17       7   NON_BANKED  
-     _DDIV                                     D111      11      17       8   NON_BANKED  
-     D_PULK                                    D122      29      41       5   NON_BANKED  
-     D_PULL                                    D14B      25      37       5   NON_BANKED  
-     D_PSHK                                    D170      23      35       3   NON_BANKED  
-     D_STAL                                    D193      2A      42       2   NON_BANKED  
-     D_XGKL                                    D1BD      39      57       2   NON_BANKED  
-     D_CLRK                                    D1F6      13      19       3   NON_BANKED  
-     D_MAXK                                    D209       A      10       2   NON_BANKED  
-     D_NORMK                                   D213      77     119       5   NON_BANKED  
-     F_ADDKL                                   D28A      5E      94       1   NON_BANKED  
-     _FADD                                     D2E8      15      21       2   NON_BANKED  
-     _FCMP                                     D2FD      26      38       6   NON_BANKED  
-     F_TOLONGK                                 D323      32      50       1   NON_BANKED  
-     F_FRLONGK                                 D355      1E      30       1   NON_BANKED  
-     _FSFLOAT                                  D373      12      18       1   NON_BANKED  
-     _FSTRUNC                                  D385      11      17       1   NON_BANKED  
-     _FUTRUNC                                  D396       3       3       3   NON_BANKED  
-     F_DIVKL                                   D399      84     132       1   NON_BANKED  
-     F_MULKL                                   D41D      57      87       1   NON_BANKED  
-     _FMUL                                     D474      14      20       5   NON_BANKED  
-     _FDIV                                     D488      1E      30       1   NON_BANKED  
-     F_PULK                                    D4A6      15      21       5   NON_BANKED  
-     F_PULL                                    D4BB      15      21       3   NON_BANKED  
-     F_PSHK                                    D4D0      13      19       5   NON_BANKED  
-     F_XGKL                                    D4E3      21      33       2   NON_BANKED  
-     F_CLRK                                    D504       B      11       3   NON_BANKED  
-     F_MAXK                                    D50F       9       9       3   NON_BANKED  
-     F_NORMK                                   D518      37      55       3   NON_BANKED  
-     _BSHL                                     D54F       8       8       1   NON_BANKED  
-     _BDIVMODS                                 D557       B      11       1   NON_BANKED  
-     _LCMP                                     D562       A      10       1   NON_BANKED  
-     _lDivMod                                  D56C      B9     185       3   NON_BANKED  
-     _LDIVU                                    D625       E      14       2   NON_BANKED  
-     _NEG_P                                    D633       C      12       4   NON_BANKED  
-     _LMODS                                    D63F      2A      42       1   NON_BANKED  
-     _COPY                                     D669       8       8      13   NON_BANKED  
-     _CASE_CHECKED                             D671       B      11       1   NON_BANKED  
-     _CASE_CHECKED_BYTE                        D67C      14      20       4   NON_BANKED  
-     L_NEGK                                    D690       7       7       2   NON_BANKED  
-     L_PSHK                                    D697       8       8       2   NON_BANKED  
-     SL_PULK                                   D69F       A      10       1   NON_BANKED  
+     STRING.T..1                               CBE4       3       3       1   .rodata1    
+     STRING.T..2                               CBE7       3       3       1   .rodata1    
+     STRING.x..3                               CBEA       3       3       1   .rodata1    
+     STRING.y..4                               CBED       3       3       1   .rodata1    
+     STRING.z..5                               CBF0       3       3       1   .rodata1    
+     STRING..........6                         CBF3       9       9       1   .rodata1    
+     STRING.T..7                               CBFC       3       3       1   .rodata1    
+     STRING.........8                          CBFF       8       8       1   .rodata1    
+     STRING.........9                          CC07       8       8       1   .rodata1    
+     STRING.........10                         CC0F       8       8       1   .rodata1    
+     STRING.........11                         CC17       8       8       1   .rodata1    
+     STRING.........12                         CC1F       8       8       1   .rodata1    
+     STRING.........13                         CC27       8       8       1   .rodata1    
+     Pit0_interrupt                            CC2F      AE     174       4   NON_BANKED  
+     D_ADDKL                                   CCDD      A6     166       1   NON_BANKED  
+     _DADD                                     CD83      11      17      37   NON_BANKED  
+     _DSUB                                     CD94      19      25       7   NON_BANKED  
+     _DNEG                                     CDAD      14      20       2   NON_BANKED  
+     D_FREXP                                   CDC1      20      32       1   NON_BANKED  
+     D_LDEXP                                   CDE1      18      24       1   NON_BANKED  
+     frexp                                     CDF9      1F      31       2   NON_BANKED  
+     RetErrDom                                 CE18      1F      31       1   NON_BANKED  
+     ldexp                                     CE37      27      39       5   NON_BANKED  
+     _DCMP                                     CE5E      30      48       3   NON_BANKED  
+     D_TOLONGK                                 CE8E      31      49       1   NON_BANKED  
+     _DSTRUNC                                  CEBF      19      25       2   NON_BANKED  
+     D_PSHK_UNARY                              CED8      1E      30       1   NON_BANKED  
+     D_CLRK_UNARY                              CEF6       D      13       2   NON_BANKED  
+     D_MAXK_UNARY                              CF03       A      10       1   NON_BANKED  
+     D_NORMK_UNARY                             CF0D      53      83       1   NON_BANKED  
+     D_TOFK                                    CF60      3B      59       1   NON_BANKED  
+     D_FRFK                                    CF9B      10      16       1   NON_BANKED  
+     _DLONG                                    CFAB      17      23       5   NON_BANKED  
+     _DSHORT                                   CFC2      15      21       1   NON_BANKED  
+     D_DIVKL                                   CFD7      DD     221       1   NON_BANKED  
+     D_MULKL                                   D0B4      89     137       1   NON_BANKED  
+     _DMUL                                     D13D      11      17       7   NON_BANKED  
+     _DDIV                                     D14E      11      17       8   NON_BANKED  
+     D_PULK                                    D15F      29      41       5   NON_BANKED  
+     D_PULL                                    D188      25      37       5   NON_BANKED  
+     D_PSHK                                    D1AD      23      35       3   NON_BANKED  
+     D_STAL                                    D1D0      2A      42       2   NON_BANKED  
+     D_XGKL                                    D1FA      39      57       2   NON_BANKED  
+     D_CLRK                                    D233      13      19       3   NON_BANKED  
+     D_MAXK                                    D246       A      10       2   NON_BANKED  
+     D_NORMK                                   D250      77     119       5   NON_BANKED  
+     F_ADDKL                                   D2C7      5E      94       1   NON_BANKED  
+     _FADD                                     D325      15      21       2   NON_BANKED  
+     _FCMP                                     D33A      26      38       6   NON_BANKED  
+     F_TOLONGK                                 D360      32      50       1   NON_BANKED  
+     F_FRLONGK                                 D392      1E      30       1   NON_BANKED  
+     _FSFLOAT                                  D3B0      12      18       1   NON_BANKED  
+     _FSTRUNC                                  D3C2      11      17       1   NON_BANKED  
+     _FUTRUNC                                  D3D3       3       3       3   NON_BANKED  
+     F_DIVKL                                   D3D6      84     132       1   NON_BANKED  
+     F_MULKL                                   D45A      57      87       1   NON_BANKED  
+     _FMUL                                     D4B1      14      20       5   NON_BANKED  
+     _FDIV                                     D4C5      1E      30       1   NON_BANKED  
+     F_PULK                                    D4E3      15      21       5   NON_BANKED  
+     F_PULL                                    D4F8      15      21       3   NON_BANKED  
+     F_PSHK                                    D50D      13      19       5   NON_BANKED  
+     F_XGKL                                    D520      21      33       2   NON_BANKED  
+     F_CLRK                                    D541       B      11       3   NON_BANKED  
+     F_MAXK                                    D54C       9       9       3   NON_BANKED  
+     F_NORMK                                   D555      37      55       3   NON_BANKED  
+     _BSHL                                     D58C       8       8       1   NON_BANKED  
+     _BDIVMODS                                 D594       B      11       1   NON_BANKED  
+     _LCMP                                     D59F       A      10       1   NON_BANKED  
+     _lDivMod                                  D5A9      B9     185       3   NON_BANKED  
+     _LDIVU                                    D662       E      14       2   NON_BANKED  
+     _NEG_P                                    D670       C      12       4   NON_BANKED  
+     _LMODS                                    D67C      2A      42       1   NON_BANKED  
+     _COPY                                     D6A6       8       8      13   NON_BANKED  
+     _CASE_CHECKED                             D6AE       B      11       1   NON_BANKED  
+     _CASE_CHECKED_BYTE                        D6B9      14      20       4   NON_BANKED  
+     L_NEGK                                    D6CD       7       7       2   NON_BANKED  
+     L_PSHK                                    D6D4       8       8       2   NON_BANKED  
+     SL_PULK                                   D6DC       A      10       1   NON_BANKED  
      _Vector_68                                FF76       2       2       0   .abs_section_ff76
-     Oled_ControlShow                        FE8000    13D4    5076     744   .text       
-     ALL_init                                FE93D4      25      37       2   .text       
-     main                                    FE93F9       E      14       2   .text       
-     Init                                    FE9407      29      41       2   .text       
-     logb                                    FE9430      20      32       4   .text       
-     fabs                                    FE9450      2C      44       6   .text       
-     is_special                              FE947C      56      86       8   .text       
-     sqrt_r                                  FE94D2     1EB     491      14   .text       
-     sqrt                                    FE96BD      A2     162       7   .text       
-     SetSign                                 FE975F      4C      76      14   .text       
-     atan2                                   FE97AB     B10    2832     120   .text       
-     atan                                    FEA2BB      36      54       2   .text       
-     Pll_Init                                FEA2F1      13      19       2   .text       
-     Pwm0_Init                               FEA304      23      35       2   .text       
-     I2C_Init                                FEA327      17      23       2   .text       
-     I2C_Start                               FEA33E      27      39       6   .text       
-     I2C_Stop                                FEA365      23      35       4   .text       
-     I2C_SendACK                             FEA388      23      35       2   .text       
-     I2C_RecvACK                             FEA3AB      1F      31       2   .text       
-     I2C_SendByte                            FEA3CA      40      64      12   .text       
-     I2C_RecvByte                            FEA40A      41      65       2   .text       
-     Single_WriteI2C                         FEA44B      1D      29      10   .text       
-     Single_ReadI2C                          FEA468      2B      43       4   .text       
-     InitMPU6050                             FEA493      32      50       2   .text       
-     GetData                                 FEA4C5      22      34       2   .text       
-     MPU6050_GetAngle                        FEA4E7     14C     332      12   .text       
-     delayms                                 FEA633      1B      27       4   .text       
-     delayus                                 FEA64E       B      11      28   .text       
-     LCD_WrDat                               FEA659      35      53      20   .text       
-     LCD_WrCmd                               FEA68E      35      53      34   .text       
-     LCD_Set_Pos                             FEA6C3      1F      31      22   .text       
-     LCD_Fill                                FEA6E2      32      50       2   .text       
-     LCD_DLY_ms                              FEA714      17      23       2   .text       
-     LCD_Init                                FEA72B      94     148       2   .text       
-     OLED_Write_Char                         FEA7BF      8A     138      12   .text       
-     OLED_Write_Num6                         FEA849      AA     170       6   .text       
-     LCD_PutPixel                            FEA8F3      48      72      54   .text       
-     LCD_CutPixel                            FEA93B      3E      62      38   .text       
-     LCD_P6x8Str                             FEA979      59      89       6   .text       
-     LCD_P8x16Str                            FEA9D2      79     121       2   .text       
-     LCD_P14x16Str                           FEAA4B      D7     215       3   .text       
-     LCD_Print                               FEAB22      63      99       2   .text       
-     Draw_BMP                                FEAB85      3A      58       2   .text       
-     PIT_Init012                             FEABBF      33      51       2   .text       
+     Key_Init                                FE8000      19      25       2   .text       
+     Oled_Key                                FE8019      6E     110       2   .text       
+     Oled_ControlShow                        FE8087    146D    5229     759   .text       
+     ALL_init                                FE94F4      29      41       2   .text       
+     main                                    FE951D       E      14       2   .text       
+     Init                                    FE952B      29      41       2   .text       
+     logb                                    FE9554      20      32       4   .text       
+     fabs                                    FE9574      2C      44       6   .text       
+     is_special                              FE95A0      56      86       8   .text       
+     sqrt_r                                  FE95F6     1EB     491      14   .text       
+     sqrt                                    FE97E1      A2     162       7   .text       
+     SetSign                                 FE9883      4C      76      14   .text       
+     atan2                                   FE98CF     B10    2832     120   .text       
+     atan                                    FEA3DF      36      54       2   .text       
+     Pll_Init                                FEA415      13      19       2   .text       
+     beep_on                                 FEA428       9       9       2   .text       
+     beep_off                                FEA431       9       9       2   .text       
+     Pwm0_Init                               FEA43A      23      35       2   .text       
+     I2C_Init                                FEA45D      17      23       2   .text       
+     I2C_Start                               FEA474      27      39       6   .text       
+     I2C_Stop                                FEA49B      23      35       4   .text       
+     I2C_SendACK                             FEA4BE      23      35       2   .text       
+     I2C_RecvACK                             FEA4E1      1F      31       2   .text       
+     I2C_SendByte                            FEA500      40      64      12   .text       
+     I2C_RecvByte                            FEA540      41      65       2   .text       
+     Single_WriteI2C                         FEA581      1D      29      10   .text       
+     Single_ReadI2C                          FEA59E      2B      43       4   .text       
+     InitMPU6050                             FEA5C9      32      50       2   .text       
+     GetData                                 FEA5FB      22      34       2   .text       
+     MPU6050_GetAngle                        FEA61D     14C     332      12   .text       
+     delayms                                 FEA769      1B      27      10   .text       
+     delayus                                 FEA784       B      11      28   .text       
+     LCD_WrDat                               FEA78F      35      53      20   .text       
+     LCD_WrCmd                               FEA7C4      35      53      34   .text       
+     LCD_Set_Pos                             FEA7F9      1F      31      22   .text       
+     LCD_Fill                                FEA818      32      50       2   .text       
+     LCD_DLY_ms                              FEA84A      17      23       2   .text       
+     LCD_Init                                FEA861      94     148       2   .text       
+     OLED_Write_Char                         FEA8F5      8A     138      12   .text       
+     OLED_Write_Num6                         FEA97F      AA     170      10   .text       
+     LCD_PutPixel                            FEAA29      48      72      54   .text       
+     LCD_CutPixel                            FEAA71      3E      62      38   .text       
+     LCD_P6x8Str                             FEAAAF      59      89      10   .text       
+     LCD_P8x16Str                            FEAB08      79     121       2   .text       
+     LCD_P14x16Str                           FEAB81      D7     215       3   .text       
+     LCD_Print                               FEAC58      63      99       4   .text       
+     Draw_BMP                                FEACBB      3A      58       4   .text       
+     PIT_Init012                             FEACF5      33      51       2   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -2023,80 +2062,83 @@ MATH.C.o (ansixbf.lib):
 rtshc12.c.o (ansixbf.lib):
   _PowOfTwo_8 _PowOfTwo_16 _PowOfTwo_32 
 var.c.o:
-  Angle work1 shazi_x shazi_y shazixia_x shazixia_y t D P work0 flag_last 
+  Angle work1 shazi_x shazi_y shazixia_x shazixia_y t fx D P work0 flag_last 
   co_all co_all_now co_all_bef ac_x_eve ac_y_eve ac_z_eve last_ac_x last_ac_y 
   ac_x_max ac_y_max ac_x ac_y ac_z co_x_eve co_y_eve co_z_eve co_x co_y co_z 
   hubu hubu0 CY 
 LQ12864.c.o:
-  F3X3 LIBLOGO60x58 STRING..4d.2 STRING..5d.3 longqiu96x64 shijian64x32 
+  F3X3 LIBLOGO60x58 STRING..4d.2 STRING..5d.3 longqiu96x64 
 
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xD6A9 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD6E6 ---- SIZE       4 ---
 Filling bytes inserted
- 02E72100
-------- ROM-ADDRESS: 0xD6AD ---- RAM-ADDRESS: 0x2100 ---- SIZE       1 ---
-Name of initialized Object : count
- 0D
-------- ROM-ADDRESS: 0xD6AE ---- RAM-ADDRESS: 0x2101 ---- SIZE       1 ---
-Name of initialized Object : Time
- 32
-------- ROM-ADDRESS: 0xD6AF ---- RAM-ADDRESS: 0x2102 ---- SIZE       1 ---
+ 02DB2101
+------- ROM-ADDRESS: 0xD6EA ---- RAM-ADDRESS: 0x2101 ---- SIZE       1 ---
+Name of initialized Object : DELAY_NUM:1
+ C8
+------- ROM-ADDRESS: 0xD6EB ---- SIZE       1 ---
+Filling bytes inserted
+ 00
+------- ROM-ADDRESS: 0xD6EC ---- RAM-ADDRESS: 0x2103 ---- SIZE       1 ---
+Name of initialized Object : Time:1
+ 64
+------- ROM-ADDRESS: 0xD6ED ---- RAM-ADDRESS: 0x2104 ---- SIZE       1 ---
 Name of initialized Object : locate
  02
-------- ROM-ADDRESS: 0xD6B0 ---- RAM-ADDRESS: 0x2103 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD6EE ---- RAM-ADDRESS: 0x2105 ---- SIZE      20 ---
 Name of initialized Object : liusha_x
  1E2118271E 21122D1827 1E210C3312
  2D18271E21
-------- ROM-ADDRESS: 0xD6C4 ---- RAM-ADDRESS: 0x2117 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD702 ---- RAM-ADDRESS: 0x2119 ---- SIZE      20 ---
 Name of initialized Object : liusha_y
  060606060C 0C06060C0C 121206060C
  0C12121818
-------- ROM-ADDRESS: 0xD6D8 ---- RAM-ADDRESS: 0x212B ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD716 ---- RAM-ADDRESS: 0x212D ---- SIZE      20 ---
 Name of initialized Object : liushaxia_x
  211E27182D 12330C211E 27182D1221
  1E2718211E
-------- ROM-ADDRESS: 0xD6EC ---- RAM-ADDRESS: 0x213F ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD72A ---- RAM-ADDRESS: 0x2141 ---- SIZE      20 ---
 Name of initialized Object : liushaxia_y
  27272D2D33 3339392D2D 3333393933
  3339393939
-------- ROM-ADDRESS: 0xD700 ---- RAM-ADDRESS: 0x2153 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD73E ---- RAM-ADDRESS: 0x2155 ---- SIZE      20 ---
 Name of initialized Object : celiuzuo_x
  332D272D21 271E212718 1E2112181E
  210C12181E
-------- ROM-ADDRESS: 0xD714 ---- RAM-ADDRESS: 0x2167 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD752 ---- RAM-ADDRESS: 0x2169 ---- SIZE      20 ---
 Name of initialized Object : celiuzuo_y
  0606060C06 0C060C1206 0C12060C12
  18060C1218
-------- ROM-ADDRESS: 0xD728 ---- RAM-ADDRESS: 0x217B ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD766 ---- RAM-ADDRESS: 0x217D ---- SIZE      20 ---
 Name of initialized Object : celiuzuoxia_x
  0C1218121E 18211E1827 211E2D2721
  1E332D2721
-------- ROM-ADDRESS: 0xD73C ---- RAM-ADDRESS: 0x218F ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD77A ---- RAM-ADDRESS: 0x2191 ---- SIZE      20 ---
 Name of initialized Object : celiuzuoxia_y
  3939393339 3339332D39 332D39332D
  2739332D27
-------- ROM-ADDRESS: 0xD750 ---- RAM-ADDRESS: 0x21A3 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD78E ---- RAM-ADDRESS: 0x21A5 ---- SIZE      20 ---
 Name of initialized Object : celiuyuo_x
  0C1218121E 18211E1827 211E2D2721
  1E332D2721
-------- ROM-ADDRESS: 0xD764 ---- RAM-ADDRESS: 0x21B7 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD7A2 ---- RAM-ADDRESS: 0x21B9 ---- SIZE      20 ---
 Name of initialized Object : celiuyuo_y
  0606060C06 0C060C1206 0C12060C12
  18060C1218
-------- ROM-ADDRESS: 0xD778 ---- RAM-ADDRESS: 0x21CB ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD7B6 ---- RAM-ADDRESS: 0x21CD ---- SIZE      20 ---
 Name of initialized Object : celiuyuoxia_x
  332D272D21 271E212718 1E2112181E
  210C12181E
-------- ROM-ADDRESS: 0xD78C ---- RAM-ADDRESS: 0x21DF ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD7CA ---- RAM-ADDRESS: 0x21E1 ---- SIZE      20 ---
 Name of initialized Object : celiuyuoxia_y
  3939393339 3339332D39 332D39332D
  2739332D27
-------- ROM-ADDRESS: 0xD7A0 ---- SIZE       1 ---
+------- ROM-ADDRESS: 0xD7DE ---- SIZE       1 ---
 Filling bytes inserted
  00
-------- ROM-ADDRESS: 0xD7A1 ---- RAM-ADDRESS: 0x21F4 ---- SIZE     215 ---
+------- ROM-ADDRESS: 0xD7DF ---- RAM-ADDRESS: 0x21F6 ---- SIZE     215 ---
 Name of initialized Object : SmallChars:1
  3E5149453E 0000427F40 0000426151
  4946002141 454B310018 14127F1000
@@ -2113,17 +2155,17 @@ Name of initialized Object : SmallChars:1
  3F4040403F 001F204020 1F003F4038
  403F006314 0814630007 0870080700
  6151494543
-------- ROM-ADDRESS: 0xD878 ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xD8B6 ---- SIZE       8 ---
 Filling bytes inserted
  0000000000 000000
-------- ROM-ADDRESS: 0xD880 ---- RAM-ADDRESS: 0x22D3 ---- SIZE      20 ---
+------- ROM-ADDRESS: 0xD8BE ---- RAM-ADDRESS: 0x22D5 ---- SIZE      20 ---
 Name of initialized Object : SmallChars:224
  3636000000 0808080808 0020100804
  0200006060
-------- ROM-ADDRESS: 0xD894 ---- SIZE       5 ---
+------- ROM-ADDRESS: 0xD8D2 ---- SIZE       5 ---
 Filling bytes inserted
  0000000000
-------- ROM-ADDRESS: 0xD899 ---- RAM-ADDRESS: 0x22EC ---- SIZE     171 ---
+------- ROM-ADDRESS: 0xD8D7 ---- RAM-ADDRESS: 0x22EE ---- SIZE     171 ---
 Name of initialized Object : SmallChars:249
  A060000004 0201020408 08082A1C08
  0020545454 78007F4844 4438003844
@@ -2137,86 +2179,109 @@ Name of initialized Object : SmallChars:249
  003C404020 7C001C2040 201C003C40
  30403C0044 2810284400 1CA0A0A07C
  004464544C 44
-------- ROM-ADDRESS: 0xD944 ---- RAM-ADDRESS: 0x2397 ---- SIZE      64 ---
+------- ROM-ADDRESS: 0xD982 ---- RAM-ADDRESS: 0x2399 ---- SIZE      67 ---
+Name of initialized Object : shijian64x32
+ FFFFFF0707 0707070707 0707070707
+ 0707070707 0707070707 0707070707
+ 0707070707 0707070707 0707070707
+ 0707070707 0707070707 0707070707
+ 07FFFFFFFF FFFF
+------- ROM-ADDRESS: 0xD9C5 ---- SIZE       4 ---
+Filling bytes inserted
+ 00062416
+------- ROM-ADDRESS: 0xD9C9 ---- RAM-ADDRESS: 0x2416 ---- SIZE       6 ---
+Name of initialized Object : shijian64x32:125
+ FFFFFFFFFF FF
+------- ROM-ADDRESS: 0xD9CF ---- SIZE       4 ---
+Filling bytes inserted
+ 00932456
+------- ROM-ADDRESS: 0xD9D3 ---- RAM-ADDRESS: 0x2456 ---- SIZE      67 ---
+Name of initialized Object : shijian64x32:189
+ FFFFFFFFFF FFE0E0E0E0 E0E0E0E0E0
+ E0E0E0E0E0 E0E0E0E0E0 E0E0E0E0E0
+ E0E0E0E0E0 E0E0E0E0E0 E0E0E0E0E0
+ E0E0E0E0E0 E0E0E0E0E0 E0E0E0E0E0
+ E0E0E0E0FF FFFF
+------- ROM-ADDRESS: 0xDA16 ---- RAM-ADDRESS: 0x2499 ---- SIZE      64 ---
 Name of initialized Object : shalou64x64
  0103050911 2141810101 0101010101
  0101010101 0101010101 0101010101
  0101010101 0101010101 0101010101
  0101010101 0101010101 0181412111
  09050301
-------- ROM-ADDRESS: 0xD984 ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xDA56 ---- SIZE       8 ---
 Filling bytes inserted
  0000000000 000000
-------- ROM-ADDRESS: 0xD98C ---- RAM-ADDRESS: 0x23DF ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xDA5E ---- RAM-ADDRESS: 0x24E1 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:72
  0102040810 204080
-------- ROM-ADDRESS: 0xD994 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xDA66 ---- SIZE       4 ---
 Filling bytes inserted
- 00082407
-------- ROM-ADDRESS: 0xD998 ---- RAM-ADDRESS: 0x2407 ---- SIZE       8 ---
+ 00082509
+------- ROM-ADDRESS: 0xDA6A ---- RAM-ADDRESS: 0x2509 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:112
  8040201008 040201
-------- ROM-ADDRESS: 0xD9A0 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xDA72 ---- SIZE       4 ---
 Filling bytes inserted
- 00082427
-------- ROM-ADDRESS: 0xD9A4 ---- RAM-ADDRESS: 0x2427 ---- SIZE       8 ---
+ 00082529
+------- ROM-ADDRESS: 0xDA76 ---- RAM-ADDRESS: 0x2529 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:144
  0102040810 204080
-------- ROM-ADDRESS: 0xD9AC ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xDA7E ---- SIZE       4 ---
 Filling bytes inserted
- 0008243F
-------- ROM-ADDRESS: 0xD9B0 ---- RAM-ADDRESS: 0x243F ---- SIZE       8 ---
+ 00082541
+------- ROM-ADDRESS: 0xDA82 ---- RAM-ADDRESS: 0x2541 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:168
  8040201008 040201
-------- ROM-ADDRESS: 0xD9B8 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xDA8A ---- SIZE       4 ---
 Filling bytes inserted
- 0010246F
-------- ROM-ADDRESS: 0xD9BC ---- RAM-ADDRESS: 0x246F ---- SIZE      16 ---
+ 00102571
+------- ROM-ADDRESS: 0xDA8E ---- RAM-ADDRESS: 0x2571 ---- SIZE      16 ---
 Name of initialized Object : shalou64x64:216
  0102040810 20C00000C0 2010080402
  01
-------- ROM-ADDRESS: 0xD9CC ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xDA9E ---- SIZE       4 ---
 Filling bytes inserted
- 001024AF
-------- ROM-ADDRESS: 0xD9D0 ---- RAM-ADDRESS: 0x24AF ---- SIZE      16 ---
+ 001025B1
+------- ROM-ADDRESS: 0xDAA2 ---- RAM-ADDRESS: 0x25B1 ---- SIZE      16 ---
 Name of initialized Object : shalou64x64:280
  8040201008 0403000003 0408102040
  80
-------- ROM-ADDRESS: 0xD9E0 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xDAB2 ---- SIZE       4 ---
 Filling bytes inserted
- 000824E7
-------- ROM-ADDRESS: 0xD9E4 ---- RAM-ADDRESS: 0x24E7 ---- SIZE       8 ---
+ 000825E9
+------- ROM-ADDRESS: 0xDAB6 ---- RAM-ADDRESS: 0x25E9 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:336
  8040201008 040201
-------- ROM-ADDRESS: 0xD9EC ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xDABE ---- SIZE       4 ---
 Filling bytes inserted
- 000824FF
-------- ROM-ADDRESS: 0xD9F0 ---- RAM-ADDRESS: 0x24FF ---- SIZE       8 ---
+ 00082601
+------- ROM-ADDRESS: 0xDAC2 ---- RAM-ADDRESS: 0x2601 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:360
  0102040810 204080
-------- ROM-ADDRESS: 0xD9F8 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xDACA ---- SIZE       4 ---
 Filling bytes inserted
- 0008251F
-------- ROM-ADDRESS: 0xD9FC ---- RAM-ADDRESS: 0x251F ---- SIZE       8 ---
+ 00082621
+------- ROM-ADDRESS: 0xDACE ---- RAM-ADDRESS: 0x2621 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:392
  8040201008 040201
-------- ROM-ADDRESS: 0xDA04 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xDAD6 ---- SIZE       4 ---
 Filling bytes inserted
- 00502547
-------- ROM-ADDRESS: 0xDA08 ---- RAM-ADDRESS: 0x2547 ---- SIZE       8 ---
+ 00502649
+------- ROM-ADDRESS: 0xDADA ---- RAM-ADDRESS: 0x2649 ---- SIZE       8 ---
 Name of initialized Object : shalou64x64:432
  0102040810 204080
-------- ROM-ADDRESS: 0xDA10 ---- SIZE       8 ---
+------- ROM-ADDRESS: 0xDAE2 ---- SIZE       8 ---
 Filling bytes inserted
  0000000000 000000
-------- ROM-ADDRESS: 0xDA18 ---- RAM-ADDRESS: 0x2557 ---- SIZE      64 ---
+------- ROM-ADDRESS: 0xDAEA ---- RAM-ADDRESS: 0x2659 ---- SIZE      64 ---
 Name of initialized Object : shalou64x64:448
  80C0A09088 8482818080 8080808080
  8080808080 8080808080 8080808080
  8080808080 8080808080 8080808080
  8080808080 8080808080 8081828488
  90A0C080
-------- ROM-ADDRESS: 0xDA58 ---- SIZE       2 ---
+------- ROM-ADDRESS: 0xDB2A ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -2224,8 +2289,8 @@ Filling bytes inserted
 OBJECT-DEPENDENCIES SECTION
 ---------------------------------------------------------------------------------------------
 _Startup                  USES __SEG_END_SSTACK Init main 
-Pit0_interrupt            USES Pit0_interrupt acx acy acz MPU6050_GetAngle coz 
-                                cox coy _PITTF GetData _FSFLOAT 
+Pit0_interrupt            USES Oled_Key Pit0_interrupt acx acy acz 
+                                MPU6050_GetAngle coz cox coy _PITTF GetData _FSFLOAT 
 D_ADDKL                   USES D_XGKL D_NORMK 
 _DADD                     USES D_PULK D_PULL D_ADDKL D_PSHK 
 _DSUB                     USES _DADD 
@@ -2263,15 +2328,21 @@ L_NEGK                    USES _NEG_P
 L_PSHK                    USES L_NEGK 
 SL_PULK                   USES L_NEGK 
 _Vector_68                USES Pit0_interrupt 
-Oled_ControlShow          USES STRING.x..1 LCD_P6x8Str cox _FUTRUNC 
-                                OLED_Write_Num6 STRING.y..2 Oled_ControlShow STRING.z..3 coz 
-                                STRING..........4 LCD_Print flag locate liushaxia_x liusha_x 
-                                celiuzuoxia_x celiuzuoxia_y LCD_CutPixel LCD_PutPixel 
-                                celiuyuo_x celiuyuo_y celiuyuoxia_x celiuyuoxia_y 
-                                celiuzuo_x celiuzuo_y count liusha_y liushaxia_y Time 
-                                delayms _FCMP coy shalou64x64 Draw_BMP _BDIVMODS 
+Key_Init                  USES _PERS _PERJ _DDRS _DDRJ _PTS _PTJ 
+Oled_Key                  USES _PTS KEY_DOWN Time STRING.T..1 _PTJ STRING.T..2 
+                                LCD_P6x8Str OLED_Write_Num6 DELAY_NUM delayms 
+Oled_ControlShow          USES STRING.x..3 LCD_P6x8Str cox _FUTRUNC 
+                                OLED_Write_Num6 STRING.y..4 Oled_ControlShow STRING.z..5 coz 
+                                STRING..........6 LCD_Print STRING.T..7 Time flag locate 
+                                liushaxia_x liusha_x celiuzuoxia_x celiuzuoxia_y 
+                                LCD_CutPixel LCD_PutPixel celiuyuo_x celiuyuo_y 
+                                celiuyuoxia_x celiuyuoxia_y celiuzuo_x celiuzuo_y count 
+                                liusha_y STRING.........8 liushaxia_y STRING.........9 
+                                STRING.........10 STRING.........11 STRING.........12 
+                                STRING.........13 beep_on delayms beep_off _FCMP coy 
+                                shijian64x32 Draw_BMP shalou64x64 _BDIVMODS 
 ALL_init                  USES Pll_Init PIT_Init012 _DDRAB _DDRS _DDRM _PORTAB 
-                                LCD_Init InitMPU6050 I2C_Init Pwm0_Init 
+                                Key_Init LCD_Init InitMPU6050 I2C_Init Pwm0_Init 
 main                      USES ALL_init Oled_ControlShow 
 Init                      USES _startupData 
 logb                      USES _COPY frexp 
@@ -2285,6 +2356,8 @@ atan2                     USES errno atan2 is_special _CASE_CHECKED_BYTE
                                 _DSTRUNC _CASE_CHECKED _COPY _DSUB _DNEG 
 atan                      USES _COPY atan2 
 Pll_Init                  USES _REFDV _SYNR _CRGFLG _CLKSEL 
+beep_on                   USES _DDRS _PTS 
+beep_off                  USES _DDRS _PTS 
 Pwm0_Init                 USES _PWMCLK _PWMPRCLK _PWMPOL _PWMCAE _PWMPER01 
                                 _PWMDTY01 _PWME 
 I2C_Init                  USES _PTS delayus 
@@ -2331,6 +2404,8 @@ DEPENDENCY TREE
  |  |  +- Pll_Init            
  |  |  |    
  |  |  +- PIT_Init012         
+ |  |  |    
+ |  |  +- Key_Init            
  |  |  |    
  |  |  +- LCD_Init            
  |  |  |  | 
@@ -2446,7 +2521,11 @@ DEPENDENCY TREE
  |     |  |  
  |     |  +- LCD_WrDat            (see above)
  |     |     
+ |     +- beep_on             
+ |     |    
  |     +- delayms             
+ |     |    
+ |     +- beep_off            
  |     |    
  |     +- _FCMP               
  |     |    
@@ -2468,6 +2547,14 @@ DEPENDENCY TREE
  | 
  +- Pit0_interrupt      
     | 
+    +- Oled_Key            
+    |  | 
+    |  +- LCD_P6x8Str          (see above)
+    |  |  
+    |  +- OLED_Write_Num6      (see above)
+    |  |  
+    |  +- delayms              (see above)
+    |     
     +- MPU6050_GetAngle    
     |  | 
     |  +- _CASE_CHECKED_BYTE  
@@ -2723,5 +2810,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 9
-Total size of all blocks to be downloaded: 18000
+Total size of all blocks to be downloaded: 18520
 

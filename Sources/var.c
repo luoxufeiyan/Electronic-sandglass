@@ -1,5 +1,7 @@
 #include "includes.h"
 
+
+uint fx =0;
 uint16  D = 0;
 uint16  P = 0;
 uint16  Angle = 10; 
@@ -7,8 +9,8 @@ uint8  work1 = 250;
 uint8  work0 = 0;
 uint8  flag = 0;
 uint8  flag_last = 0;
-int8  count = 13;
-uint8  Time = 50;   //延时参数
+int8  count = 0;
+uint  Time = 100;   //延时参数
 uint8  locate = 2;   //判断流沙方向，0正1反。默认为0；
 //-------------------------------------------------
 byte shazi_x[20]={                ////初始化沙子横坐标位置

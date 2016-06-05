@@ -2,7 +2,7 @@
 #define _MCU6050_H_
 
 #define SCL PTS_PTS0  			//IIC时钟引脚定义
-#define SDA PTS_PTS2			//IIC数据引脚定义
+#define SDA PTS_PTS2			//IIC数据引脚定义 
 
 #define SCLIO DDRS_DDRS0
 #define SDAIO DDRS_DDRS2

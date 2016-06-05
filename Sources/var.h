@@ -3,8 +3,9 @@
 
 
 
-#define beep PORTA_PA0
-#define beep_dir DDRA_DDRA0
+#define beep PTS_PTS4
+#define beep_dir DDRS_DDRS4
+extern uint fx;
 extern uint16  D;
 extern uint16  P;
 extern uint16  Angle;
@@ -13,7 +14,7 @@ extern uint8  work0;
 extern uint8  flag;
 extern uint8  flag_last;
 extern int8  count;
-extern uint8  Time;
+extern uint  Time;
 extern uint8  locate;
 //------------------------------------------------------------
 extern byte shazi_x[20];

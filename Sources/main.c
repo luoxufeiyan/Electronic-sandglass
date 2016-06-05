@@ -1,5 +1,62 @@
 #include"includes.h"
 
+
+uint KEY_DOWN = 0;
+uint DELAY_NUM = 200;
+
+#define KEY_PUCR_ADD    PERS_PERS6
+#define KEY_PUCR_SUB    PERJ_PERJ7  // 上拉
+
+
+#define KEY_DDR_ADD     DDRS_DDRS6
+#define KEY_DDR_SUB     DDRJ_DDRJ7
+
+
+#define KEY_PORT_ADD    PTS_PTS6       // S7,数据寄存器
+#define KEY_PORT_SUB    PTJ_PTJ7       // S6,数据寄存器
+
+
+void Key_Init(void)
+{  
+  KEY_PUCR_ADD=1;   
+  KEY_PUCR_SUB=1;
+                      // 方向寄存器
+  KEY_DDR_ADD=0;     
+  KEY_DDR_SUB=0;       
+    
+  KEY_PORT_ADD = 1;      // 数据寄存器 
+  KEY_PORT_SUB = 1;
+}
+
+void Oled_Key(void)
+{
+		if(KEY_PORT_ADD == 0)          // 上
+	{
+	    delayms(DELAY_NUM);                        // 延时消抖
+		if(KEY_PORT_ADD == KEY_DOWN)
+		{
+			Time += 10;
+			delayms(DELAY_NUM);
+		  LCD_P6x8Str(66,5,"T:");
+      OLED_Write_Num6(35, 5, Time);   	
+		}
+	}
+	
+	else if(KEY_PORT_SUB == 0)     // 下
+	{
+		delayms(DELAY_NUM);                        // 延时消抖	
+		if(KEY_PORT_SUB == KEY_DOWN)
+		{
+			Time -= 10;
+			delayms(DELAY_NUM); 
+			LCD_P6x8Str(66,5,"T:");
+      OLED_Write_Num6(35, 5, Time); 
+		}
+	}
+	
+}
+
+
 void Oled_ControlShow(void)  
 {    
 
@@ -11,7 +68,10 @@ void Oled_ControlShow(void)
     LCD_P6x8Str(66,2,"z:");
     OLED_Write_Num6(35, 2, coz);
     LCD_Print(66,0,"电子沙漏");
+    LCD_P6x8Str(66,5,"T:");
+    OLED_Write_Num6(35, 5, Time); 
     delayms(Time);
+    
     /*  if(count>19||count<0){
         if(locate == 0){
           count = 0;
@@ -361,9 +421,12 @@ void Oled_ControlShow(void)
           }else if(count>19){      
             flag = 0; 
             count = 0;
-           // Draw_BMP(0,2,64,5,shijian64x32);
-           // LCD_Print(8,3,"时间到!");
-           //delayms(2000);
+            Draw_BMP(0,2,64,5,shijian64x32);
+            LCD_Print(8,3,"时间到!");
+            beep_on();
+            delayms(300);
+            beep_off();
+            delayms(1000);
             //locate =1;
            // LCD_Init();
           } 
@@ -573,9 +636,12 @@ void Oled_ControlShow(void)
         }else if(count<0){      
           flag = 0; 
           count = 19;
-        //  Draw_BMP(0,2,64,5,shijian64x32);
-        //  LCD_Print(8,3,"时间到!");
-        //  delayms(2000);
+          Draw_BMP(0,2,64,5,shijian64x32);
+          LCD_Print(8,3,"时间到!");
+          beep_on();
+            delayms(300);
+            beep_off();
+          delayms(1000);
         //  locate = 0;
         //  LCD_Init(); 
         }
@@ -724,9 +790,12 @@ void Oled_ControlShow(void)
         }else if(count>19){      
             flag = 0; 
             count = 0;
-           // Draw_BMP(0,2,64,5,shijian64x32);
-            //LCD_Print(8,3,"时间到!");
-            //delayms(2000);
+            Draw_BMP(0,2,64,5,shijian64x32);
+            LCD_Print(8,3,"时间到!");
+            beep_on();
+            delayms(300);
+            beep_off();
+            delayms(1000);
             //locate =1;
            // LCD_Init();
         }
@@ -875,9 +944,12 @@ void Oled_ControlShow(void)
         }else if(count<0){      
             flag = 0; 
             count = 19;
-           // Draw_BMP(0,2,64,5,shijian64x32);
-            //LCD_Print(8,3,"时间到!");
-            //delayms(2000);
+            Draw_BMP(0,2,64,5,shijian64x32);
+            LCD_Print(8,3,"时间到!");
+            beep_on();
+            delayms(300);
+            beep_off();
+            delayms(1000);
             //locate =1;
            // LCD_Init();
         }
@@ -1026,9 +1098,12 @@ void Oled_ControlShow(void)
         }else if(count>19){      
             flag = 0; 
             count = 0;
-           // Draw_BMP(0,2,64,5,shijian64x32);
-            //LCD_Print(8,3,"时间到!");
-            //delayms(2000);
+            Draw_BMP(0,2,64,5,shijian64x32);
+            LCD_Print(8,3,"时间到!");
+            beep_on();
+            delayms(300);
+            beep_off();
+            delayms(1000);
             //locate =1;
            // LCD_Init();
         }
@@ -1177,9 +1252,12 @@ void Oled_ControlShow(void)
         }else if(count<0){      
             flag = 0; 
             count = 19;
-           // Draw_BMP(0,2,64,5,shijian64x32);
-            //LCD_Print(8,3,"时间到!");
-            //delayms(2000);
+            Draw_BMP(0,2,64,5,shijian64x32);
+            LCD_Print(8,3,"时间到!");
+            beep_on();
+            delayms(300);
+            beep_off();
+            delayms(1000);
             //locate =1;
            // LCD_Init();
         }
@@ -1199,6 +1277,7 @@ void ALL_init(void)
     DDRS=0XFF;
     DDRM=0XFF;
     PORTB=0XFF;
+    Key_Init();
     LCD_Init();              
     InitMPU6050();
     I2C_Init();
@@ -1213,6 +1292,7 @@ void main(void)
   
    for(;;) 
    {
+     //Oled_Key();
      Oled_ControlShow();
      
     // delayms(1000);
@@ -1230,6 +1310,7 @@ void interrupt 68 Pit0_interrupt(void)
 {      
           
       DisableInterrupts;
+      Oled_Key();
       acx=GetData(ACCEL_XOUT_H);	
     	acy=GetData(ACCEL_YOUT_H);	
     	acz=GetData(ACCEL_ZOUT_H);	
